@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.mainSectionm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.title {
+    text-align: center;
+}

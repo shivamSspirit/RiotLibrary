@@ -9,12 +9,8 @@ import cate2 from '../../asset/img/photo-1487180144351-b8472da7d491.avif'
  * You can add category of your wish with different attributes
  * */
 
-//  _id: "539129eb-b2f4-4213-bc2b-88b2ef1bd512",
-//  categoryName: "Donuts",
-//  imgUrl:
-//    "https://res.cloudinary.com/dtrjdcrme/image/upload/v1648667649/video%20library/donuts2.webp",
-//  title: "Donut Stop, Bake It!",
-//  subTitle: "Let's bake together.",
+
+
 
 export const categories = [
   {

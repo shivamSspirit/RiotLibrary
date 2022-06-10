@@ -3,16 +3,6 @@
  * You can add videos of your wish with different attributes
  * */
 
-//category:''
-//  _id: "qtlhdIfojmc
-//  title: "Classic Vanilla Cake Recipe | How to Make Birthday Cake",
-//  videoUrl: "https://youtu.be/qtlhdIfojmc",
-//  category: "Cakes",
-//  viewCount: 0,
-//  uploadDate: new Date(2020, 10, 5),
-//  description:
-//    " Learn how to make the best vanilla cake – this cake is soft, moist, rich and covered with amazing cream cheese vanilla frosting. This vanilla cake is the best birthday cake ever! Perfect birthday cake for boys and girls, for kids and adults. If you are looking for a recipe for vanilla cake with confetti sprinkles, this is the recipe for you!",
-// },
 
 export const videos = [
   {

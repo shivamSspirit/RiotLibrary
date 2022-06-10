@@ -1,0 +1,15 @@
+*{
+   margin: 0;
+   box-sizing: border-box;
+}
+
+
+.main-container{
+    display: flex;
+    flex-direction: column;
+    max-width: 100vw;
+    max-height: 100vh;
+    background-color: aquamarine;
+}
+
+

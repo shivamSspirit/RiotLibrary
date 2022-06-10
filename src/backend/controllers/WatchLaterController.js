@@ -43,10 +43,13 @@ export const getWatchLaterVideosHandler = function (schema, request) {
  * */
 
 export const addItemToWatchLaterVideos = function (schema, request) {
+  // console.log('req',request)
   const user = requiresAuth.call(this, request);
+  // console.log('iser',user)
   if (user) {
-    const { video } = JSON.parse(request.requestBody);
-    if (user.watchlater.some((item) => item.id === video.id)) {
+    const { data } = JSON.parse(request.requestBody);
+    // console.log(data)
+    if (user.watchlater.some((item) => item.id === data.id)) {
       return new Response(
         409,
         {},
@@ -55,7 +58,7 @@ export const addItemToWatchLaterVideos = function (schema, request) {
         }
       );
     }
-    user.watchlater.push(video);
+    user.watchlater.push(data);
     return new Response(201, {}, { watchlater: user.watchlater });
   }
   return new Response(
@@ -73,11 +76,13 @@ export const addItemToWatchLaterVideos = function (schema, request) {
  * */
 
 export const removeItemFromWatchLaterVideos = function (schema, request) {
+  console.log(request)
   const user = requiresAuth.call(this, request);
+  console.log('user',user)
   if (user) {
     const videoId = request.params.videoId;
     const filteredVideos = user.watchlater.filter(
-      (item) => item._id !== videoId
+      (item) => item.id !== videoId
     );
     this.db.users.update({ watchlater: filteredVideos });
     return new Response(200, {}, { watchlater: filteredVideos });

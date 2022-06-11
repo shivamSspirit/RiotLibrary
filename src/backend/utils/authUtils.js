@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import jwt_decode from "jwt-decode";
 
 export const requiresAuth = function (request) {
-  const encodedToken = request.requestHeaders.authorization;
+  const encodedToken = request.requestHeaders.encodedToken;
   const decodedToken = jwt_decode(
     encodedToken,
     process.env.REACT_APP_JWT_SECRET
@@ -19,4 +19,7 @@ export const requiresAuth = function (request) {
   );
 };
 
-export const formatDate = () => dayjs().format("YYYY-MM-DDTHH:mm:ssZ");
+ const formatDate = () => dayjs().format("YYYY-MM-DDTHH:mm:ssZ");
+
+ export default formatDate
+ 

@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.section-container {
+    display: flex;
+    flex-direction: column;
+    width: 69vw;
+    gap: 1.5rem;
+    justify-content: flex-start;
+    justify-items: flex-start;
+
+}
+
+.play-feature {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    gap: 0.6rem;
+}
+
+
+.iconss {
+    display: flex;
+    flex-direction: row;
+    gap: .7rem;
+    width: 100%;
+}
+
+
+.like-icon {
+    display: flex;
+    flex-direction: row;
+    gap: 0.7rem;
+    justify-items: center;
+    justify-content: center;
+}
+
+.dislike-icon {
+    display: flex;
+    flex-direction: row;
+    gap: 0.7rem;
+}
+
+.heart-icon {
+    display: flex;
+    flex-direction: row;
+    gap: 0.7rem;
+}
+
+.playlist-icon {
+    display: flex;
+    flex-direction: row;
+    gap: 0.7rem;
+}
+
+
+.img-style {
+    width: 1.7rem;
+    height: 1.7rem;
+}
+
+.end-flex {
+    display: flex;
+    flex-direction: row;
+    gap: .4rem;
+    width: 40%;
+    justify-content: end;
+    justify-self: end;
+    justify-items: end;
+}
+
+.des-val{
+  max-width: 90%;
+}

@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.trend-page{
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+}
+
+.main-land{
+    background-image: linear-gradient(to bottom right, rgb(15, 32, 68), rgb(10, 32, 71));
+}
+.page-title{
+    
+}

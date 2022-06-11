@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.p-card-container{
+    /* display: flex;
+    flex-direction: row; */
+    max-width: 16rem;
+    max-height: 6rem;
+    background-color: blueviolet;
+}
+
+.main-p-section{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 100%;
+    gap: 1rem;
+    background-color: pink;
+    padding: 1rem;
+}
+
+
+.p-parts{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}

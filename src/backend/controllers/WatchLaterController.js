@@ -43,12 +43,9 @@ export const getWatchLaterVideosHandler = function (schema, request) {
  * */
 
 export const addItemToWatchLaterVideos = function (schema, request) {
-  // console.log('req',request)
   const user = requiresAuth.call(this, request);
-  // console.log('iser',user)
   if (user) {
     const { data } = JSON.parse(request.requestBody);
-    // console.log(data)
     if (user.watchlater.some((item) => item.id === data.id)) {
       return new Response(
         409,
@@ -76,9 +73,7 @@ export const addItemToWatchLaterVideos = function (schema, request) {
  * */
 
 export const removeItemFromWatchLaterVideos = function (schema, request) {
-  console.log(request)
   const user = requiresAuth.call(this, request);
-  console.log('user',user)
   if (user) {
     const videoId = request.params.videoId;
     const filteredVideos = user.watchlater.filter(

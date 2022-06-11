@@ -10,8 +10,6 @@ import cate2 from '../../asset/img/photo-1487180144351-b8472da7d491.avif'
  * */
 
 
-
-
 export const categories = [
   {
     _id: uuid(),

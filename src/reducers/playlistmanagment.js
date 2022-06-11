@@ -6,7 +6,6 @@ export const playlistInitialState = {
 }
 
 const PlaylistListReducer = (state = playlistInitialState, action) => {
-    //  console.log(action)
     switch (action.type) {
         case "CREATE_GLOBAL_PLAYLISTS":
             return {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { useGlobal } from '../../../context/GlobalContext'
 import { useNavigate } from 'react-router-dom'
@@ -7,27 +7,17 @@ import { usePlayList } from '../../../context/playListContext'
 
 import * as CategoryPis from '../../../api/category'
 import * as WatchLaterApi from '../../../api/watchlater'
-import * as playListApis from '../../../api/playlist'
 import * as ActionTypes from '../../../constant/actions'
-
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { solid, regular, brands } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
 
 
 function OneCard(props) {
-    const { isCategoryCard, CategoryCardData, isExploreVideoCard, exploreVideoData, isWatchLater, watchvideoLaterData, setModal, openModal } = props;
+    const { isCategoryCard, CategoryCardData, isExploreVideoCard, exploreVideoData, isWatchLater, watchvideoLaterData, setModal } = props;
     const { setDynamicProperties } = useGlobal();
     const navigate = useNavigate();
     const { watchLater, dispatchWatchlater } = useWatchLater();
-    const [unsetfromWatchList, setunsetfromWatchList] = useState(false)
     const { playList, dispatchplayList } = usePlayList()
 
-
-
-    useEffect(() => {
-        console.log('move vaules', unsetfromWatchList)
-    }, [unsetfromWatchList])
-
+    console.log(playList)
 
     const moveToExplore = async (videoCategoryID) => {
         const res = await CategoryPis?.getSingleCategory(videoCategoryID);
@@ -39,10 +29,6 @@ function OneCard(props) {
     const moveToWatchLater = async (videoId) => {
         const selectedProduct = exploreVideoData?.find(item => item?.id === videoId)
         const res = await WatchLaterApi?.postwatchVideo(selectedProduct)
-        console.log('res from post to watch later', res?.data?.watchlater)
-        // if (res) {
-        //     setunsetfromWatchList(!unsetfromWatchList)
-        // }
         await dispatchWatchlater({
             type: ActionTypes?.WatchLaterAction?.ADD_TO_WATCHLATER,
             payload: res?.data?.watchlater

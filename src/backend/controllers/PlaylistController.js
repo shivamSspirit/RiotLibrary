@@ -13,7 +13,6 @@ import { v4 as uuid } from "uuid";
  * send GET Request at /api/user/playlist
  * */
 export const getAllPlaylistsHandler = function (schema, request) {
-  console.log('user',request)
   const user = requiresAuth.call(this, request);
 
   try {
@@ -45,12 +44,7 @@ export const getAllPlaylistsHandler = function (schema, request) {
  * */
 
 export const addNewPlaylistHandler = function (schema, request) {
-  // console.log('req from backend',request)
-
-  // console.log('user',requiresAuth.call(this, request))
-
   const user = requiresAuth.call(this, request);
-  
   if (user) {
     const { playlist } = JSON.parse(request.requestBody);
     user.playlists.push({ ...playlist, videos: [], _id: uuid() });
@@ -114,14 +108,9 @@ export const getVideosFromPlaylistHandler = function (schema, request) {
 
 export const addVideoToPlaylistHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
-  console.log('user from add vdeos',user)
   if (user) {
-    console.log(request.params)
     const playlistId = request.params.playlistId;
-    console.log(playlistId)
-    console.log(request.requestBody)
     const { data } = JSON.parse(request.requestBody);
-    console.log(data.video)
     const playlist = user.playlists.find((item) => item._id === playlistId);
     if (playlist.videos.some((item) => item.id === data.video.id)) {
       return new Response(
@@ -148,16 +137,11 @@ export const addVideoToPlaylistHandler = function (schema, request) {
  * */
 
 export const removeVideoFromPlaylistHandler = function (schema, request) {
-  console.log('user')
   const user = requiresAuth.call(this, request);
-  console.log('user',user)
   if (user) {
     const playlistId = request.params.playlistId;
-    console.log(playlistId)
     const videoId = request.params.videoId;
-    console.log(request.params)
     let playlist = user.playlists.find((item) => item._id === playlistId);
-    console.log(videoId)
     const filteredVideos = playlist.videos.filter(
       (item) => item.id !== videoId
     );

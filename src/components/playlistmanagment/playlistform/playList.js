@@ -9,7 +9,7 @@ import * as playListAPis from '../../../api/playlist'
 
 
 
-function Listform({ openModal, setModal }) {
+function Listform({ openModal }) {
     const [list, setList] = useState({
         title: "foo", description: "bar bar bar"
     });
@@ -18,7 +18,6 @@ function Listform({ openModal, setModal }) {
 
     // getting playlist from server
     const [getplaylist, setGetPlayList] = useState(null)
-
     // fetching global playlist state from hooks
 
     const { playList, dispatchplayList } = usePlayList();
@@ -27,35 +26,28 @@ function Listform({ openModal, setModal }) {
 
     const [checks, setChecks] = useState(false)
 
-    // handle watch later checks box
-    const [handlewatchcheck, setHandleWatchCheck] = useState(false)
-
     const { watchLater, dispatchWatchlater } = useWatchLater();
 
-    const [ifinwatchlater,setIfinwatchlater] = useState(false)
+    const [ifinwatchlater, setIfinwatchlater] = useState(false)
 
-    console.log(handlewatchcheck)
-
-    // console.log('global playlist from playList form', playList)
 
     useEffect(() => {
         getGlobalPlayList()
-        console.log('hello for playlist')
     }, [playList?.playlistCount])
 
-    useEffect(()=>{
-        console.log('checkes whetetr add video to playlist or not',checks);
-        console.log('playlist from modal',playList)
-    },[lists?.length])
+    // useEffect(() => {
+    //     console.log('checkes whetetr add video to playlist or not', checks);
+    //     console.log('playlist from modal', playList)
+    // }, [lists?.length])
 
-    useEffect(()=>{
-        if(playList?.currentselectedVideo){
-            const findifin = watchLater?.watchLaterproducts?.find(watchvideo=>watchvideo?.id===playList?.currentselectedVideo)
-            if(findifin){
+    useEffect(() => {
+        if (playList?.currentselectedVideo) {
+            const findifin = watchLater?.watchLaterproducts?.find(watchvideo => watchvideo?.id === playList?.currentselectedVideo)
+            if (findifin) {
                 setIfinwatchlater(!ifinwatchlater)
             }
         }
-    },[playList?.currentselectedVideo])
+    }, [playList?.currentselectedVideo])
 
     const listOnchange = (e) => {
         const val = e.target.name;
@@ -74,9 +66,7 @@ function Listform({ openModal, setModal }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const targetList = { ...list }
-        //  console.log(targetList);
         const response = await playListApis?.postPlayList(targetList);
-         console.log('res from post play list', response?.playlists)
         await dispatchplayList({
             type: ActionTypes?.playlistmanagment?.CREATE_GLOBAL_PLAYLISTS,
             payload: response?.playlists
@@ -89,7 +79,6 @@ function Listform({ openModal, setModal }) {
                 title: '',
                 description: ''
             });
-            // setModal(false)
         }, 1000)
     }
 
@@ -97,14 +86,14 @@ function Listform({ openModal, setModal }) {
         setToggleform(!toggleform)
     }
 
-    const closeModal = async() => {
+    // const closeModal = async() => {
 
-        await dispatchplayList({
-                 type: ActionTypes?.playlistmanagment?.UNSET_CURRENT_VIDEO
-        });
+    //     await dispatchplayList({
+    //              type: ActionTypes?.playlistmanagment?.UNSET_CURRENT_VIDEO
+    //     });
 
-        setModal(false)
-    }
+    //     setModal(false)
+    // }
 
     const getGlobalPlayList = async () => {
         const response = await playListApis?.getPlayList();
@@ -113,7 +102,6 @@ function Listform({ openModal, setModal }) {
             type: ActionTypes?.playlistmanagment?.CREATE_GLOBAL_PLAYLISTS,
             payload: response?.data?.playlists
         })
-        console.log('res from getting global play list', response?.data?.playlists)
     }
 
 
@@ -136,19 +124,15 @@ function Listform({ openModal, setModal }) {
         setChecks(!checks)
         if (playList?.currentselectedVideo) {
             const response = await playListAPis?.deleteSingleplayList(playlistID, playList?.currentselectedVideo?._id)
-            console.log('res from remove video from single playlist',response)
+            console.log(response)
         }
     }
 
     // adding to watxh later
 
     const addingToWatchlater = async () => {
-        // setHandleWatchCheck(!handlewatchcheck);
         if (playList?.currentselectedVideo) {
-            console.log('heloo')
             const response = await watchlaterApis?.postwatchVideo(playList?.currentselectedVideo)
-            console.log('added to watch later', response)
-
             await dispatchWatchlater({
                 type: ActionTypes?.WatchLaterAction?.ADD_TO_WATCHLATER,
                 payload: response?.data?.watchLater
@@ -158,15 +142,13 @@ function Listform({ openModal, setModal }) {
 
     // removing from watch later
     const removingFromWatchlater = async () => {
-       // setHandleWatchCheck(!handlewatchcheck)
+
         if (playList?.currentselectedVideo) {
-            console.log(playList?.currentselectedVideo)
             const response = await watchlaterApis?.deletewatchVideo(playList?.currentselectedVideo?.id);
-            console.log('res froom removing watchlater', response)
 
             await dispatchWatchlater({
-                type:ActionTypes?.WatchLaterAction?.ADD_TO_WATCHLATER,
-                payload:response?.data?.watchLater
+                type: ActionTypes?.WatchLaterAction?.ADD_TO_WATCHLATER,
+                payload: response?.data?.watchLater
             })
 
             // await dispatchplayList({

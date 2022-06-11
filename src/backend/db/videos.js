@@ -54,25 +54,6 @@ export const videos = [
       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
   },
 
-  // second row
-
-  // // category:'',
-  // viewCount: 0,
-  // // // <iframe width"950" height="534" src="https://www.youtube.com/embed/SA7AIQw-7Ms?list=RDKbj2Zss-5GY" title="YouTube vido player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  // // // <iframe width="950" height="534" src="https://www.youtube.com/embed/bSfpSOBD30U?list=RDKbj2Zss-5GY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-  // // category:'',
-  // viewCount: 0,
-  // // // <iframe width"950" height="534" src="https://www.youtube.com/embed/LjxulQ1bEWg?list=RDKbj2Zss-5GY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-  // // category:'',
-  // viewCount: 0,
-  // // // <iframe width"950" height="534" src="https://www.youtube.com/embed/uxpDa-c-4Mc?list=RDKbj2Zss-5GY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-  // // category:'',
-  // viewCount: 0,
-  // // <iframe width"950" height="534" src="https://www.youtube.com/embed/xWggTb45brM?list=RDKbj2Zss-5GY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
   {
     category:'web3',
     viewCount: 0,

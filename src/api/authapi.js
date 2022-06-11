@@ -1,7 +1,5 @@
 import axios from "axios"
-
 const baseAuthUrl = '/api/auth'
-
 
 export const signupHandler = async (userData) => {
     try {
@@ -15,7 +13,6 @@ export const signupHandler = async (userData) => {
 
 
 export const LoginHandler = async (userLogdata) => {
-    console.log('login user info', userLogdata)
     try {
         const response = await axios.post(`${baseAuthUrl}/login`, userLogdata);
         localStorage.setItem("token", response.data.encodedToken);

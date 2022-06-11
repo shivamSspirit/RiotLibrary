@@ -2,8 +2,6 @@ import axios from 'axios'
 
 const playListUrl = '/api/user/playlists';
 
-// /user/playlists/:playlistId/:videoId
-
 const encodedToken = localStorage.getItem('token')
 
 // get playlist videos
@@ -11,7 +9,6 @@ const encodedToken = localStorage.getItem('token')
 export const getPlayList = async () => {
   try {
     const response = await axios.get(playListUrl, { headers: { encodedToken } })
-    console.log(response)
     return response;
   } catch (error) {
     console.error("getPlaylistfromServer : Error in getting playlist");
@@ -21,18 +18,14 @@ export const getPlayList = async () => {
 // post playlist video
 
 export const postPlayList = async (playlist) => {
-  console.log('list from api', playlist)
   try {
     const response = await axios.post("/api/user/playlists", { playlist },
       { headers: { encodedToken }, }
     );
     if (response.status === 201) {
-      // toast.success("Playlist created successfully");
-      console.log(response.data)
       return response.data;
     } else throw new Error();
   } catch (e) {
-    // toast.error(`Couldn't add Playlist! Try again.`);
     console.error("addPlaylistToServer : Error in adding playlist", e);
   }
 };

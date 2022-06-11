@@ -13,7 +13,6 @@ const GlobalContext = (props) => {
 		const fetchVideo = async () => {
 			const response = await VideoApi.getVideoList();
 			if (response) {
-				//console.log('res from global videos', response);
 				setGlobalVideos(response?.data?.videos)
 			}
 		}
@@ -24,7 +23,6 @@ const GlobalContext = (props) => {
 		const fetchCategory = async () => {
 			const response = await categoryApi?.getCategoryList();
 			if (response) {
-				//console.log('repsonse from global video category', response)
 				setGlobalVidCategory(response?.data?.categories)
 			}
 		}

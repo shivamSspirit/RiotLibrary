@@ -1,5 +1,3 @@
-// export const val  = (function ALlActions(){console.log('hello')})()
-// val()
 
 export const CategoryAction={
     SINGLE_CATEGORY :  'SINGLE_CATEGORY'

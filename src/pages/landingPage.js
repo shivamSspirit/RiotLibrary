@@ -5,9 +5,7 @@ import Card from '../components/cards/CategoryCard/Card'
 import { useGlobal } from '../context/GlobalContext'
 
 function LandingPage() {
-    const { globalVideos,globalVidCategory } = useGlobal();
-   // console.log('glob', globalVideos)
-   /// console.log('catglob', globalVidCategory)
+    const { globalVidCategory } = useGlobal();
     return (
         <div className='main-land'>
             <Header />

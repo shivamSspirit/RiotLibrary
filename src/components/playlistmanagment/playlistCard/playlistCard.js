@@ -5,7 +5,6 @@ import * as ActionTypes from '../../../constant/actions'
 import * as playListApis from '../../../api/playlist'
 
 function PlaylistCard() {
-    // console.log('from playlist card', playlists)
     const { playList, dispatchplayList } = usePlayList()
 
     const removeGplaylist=async(playlistId)=>{
@@ -19,7 +18,6 @@ function PlaylistCard() {
             type:ActionTypes?.playlistmanagment?.CREATE_GLOBAL_PLAYLISTS,
             payload:repsonse?.data?.playlists
         })
-       // console.log('res from delete playlist',repsonse?.data?.playlists)
     }
 
     return (

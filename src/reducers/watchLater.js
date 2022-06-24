@@ -1,3 +1,5 @@
+import * as ActionTypes from '../constant/actions'
+
 export const watchLaterInitialState = {
     watchLaterproducts: [],
     watchLaterCount: 0
@@ -5,16 +7,16 @@ export const watchLaterInitialState = {
 
 const watchLaterListReducer = (state = watchLaterInitialState, action) => {
     switch (action.type) {
-        case "ADD_TO_WATCHLATER":
+        case ActionTypes?.WatchLaterAction?.ADD_TO_WATCHLATER:
             return {
                 ...state,
                 watchLaterproducts: action.payload,
                 watchLaterCount: action?.payload?.length
             }
-        case "REMOVE_FROM_WATCHLATER":
+        case ActionTypes?.WatchLaterAction?.REMOVE_FROM_WATCHLATER:
             return {
                 ...state,
-                watchLaterproducts: state?.watchLaterproducts?.filter((r) => r?.id !== action.payload),
+                watchLaterproducts: state?.watchLaterproducts?.filter((r) => r?._id !== action.payload),
                 watchLaterCount: state?.watchLaterproducts?.length
             }
     }

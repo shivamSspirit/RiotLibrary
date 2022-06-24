@@ -4,8 +4,6 @@
 }
 
 .p-card-container{
-    /* display: flex;
-    flex-direction: row; */
     max-width: 16rem;
     max-height: 6rem;
     background-color: blueviolet;

@@ -4,7 +4,7 @@ import { useWatchLater } from '../../../context/watchLaterContext'
 import OneCard from '../oneCard/oneCard';
 
 function Watchlatersection() {
-    const { watchLater, dispatchWatchlater } = useWatchLater();
+    const { watchLater } = useWatchLater();
     return (
         <div className='mainSectionm'>
             <div className='hero-part'>

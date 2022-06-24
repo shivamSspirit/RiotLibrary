@@ -8,6 +8,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "axios": "^0.26.1",
+    "bootstrap": "^5.2.0-beta1",
     "dayjs": "^1.11.1",
     "js-cookie": "^3.0.1",
     "jwt-decode": "^3.1.2",
@@ -15,7 +16,9 @@
     "miragejs": "^0.1.43",
     "mockman-js": "^1.1.5",
     "react": "^18.0.0",
+    "react-bootstrap": "^2.4.0",
     "react-dom": "^18.0.0",
+    "react-player": "^2.10.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "uuid": "^8.3.2"

@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const VideoUrl = '/api/videos';
 
+
 export function getVideoList() {
 	return axios.get(`${VideoUrl}`,(req,res)=>{
         console.log(res);
@@ -9,7 +10,7 @@ export function getVideoList() {
 }
 
 export function getSingleVideo(videoId) {
-	return axios.get(`${VideoUrl}/${videoId}`,(req,res)=>{
+	return axios.get(`${'/api/video'}/${videoId}`,(req,res)=>{
         console.log(res)
     }); 
 }

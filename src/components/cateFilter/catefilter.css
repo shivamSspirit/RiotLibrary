@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.nav-links{
+    width: 100%;
+    background-image: linear-gradient(to bottom right, rgb(127, 157, 163), rgb(26, 43, 71));
+}
+
+.categoeryFilter{
+    width: 39%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    gap: .6rem;
+    background-image: linear-gradient(to bottom right, rgb(127, 157, 163), rgb(26, 43, 71));
+    border-radius: 6px;
+    height: max-content;
+}
+
+.cate-li{
+    list-style: none;
+    font-size: large;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cate-li:hover{
+    background-image: linear-gradient(to bottom right, rgb(127, 157, 163), rgb(26, 43, 71));
+    color: rgb(124, 142, 157);
+}
+
+ .active{
+    background-color: rgb(42, 9, 106);
+    color: white;
+} 
+
+@media screen {
+    
+}

@@ -1,40 +1,9 @@
+@import url(../../../asset/css/theme.css);
+
 * {
     margin: 0;
     box-sizing: border-box;
 }
-
-.nav-links{
-    width: 100%;
-}
-
-.categoeryFilter{
-    width: 39%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    gap: .6rem;
-    background-image: linear-gradient(to bottom right, rgb(127, 157, 163), rgb(26, 43, 71));
-    border-radius: 6px;
-    height: max-content;
-}
-
-.cate-li{
-    list-style: none;
-    font-size: large;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.cate-li:hover{
-    background-image: linear-gradient(to bottom right, rgb(127, 157, 163), rgb(26, 43, 71));
-    color: aliceblue;
-}
-
-.active{
-    background-color: rgb(42, 9, 106);
-    color: white;
-}
-
 
 
 .col-container {
@@ -44,65 +13,9 @@
     flex-direction: row;
     gap: 1rem; 
     flex-wrap: wrap;
-    background-color: rgb(72, 56, 59);
+    background-image: var(--backgroundImg);
     justify-items: center;
     align-items: center;
     justify-content: center;
     overflow: scroll;
 }
-
-/* .card-container {
-    /* background-color: aqua; 
-    max-width: 20rem;
-    max-height: max-content;
-}
-
-.card-parts {
-    display: flex;
-    flex-direction: column;
-    max-width: 100%;
-    max-height: 100%;
-    padding: 0.2rem;
-    background-color: rgb(154, 175, 235);
-    border-radius: 4px;
-}
-
-.part-1 {
-    width: 100%;
-    height: 100%;
-}
-
-
-.part-2 {
-    padding: 0.5rem;
-}
-
-.card-title {
-    font-weight: 500;
-    font-size: large;
-}
-
-.part-3 {
-    padding: 0.3rem;
-}
-
-.card-des {
-    font-weight: 500;
-    font-size: large;
-}
-
-
-.part-4 {
-    padding: 0.3rem;
-}
-
-.card-btn {
-    width: 80%;
-    padding: 0.3rem;
-    color: antiquewhite;
-    background-color: black;
-    border: .1rem solid rgb(193, 235, 154);
-    border-radius: 4px;
-    font-weight: 500;
-    font-size: 16px;
-} */

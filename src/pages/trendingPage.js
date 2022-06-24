@@ -8,9 +8,8 @@ import PlayListModal from '../components/playlistmanagment/playlistmodal/playlis
 import './landing.css'
 
 
-
 function TrendingPage() {
-    const {globalVideos,globalVidCategory, globalStateProperties } = useGlobal();
+    const {globalVideos, globalStateProperties } = useGlobal();
     const [openmodal,setModalOpen] = useState(false)
     return (
         <>

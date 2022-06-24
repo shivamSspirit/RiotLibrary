@@ -1,0 +1,16 @@
+@import url(../../../asset/css/theme.css);
+
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.category-side{
+    display: flex;
+}
+
+.side-container{
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}

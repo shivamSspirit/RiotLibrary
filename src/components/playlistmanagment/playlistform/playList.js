@@ -1,53 +1,50 @@
 import React, { useState, useEffect } from 'react'
 import './playlist.css'
 import * as playListApis from '../../../api/playlist';
-import * as watchlaterApis from '../../../api/watchlater'
 import { usePlayList } from '../../../context/playListContext';
 import { useWatchLater } from '../../../context/watchLaterContext';
 import * as ActionTypes from '../../../constant/actions'
-import * as playListAPis from '../../../api/playlist'
+
+import { useWatchLaterOperation } from '../../../hooks/watchlater';
+import { usePlaylistOperation } from '../../../hooks/playlistmanagment';
+
+import Cross from '../../../asset/img/cross.png'
 
 
-
-function Listform({ openModal }) {
+function Listform({ openModal, setModal }) {
     const [list, setList] = useState({
-        title: "foo", description: "bar bar bar"
+        title: "games", description: "bob bar bar"
     });
     const [lists, setDataLists] = useState([]);
     const [toggleform, setToggleform] = useState(false)
 
     // getting playlist from server
     const [getplaylist, setGetPlayList] = useState(null)
+
     // fetching global playlist state from hooks
-
     const { playList, dispatchplayList } = usePlayList();
+    const { getGlobalPlayLists,
+        postVideotoplaylist,
+        deletevideoFromplaylist } = usePlaylistOperation();
 
-    // handling adding video to playlist
-
-    const [checks, setChecks] = useState(false)
-
-    const { watchLater, dispatchWatchlater } = useWatchLater();
-
-    const [ifinwatchlater, setIfinwatchlater] = useState(false)
+    const { watchLater } = useWatchLater()
+    const { postToWatchLater, removeFromWatchLater } = useWatchLaterOperation()
 
 
     useEffect(() => {
-        getGlobalPlayList()
+        getGlobalPlayLists(() => {
+            console.log('setting playlist')
+        })
     }, [playList?.playlistCount])
 
-    // useEffect(() => {
-    //     console.log('checkes whetetr add video to playlist or not', checks);
-    //     console.log('playlist from modal', playList)
-    // }, [lists?.length])
 
     useEffect(() => {
-        if (playList?.currentselectedVideo) {
-            const findifin = watchLater?.watchLaterproducts?.find(watchvideo => watchvideo?.id === playList?.currentselectedVideo)
-            if (findifin) {
-                setIfinwatchlater(!ifinwatchlater)
-            }
+        if (playList.playlistproducts) {
+            setGetPlayList(playList.playlistproducts);
         }
-    }, [playList?.currentselectedVideo])
+    }, [playList.playlistproducts])
+
+    // forminput list  handler
 
     const listOnchange = (e) => {
         const val = e.target.name;
@@ -62,6 +59,8 @@ function Listform({ openModal }) {
             })
         }
     }
+
+    // dispatching new play list
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -86,85 +85,62 @@ function Listform({ openModal }) {
         setToggleform(!toggleform)
     }
 
-    // const closeModal = async() => {
+    
+    // plylist operations
 
-    //     await dispatchplayList({
-    //              type: ActionTypes?.playlistmanagment?.UNSET_CURRENT_VIDEO
-    //     });
+    const isVideoInPlaylist = async (playlist) => {
+        const filteredVideos = playlist.videos.filter(
+            (playlistVideo) => playlistVideo._id === playList?.currentselectedVideo?._id
+        );
+        return filteredVideos.length === 1;
+    };
 
-    //     setModal(false)
-    // }
 
-    const getGlobalPlayList = async () => {
-        const response = await playListApis?.getPlayList();
-        setGetPlayList(response?.data?.playlists);
+    const handlevideoInplaylist = async (playlist) => {
+        isVideoInPlaylist(playlist) ? deletevideoFromplaylist({ playlistId: playlist?._id, videoId: playList?.currentselectedVideo?._id }) : postVideotoplaylist({ playlistId: playlist?._id, video: playList?.currentselectedVideo })
+    }
+
+    
+    // watch later oparation
+
+    const setwatchlater = async () => {
+        if (playList?.currentselectedVideo) {
+            await postToWatchLater(playList?.currentselectedVideo)
+        }
+        console.log('setted in watchlater')
+    }
+
+    const unsetfromwatchlater = async () => {
+        if (playList?.currentselectedVideo) {
+            await removeFromWatchLater(playList?.currentselectedVideo?._id)
+        }
+        console.log('unsetted in watchlater')
+    }
+
+
+    // close modal and unsetting current video
+
+    const closeModal = async () => {
         await dispatchplayList({
-            type: ActionTypes?.playlistmanagment?.CREATE_GLOBAL_PLAYLISTS,
-            payload: response?.data?.playlists
-        })
-    }
+            type: ActionTypes?.playlistmanagment?.UNSET_CURRENT_VIDEO
+        });
 
-
-    // setting cuurent video to respected playlist
-
-    const setvideoToplaylist = async (playListID) => {
-        setChecks(!checks)
-        if (playList?.currentselectedVideo) {
-            const response = await playListAPis?.postSingleplayList(playListID, playList?.currentselectedVideo)
-            console.log('aftersend video to respected playlist', response)
-        }
-        // await dispatchplayList({
-        //     type: ActionTypes?.playlistmanagment?.UNSET_CURRENT_VIDEO
-        // })
-    }
-
-    // removing specific video from respected playlist
-
-    const removeVideoFromPlaylist = async (playlistID) => {
-        setChecks(!checks)
-        if (playList?.currentselectedVideo) {
-            const response = await playListAPis?.deleteSingleplayList(playlistID, playList?.currentselectedVideo?._id)
-            console.log(response)
-        }
-    }
-
-    // adding to watxh later
-
-    const addingToWatchlater = async () => {
-        if (playList?.currentselectedVideo) {
-            const response = await watchlaterApis?.postwatchVideo(playList?.currentselectedVideo)
-            await dispatchWatchlater({
-                type: ActionTypes?.WatchLaterAction?.ADD_TO_WATCHLATER,
-                payload: response?.data?.watchLater
-            })
-        }
-    }
-
-    // removing from watch later
-    const removingFromWatchlater = async () => {
-
-        if (playList?.currentselectedVideo) {
-            const response = await watchlaterApis?.deletewatchVideo(playList?.currentselectedVideo?.id);
-
-            await dispatchWatchlater({
-                type: ActionTypes?.WatchLaterAction?.ADD_TO_WATCHLATER,
-                payload: response?.data?.watchLater
-            })
-
-            // await dispatchplayList({
-            //     type: ActionTypes?.playlistmanagment?.UNSET_CURRENT_VIDEO
-            // })
-        }
+        setModal(false)
     }
 
     return (
         <div>
             {openModal && (
                 <div className='play-list-form'>
+                    <div className='card-head'>
+                        <h2 onClick={openForm} className='form-title'>
+                            create new playlist
+                        </h2>
+                        <span className='cross-icon'>
+                            <img onClick={closeModal} src={Cross} className='cross' alt='close' />
+                        </span>
+                    </div>
 
-                    <h2 onClick={openForm} className='form-title'>
-                        create new playlist
-                    </h2>
                     {toggleform && (
                         <form onSubmit={handleSubmit} className='form-container'>
                             <label className='in-label' htmlFor='play-list-title'>
@@ -186,12 +162,12 @@ function Listform({ openModal }) {
                     <div className='playlists'>
                         <p>save to...</p>
                         <div className='chec-doc'>
-                            <input onChange={ifinwatchlater ? removingFromWatchlater : addingToWatchlater} value={ifinwatchlater} type="checkbox" id={`${'watch'}`} name={`${'watch'}`} />
+                            <input onChange={watchLater?.watchLaterproducts?.find(video => video?.id === playList?.currentselectedVideo?.id) ? unsetfromwatchlater : setwatchlater} checked={watchLater?.watchLaterproducts?.find(video => video?.id === playList?.currentselectedVideo?.id)} type="checkbox" id={`${'watch'}`} name={`${'watch'}`} />
                             <label className='lab-check' for={`${'watch'}`}>{`${'watch later'}`}</label>
                         </div>
-                        {getplaylist && getplaylist?.map((list, idx) => (
+                        {getplaylist.length && getplaylist?.map((list, idx) => (
                             <div className='chec-doc' key={`playlist${idx}`}>
-                                <input onChange={() => checks ? removeVideoFromPlaylist(list?._id) : setvideoToplaylist(list?._id)} type="checkbox" id={`${list.title}`} name={`${list.title}`} />
+                                <input onChange={() => handlevideoInplaylist(list)} type="checkbox" id={`${list.title}`} name={`${list.title}`} />
                                 <label className='lab-check' htmlFor={`${list.title}`}>{`${list.title}`}</label>
                             </div>
                         ))}
@@ -201,5 +177,6 @@ function Listform({ openModal }) {
         </div>
     )
 }
+
 
 export default Listform

@@ -1,16 +1,19 @@
+@import url(../../../asset/css/theme.css);
+
 * {
     margin: 0;
     box-sizing: border-box;
 }
- .card-section {
+
+.card-section {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 0.9rem;
+    gap: 0.5rem;
     justify-content: center;
     justify-items: center;
     background-image: linear-gradient(to bottom right, rgb(130, 159, 165), rgb(38, 41, 82));
-} 
+}
 
 .card-container {
     max-width: 20rem;
@@ -18,6 +21,9 @@
     /* position: relative; */
 }
 
+.dropdown-menu {
+    background-color: var(--primaryColor) !important;
+}
 
 
 
@@ -30,7 +36,8 @@
     background-image: linear-gradient(to bottom right, rgb(130, 159, 165), rgb(38, 41, 82));
     border-radius: 4px;
     text-align: center;
-    gap: 0.3rem;
+    /* gap: 0.3rem; */
+    font-size: medium;
 }
 
 .part-1 {
@@ -46,12 +53,12 @@
 
 
 .part-2 {
-    padding: 0.3rem;
+    /* padding: 0.3rem; */
 }
 
 .card-title {
     font-weight: 500;
-    font-size: large;
+    font-size: small;
     text-decoration: none;
 }
 
@@ -67,15 +74,33 @@
 
 .part-4 {
     padding: 0.3rem;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+.lik-span {
+    width: 48px !important;
+    height: 48px;
+}
+
+.lik-icon {
+    max-width: 29px !important;
+    max-height: 26px !important;
 }
 
 .card-btn {
     width: 80%;
     padding: 0.3rem;
-    color: antiquewhite;
-    background-color: black;
+    color: var(--primaryColor);
+    /* background-color: black; */
     border: .1rem solid rgb(193, 235, 154);
     border-radius: 4px;
+    background-color: var(--primaryColor);
     font-weight: 500;
     font-size: 16px;
+}
+
+.card-btn:hover {
+    color: white;
 }

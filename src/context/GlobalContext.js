@@ -50,7 +50,6 @@ const GlobalContext = (props) => {
 };
 
 
-
 export default GlobalContext;
 
 export const useGlobal=()=>useContext(Context)

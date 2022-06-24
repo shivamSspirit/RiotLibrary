@@ -21,7 +21,7 @@ export const categories = [
   },
   {
     _id: uuid(),
-    imgUrl:cate1,
+    imgUrl:cate2,
     btnText:'Check Now',
     categoryName: "Frontend Development",
      title:

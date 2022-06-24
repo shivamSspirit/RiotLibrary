@@ -61,7 +61,7 @@
     height: 1.7rem;
 }
 
-.flex-end-flex {
+.end-flex {
     display: flex;
     flex-direction: row;
     gap: .4rem;

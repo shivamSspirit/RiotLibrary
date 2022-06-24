@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Route, Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import AuthRoutes from "./authRoutes";
 
 import Mockman from "mockman-js";

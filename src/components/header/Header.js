@@ -66,9 +66,9 @@ function Header() {
 
                         <div class="dropdown">
                             {/* data-toggle="modal" data-target="#plylist" */}
-                            <a onClick={() => setTrue(!pop)} class="btn btn-secondary dropdown-toggle" data-target="#d-menu" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <p onClick={() => setTrue(!pop)} class="btn btn-secondary dropdown-toggle" data-target="#d-menu" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Navs
-                            </a>
+                            </p>
                             {pop && (
                                 <div data-offset={0} style={{ borderRadius: '6px' }} class="dropdown-menu"  aria-labelledby="">
                                     <NavLink style={lStyle} onMouseEnter={toggleHover1} onMouseLeave={toggleHover1} to={'/watchlater'} className='auth-btn dropdown-item'>Watchlater</NavLink>

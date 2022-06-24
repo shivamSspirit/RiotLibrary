@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 
 import SenSitara from '../components/senSitara/senSitara'
@@ -15,23 +15,28 @@ function SenSitaracomppo() {
     const [currentVideo, setCurrentVideos] = useState(null)
     const [categorized, setCategorized] = useState(null);
 
-    const fetchSingleVideo = async () => {
-        const response = await videoApis?.getSingleVideo(videoId);
-        setCurrentVideos(response?.data?.video)
-    }
 
     useEffect(() => {
         if (videoId) {
-            fetchSingleVideo();
+            (async()=>{
+                const response = await videoApis?.getSingleVideo(videoId);
+                setCurrentVideos(response?.data?.video)
+            })()
         }
     }, [videoId])
 
+    const givemeARR = useMemo(() => {
+        return globalVideos;
+      }, [globalVideos]);
+
     useEffect(() => {
         if (currentVideo) {
-            const filtred = globalVideos?.filter(item => item.category === currentVideo?.category)
+            const mains = givemeARR;
+            console.log('dasdsa',mains)
+            const filtred = mains?.filter(item => item.category === currentVideo?.category)
             setCategorized(filtred)
         }
-    }, [currentVideo])
+    }, [currentVideo,givemeARR])
 
     return (
         <>

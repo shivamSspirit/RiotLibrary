@@ -12,15 +12,15 @@ function SinglePlayListComp() {
 
 
     useEffect(() => {
-        getSinglePlayList()
+        if(playlistId){
+            (async()=>{
+                const response = await PlayLaistApis?.getSingleplayList(playlistId);
+                setCurretnPlayList(response?.data?.playlist)
+            })()
+        }
     }, [playlistId])
 
-    const getSinglePlayList = async () => {
-        if (playlistId) {
-            const response = await PlayLaistApis?.getSingleplayList(playlistId);
-            setCurretnPlayList(response?.data?.playlist)
-        }
-    }
+   
 
     return (
         <div className='mainplaylistSectionm'>

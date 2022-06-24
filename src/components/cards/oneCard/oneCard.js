@@ -19,7 +19,7 @@ function OneCard(props) {
     const { isCategoryCard, CategoryCardData, isExploreVideoCard, exploreVideoData, isWatchLater, watchvideoLaterData, setModal, isSinglePLayList, singlePlaylistVideoData, isCategorized, categorizedVideo } = props;
     const { setDynamicProperties } = useGlobal();
     const navigate = useNavigate();
-    const { watchLater, dispatchWatchlater } = useWatchLater();
+    const { watchLater } = useWatchLater();
     const { playList, dispatchplayList } = usePlayList()
     const { Likes, dispatchLikes } = useLikes();
     const { postToWatchLater, removeFromWatchLater } = useWatchLaterOperation()

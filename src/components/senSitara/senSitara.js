@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './sensitara.css'
 import likeIcon from '../../asset/icon/like.png'
 import Dislike from '../../asset/icon/dislike.png'

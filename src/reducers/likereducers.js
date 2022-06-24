@@ -19,6 +19,11 @@ const LikesListReducer = (state = likesInitialState, action) => {
                 likesproducts: state?.likesproducts?.filter((r) => r?._id !== action.payload),
                 likesCount: state?.likesproducts?.length
             }
+
+            default:
+                return{
+                    state
+                }  
     }
 }
 

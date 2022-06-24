@@ -8,17 +8,17 @@ function CardIcon(props) {
     const [filteredCategory, setFilteredCategory] = useState(null);
 
     useEffect(() => {
-        if (globalStateproperties?.selectedsingleVideoCategory) {
+        if (globalStateproperties?.selectedsingleVideoCategory?.categoryName) {
             const filtered = globalVideos?.filter((item) => item.category === globalStateproperties?.selectedsingleVideoCategory?.categoryName)
             setFilteredCategory(filtered)
         }
-    }, [globalStateproperties?.selectedsingleVideoCategory])
+    }, [globalStateproperties?.selectedsingleVideoCategory?.categoryName])
 
     useEffect(() => {
         if (!globalStateproperties?.selectedsingleVideoCategory?.categoryName) {
             setFilteredCategory(globalVideos)
         }
-    }, [])
+    }, [globalVideos,globalStateproperties?.selectedsingleVideoCategory?.categoryName])
 
     const clicck = (catefgoryName) => {
         if (catefgoryName === 'all') {

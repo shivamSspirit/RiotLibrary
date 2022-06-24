@@ -19,6 +19,11 @@ const watchLaterListReducer = (state = watchLaterInitialState, action) => {
                 watchLaterproducts: state?.watchLaterproducts?.filter((r) => r?._id !== action.payload),
                 watchLaterCount: state?.watchLaterproducts?.length
             }
+
+         default:
+            return{
+                state
+            }  
     }
 }
 

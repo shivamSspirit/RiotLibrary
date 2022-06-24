@@ -29,12 +29,17 @@ const PlaylistListReducer = (state = playlistInitialState, action) => {
                 currentselectedVideo: action.payload
             }
 
-        case ActionTypes?.playlistmanagment?.UNSET_CURRENT_VIDEO: {
+        case ActionTypes?.playlistmanagment?.UNSET_CURRENT_VIDEO: 
             return {
                 ...state,
                 currentselectedVideo: undefined
             }
-        }
+    
+
+        default:
+            return{
+                state
+            }  
     }
 }
 

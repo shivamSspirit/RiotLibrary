@@ -1,5 +1,6 @@
 
 import axios from 'axios'
+
 const encodedToken = localStorage.getItem('token')
 const likesUrl = '/api/user/likes'
 

@@ -12,6 +12,12 @@ import { useWatchLaterOperation } from '../../../hooks/watchlater'
 
 import { Link } from 'react-router-dom'
 
+import MenusIcon from '../../../asset/icon/menus.png'
+
+import likesIcon from '../../../asset/icon/like.png'
+import dislikeIcon from '../../../asset/icon/dislike.png'
+import playlistIcon from '../../../asset/icon/playList.png'
+
 import Dropdown from 'react-bootstrap/Dropdown';
 
 
@@ -141,32 +147,41 @@ function OneCard(props) {
                                 <div className='part-1'>
                                     <iframe width="300" height="210" src={`https://www.youtube.com/embed/${item?._id}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                                 </div>
-                                <div className='part-2'>
+                                <div className='parts-2'>
                                     <h2 className='card-title'>
                                         <Link to={`/videos/${item?._id}`}>{item?.title}</Link>
                                     </h2>
                                 </div>
-                                <div className='part-3'>
-                                    <p className='card-des'>
-                                        {item.viewCount} views | 4 hours ago
-                                    </p>
-                                </div>
-                                <div className='part-4'>
 
-                                    <Dropdown>
-                                        <Dropdown.Toggle style={{ background: 'transparent', border: 'none' }} variant="success" id="dropdown-basic">
-                                            Actions
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item className='drops' >
-                                                {(Likes && Likes?.likesproducts?.find(video => video?.id === item?.id)) ? <button onClick={() => { removeFromLikes(item?._id) }} className='lik-icon'>Unlike</button> : <button onClick={() => { addtoLikes(item?._id) }} className='lik-icon'>Add to likes</button>}
-                                            </Dropdown.Item>
-                                            <Dropdown.Item className='drops'> <button onClick={() => modalOpration(item?._id)} >Add to playlist</button></Dropdown.Item>
-                                            <Dropdown.Item className='drops' > {watchLater?.watchLaterproducts?.find(video => video?.id === item?.id) ? <button onClick={() => unsetfromwatchlater(item?._id)} >{'Undo'}</button> : <button onClick={() => moveToWatchLater(item?._id)}>{'Add to watchlater'}</button>}
-                                            </Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
+
+                                <div className='common-parts'>
+                                    <div className='part-3'>
+                                        <p className='card-des'>
+                                            {item.viewCount} views | 4 hours ago
+                                        </p>
+                                    </div>
+                                    <div className='part-4'>
+                                        <div className='action-icons'>
+                                            {(Likes && Likes?.likesproducts?.find(video => video?.id === item?.id)) ? <button onClick={() => { removeFromLikes(item?._id) }} className='lik-icon'><img className='card-icons' src={dislikeIcon} alt="dislike" /></button> : <button onClick={() => { addtoLikes(item?._id) }} className='lik-icon'> <img className='card-icons' src={likesIcon} alt="like" /></button>}
+                                            <button onClick={() => modalOpration(item?._id)} > <img className='card-icons' src={playlistIcon} alt='playlist' /></button>
+                                        </div>
+
+                                        {/* <div class="dropdown">
+                                            <button id="dLabel" className='dropdown-toggle' type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img className='menu-icon' alt='menu' src={MenusIcon} />
+                                            </button>
+
+                                            <div className="dropdown-menu" aria-labelledby="dLabel">
+                                            {(Likes && Likes?.likesproducts?.find(video => video?.id === item?.id)) ? <button onClick={() => { removeFromLikes(item?._id) }} className='lik-icon'>Unlike</button> : <button onClick={() => { addtoLikes(item?._id) }} className='lik-icon'>Add to likes</button>}
+                                            <button onClick={() => modalOpration(item?._id)} >Add to playlist</button>
+                                            {watchLater?.watchLaterproducts?.find(video => video?.id === item?.id) ? <button onClick={() => unsetfromwatchlater(item?._id)} >{'Undo'}</button> : <button onClick={() => moveToWatchLater(item?._id)}>{'Add to watchlater'}</button>}
+                                            </div>
+                                        </div> */}
+
+
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     )))}

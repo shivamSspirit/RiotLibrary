@@ -5,15 +5,16 @@ import { useWatchLater } from '../context/watchLaterContext'
 export function useWatchLaterOperation() {
     const { dispatchWatchlater } = useWatchLater();
 
-    // function getwatchLatervideoList(data, callback) {
-    //     return async (dispatch) => {
-    //         const response = await WatchLaterApis?.getwatchLater();
-    //         dispatch(setwatchLatervideoList(response.data.watchlater));
-    //         if (callback) {
-    //             return callback();
-    //         }
-    //     };
-    // }
+    async function getwatchLatervideoList(callback){
+        const response = await watchlaterApis?.getwatchLater();
+        await dispatchWatchlater({
+            type:ActionTypes?.WatchLaterAction?.ADD_TO_WATCHLATER,
+            payload: response?.data?.watchlater
+        })
+        if(callback){
+            return callback();
+        }
+    }
 
     async function postToWatchLater(video, callback) {
         const response = await watchlaterApis?.postwatchVideo(video);
@@ -28,10 +29,10 @@ export function useWatchLaterOperation() {
 
     async function removeFromWatchLater(videoId, callback) {
         const response = await watchlaterApis?.deletewatchVideo(videoId);
-        dispatchWatchlater({
-            type: ActionTypes?.WatchLaterAction?.REMOVE_FROM_WATCHLATER,
-            payload: videoId
-        })
+        // dispatchWatchlater({
+        //     type: ActionTypes?.WatchLaterAction?.REMOVE_FROM_WATCHLATER,
+        //     payload: videoId
+        // })
         dispatchWatchlater({
             type: ActionTypes?.WatchLaterAction?.ADD_TO_WATCHLATER,
             payload: response?.data?.watchlater
@@ -42,6 +43,7 @@ export function useWatchLaterOperation() {
     }
 
     return {
+        getwatchLatervideoList,
         postToWatchLater,
         removeFromWatchLater
     }

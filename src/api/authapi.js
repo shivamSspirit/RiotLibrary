@@ -1,6 +1,7 @@
 import axios from "axios"
 const baseAuthUrl = '/api/auth'
 
+
 export const signupHandler = async (userData) => {
     try {
         const response = await axios.post(`${baseAuthUrl}/signup`, userData);

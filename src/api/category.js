@@ -5,7 +5,7 @@ const CategoryUrl = '/api/categories';
 
 
 export function getCategoryList() {
-	return axios.get(`${CategoryUrl}`,(req,res)=>{
+	return axios.get(`${CategoryUrl}`,(res)=>{
         console.log(res);
     });
 }
@@ -13,7 +13,7 @@ export function getCategoryList() {
 
 
 export function getSingleCategory(CategoryId) {
-	return axios.get(`${`/api/category`}/${CategoryId}`,(req,res)=>{
+	return axios.get(`${`/api/category`}/${CategoryId}`,(res)=>{
         console.log(res)
     }); 
 }

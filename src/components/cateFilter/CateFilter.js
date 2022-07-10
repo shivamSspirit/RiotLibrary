@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import './catefilter.css'
 function CateFilter(props) {
     const {category,click} =  props;
-    console.log(props)
     useEffect(()=>{
         console.log('cate',category?.categoryName)
     },[category?.categoryName])

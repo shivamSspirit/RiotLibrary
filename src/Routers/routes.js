@@ -9,7 +9,7 @@ import LandingPage from "../pages/landingPage";
 import SignUp from "../components/auth/signup/signup";
 import Login from "../components/auth/login/login";
 import TrendingPage from "../pages/trendingPage";
-import SenSitara from "../pages/senSitara";
+import SingleVideo from "../pages/singleVideo";
 import WatchLater from "../pages/watchlater";
 import PlaylistPage from "../pages/playlistPage/PlaylistPage";
 import Jest from "../pages/jest/jest";
@@ -20,19 +20,25 @@ class AllRoutes extends React.Component {
         return (
             <div>
                 <Routes>
-                    {/* <Routes> */}
+                    {/* < Public Routes> */}
                     <Route exact path="/" element={<LandingPage />} />
                     <Route exact path="/auth/login" element={<Login />} />
                     <Route exact path="/auth/signup" element={<SignUp />} />
                     <Route exact path="/videos" element={<TrendingPage />} />
+
+                    {/* {Auth Routes} */}
+
                     <Route exact path="/videos/:videoId" element={
                         <AuthRoutes>
-                            <SenSitara />
+                            <SingleVideo />
                         </AuthRoutes>
                     } />
                     <Route exact path="/watchlater" element={<AuthRoutes><WatchLater /></AuthRoutes>} />
                     <Route exact path="/playlists" element={<AuthRoutes><PlaylistPage /></AuthRoutes>} />
                     <Route exact path="/playlists/:playlistId" element={<AuthRoutes><SinglePlayListPage /></AuthRoutes>} />
+
+                    {/* {extra routes use in development} */}
+
                     <Route exact path="/jest" element={<Jest />} />
                     <Route exact path="/test" element={<Mockman />} />
                 </Routes>

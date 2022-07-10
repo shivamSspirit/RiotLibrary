@@ -165,7 +165,7 @@ function Listform({ openModal, setModal }) {
                             <input onChange={watchLater?.watchLaterproducts?.find(video => video?.id === playList?.currentselectedVideo?.id) ? unsetfromwatchlater : setwatchlater} checked={watchLater?.watchLaterproducts?.find(video => video?.id === playList?.currentselectedVideo?.id)} type="checkbox" id={`${'watch'}`} name={`${'watch'}`} />
                             <label className='lab-check' for={`${'watch'}`}>{`${'watch later'}`}</label>
                         </div>
-                        {getplaylist.length && getplaylist?.map((list, idx) => (
+                        {getplaylist && getplaylist?.map((list, idx) => (
                             <div className='chec-doc' key={`playlist${idx}`}>
                                 <input onChange={() => handlevideoInplaylist(list)} type="checkbox" id={`${list.title}`} name={`${list.title}`} />
                                 <label className='lab-check' htmlFor={`${list.title}`}>{`${list.title}`}</label>

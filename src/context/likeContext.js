@@ -1,11 +1,10 @@
 
 import React, { createContext, useContext, useReducer } from "react";
-import * as LikesListReducer from '../reducers/likereducers'
-
+import { LikesListReducer,likesInitialState} from '../reducers/likereducers'
 export const LikesContext = createContext('LikesContext');
 
 export const LikesProvider = ({ children }) => {
-  const [Likes, dispatchLikes] = useReducer(LikesListReducer?.LikesListReducer,LikesListReducer?.likesInitialState);
+  const [Likes, dispatchLikes] = useReducer(LikesListReducer,likesInitialState);
 
   let contextValue = {
     Likes,

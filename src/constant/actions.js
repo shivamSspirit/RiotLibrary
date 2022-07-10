@@ -6,7 +6,6 @@ export const CategoryAction = {
 
 export const WatchLaterAction = {
     ADD_TO_WATCHLATER: 'ADD_TO_WATCHLATER',
-    REMOVE_FROM_WATCHLATER: 'REMOVE_FROM_WATCHLATER'
 }
 
 export const playlistmanagment = {
@@ -18,5 +17,8 @@ export const playlistmanagment = {
 
 export const likeAction = {
     ADD_TO_LIKES: 'ADD_TO_LIKES',
-    REMOVE_FROM_LIKES: 'REMOVE_FROM_LIKES'
+}
+
+export const historyAction = {
+    ADD_TO_HISTORY: 'ADD_TO_HISTORY',
 }

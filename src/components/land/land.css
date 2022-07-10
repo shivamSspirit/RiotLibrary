@@ -1,33 +1,30 @@
 @import url(../../asset/css/theme.css);
 
-* {
+
+/* * {
     margin: 0;
     box-sizing: border-box;
-}
+} */
 
 .img-container {
     width: 100vw;
-    height: 60vh;
+    height: calc(100%-96px);
     display: flex;
+    background-image: url('../../asset/img/istockphoto-1287065554-170667a.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.land-img {
-    width: 100%;
-    max-height: 100%;
-    position: relative;
-}
+
 
 .img-content {
     display: flex;
     align-items: center;
-    position: absolute;
-    top: 7.7rem;
-    max-width: 25rem;
-    /* text-align: left; */
-    max-height: 50vh;
+    max-width: 50%;
+    max-height: 100%;
     padding: 1.5rem;
     color: var(--white);
-
 }
 
 .parts {

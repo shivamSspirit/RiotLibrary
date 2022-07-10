@@ -16,13 +16,6 @@ const PlaylistListReducer = (state = playlistInitialState, action) => {
                 playlistCount: action.payload?.length
             }
 
-        case ActionTypes?.playlistmanagment?.REMOVE_PLAYLIST_FROM_GLOBAL:
-            return {
-                ...state,
-                playlistproducts: state?.playlistproducts?.filter((r) => r?.id !== action.payload),
-                playlistCount: state?.playlistproducts.length
-            }
-
         case ActionTypes?.playlistmanagment?.SET_CURRENT_VIDEO:
             return {
                 ...state,
@@ -35,7 +28,6 @@ const PlaylistListReducer = (state = playlistInitialState, action) => {
                 currentselectedVideo: undefined
             }
     
-
         default:
             return{
                 state

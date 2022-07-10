@@ -1,57 +1,53 @@
-const historyUrl = '/api/user/history';
 import axios from 'axios'
+
+const historyUrl = '/api/user/history';
 const encodedToken = localStorage.getItem('token')
 
 
 // get history 
 
-export function getHistoryList() {
-  return axios({
-        method: 'get',
-        url: historyUrl,
-        headers:{
-            authorization: encodedToken
-        }
-      })
+export async function getHistoryList() {
+    try {
+        const response = await axios.get(historyUrl, { headers: { encodedToken } })
+        return response;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 // post history video
 
-export function postHistory(historyVideo){
-    return axios({
-        method: 'post',
-        url: historyUrl,
-        headers:{
-            authorization: encodedToken
-        },
-        data:historyVideo
-      })
+export async function postHistory(historyVideo) {
+    try {
+        const response = await axios.post(historyUrl, { headers: { encodedToken } }, { historyVideo })
+        return response
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 
-// delete liked video
+// delete HISTORY video
 
 
-export function deleteHistoryVideo(videoId){
-    return axios({
-        method: 'delete',
-        url: `${historyUrl}/${videoId}`,
-        headers:{
-            authorization: encodedToken
-        }
-      })
+export async function deleteHistoryVideo(videoId) {
+    try {
+        const response = await axios.delete(`${historyUrl}/${videoId}`, { headers: { encodedToken } })
+        return response;
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 
 // delete all history
 
-export function deleteHistoryVideos(){
-    return axios({
-        method: 'delete',
-        url: `${historyUrl}/all`,
-        headers:{
-            authorization: encodedToken
-        }
-      })
+export async function deleteHistoryVideos() {
+    try {
+        const response = await axios.delete(`${historyUrl}/all`, { headers: { encodedToken } })
+        return response
+    } catch (error) {
+        console.error(error)
+    }
 }
 

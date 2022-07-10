@@ -3,11 +3,12 @@ import { useParams } from 'react-router-dom'
 
 import SenSitara from '../components/senSitara/senSitara'
 import SingleVCategory from '../components/senSitara/catogarixedVideo/cateGorizedVideo'
-import './sensita.css'
+import './singlevideo.css'
 import Header from '../components/header/Header';
 import * as videoApis from '../api/videos'
 
 import { useGlobal } from '../context/GlobalContext'
+import { ScrollToTop } from '../components/scrolltotop/ScroolTotop'
 
 function SenSitaracomppo() {
     const { videoId } = useParams()
@@ -40,6 +41,7 @@ function SenSitaracomppo() {
 
     return (
         <>
+        <ScrollToTop/>
             <Header />
             <div className='sensitara'>
                 <div>

@@ -69,14 +69,14 @@ function Header() {
                             <p onClick={() => setTrue(!pop)} class="btn btn-secondary dropdown-toggle" data-target="#d-menu" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Navs
                             </p>
-                            {pop && (
-                                <div data-offset={0} style={{ borderRadius: '6px' }} class="dropdown-menu"  aria-labelledby="">
+                         {pop && ( 
+                                <div style={{ borderRadius: '6px' }} class="dropdown-menu"  id='d-menu' aria-labelledby="">
                                     <NavLink style={lStyle} onMouseEnter={toggleHover1} onMouseLeave={toggleHover1} to={'/watchlater'} className='auth-btn dropdown-item'>Watchlater</NavLink>
                                     <NavLink style={rStyle} onMouseEnter={toggleHover2} onMouseLeave={toggleHover2} to={'/playlists'} className='auth-btn dropdown-item'>playlists</NavLink>
                                     {!authToken && (<NavLink to='/auth/login' className='auth-btn dropdown-item'>login</NavLink>)}
                                     {authToken && (<NavLink to='/' className='auth-btn dropdown-item'>logout</NavLink>)}
                                 </div>
-                            )}
+                             )} 
 
                         </div>
                     </div>

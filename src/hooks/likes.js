@@ -22,6 +22,7 @@ export function uselikesOperation() {
             type: ActionTypes?.likeAction?.ADD_TO_LIKES,
             payload: response?.data?.likes
         })
+        
         if (callback) {
             return callback();
         }

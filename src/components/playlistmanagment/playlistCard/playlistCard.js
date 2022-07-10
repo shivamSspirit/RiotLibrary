@@ -3,6 +3,7 @@ import './playlistcard.css'
 import { usePlayList } from '../../../context/playListContext'
 import * as ActionTypes from '../../../constant/actions'
 import * as playListApis from '../../../api/playlist'
+import { Link } from 'react-router-dom'
 
 function PlaylistCard() {
     const { playList, dispatchplayList } = usePlayList()
@@ -26,7 +27,7 @@ function PlaylistCard() {
                 <div key={`p-list${idx}`} className='p-card-container'>
                     <div className='p-parts'>
                         <div className='p-part-1'>
-                            <h3 className='playlist-name'>{item.title}</h3>
+                            <Link to={`/playlists/${item?._id}`} className='playlist-name'>{item?.title}</Link>
                             <p className='content-count'>{`(${playList?.playlistproducts?.videos?.length ? playList?.playlistproducts?.videos?.length : 0}) videos`}</p>
                         </div>
                         <div className='p-part-2'>

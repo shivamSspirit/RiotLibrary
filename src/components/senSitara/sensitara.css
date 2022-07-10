@@ -1,7 +1,3 @@
-* {
-    margin: 0;
-    box-sizing: border-box;
-}
 
 .section-container {
     display: flex;
@@ -66,9 +62,9 @@
     flex-direction: row;
     gap: .4rem;
     width: 40%;
-    justify-content: end;
-    justify-self: end;
-    justify-items: end;
+    justify-content: flex-end;
+    justify-self: flex-end;
+    justify-items: flex-end;
 }
 
 .des-val{

@@ -1,44 +1,42 @@
-const likesUrl = '/api/user/likes';
+
 import axios from 'axios'
+
 const encodedToken = localStorage.getItem('token')
+const likesUrl = '/api/user/likes'
 
 
 // get liked videos
 
-export function getLikedList() {
-  return axios({
-        method: 'get',
-        url: likesUrl,
-        headers:{
-            authorization: encodedToken
-        }
-      })
+export const getLikedList = async () => {
+    try {
+        const response = await axios.get(likesUrl, { headers: { encodedToken } })
+        return response;
+    } catch (error) {
+        console.error(error);
+    }
 }
+
 
 // post like video
 
-export function postLikedVideo(likedVideo){
-    return axios({
-        method: 'post',
-        url: likesUrl,
-        headers:{
-            authorization: encodedToken
-        },
-        data:likedVideo
-      })
+export const postLikedVideo = async (likedVideo) => {
+    try {
+        const response = await axios.post(likesUrl, { likedVideo }, { headers: { encodedToken } })
+        return response;
+    } catch (error) {
+        console.log(error)
+    }
 }
-
 
 // delete liked video
 
 
-export function deleteLikedVideo(likedtodeleteVideo){
-    return axios({
-        method: 'delete',
-        url: `${likesUrl}/${likedtodeleteVideo}`,
-        headers:{
-            authorization: encodedToken
-        }
-      })
+export const deleteLikedVideo = async (likedtodeleteVideo) => {
+    try {
+        const response = await axios.delete(`${likesUrl}/${likedtodeleteVideo}`, { headers: { encodedToken } })
+        return response;
+    } catch (error) {
+        console.log(error)
+    }
 }
 

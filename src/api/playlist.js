@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 const playListUrl = '/api/user/playlists';
-
 const encodedToken = localStorage.getItem('token')
 
 // get playlist videos
@@ -59,9 +58,13 @@ export const getSingleplayList = async (playlistId) => {
 export const postSingleplayList = async (playlistId, video) => {
   try {
     const response = await axios.post(`${playListUrl}/${playlistId}`, { data: {video} }, { headers: { encodedToken } })
-    return response
+    if(response.status===201){
+      return response
+    } else {
+    console.log(response)
+    }
   } catch (error) {
-    console.log('in adding single playlist')
+    throw new Error(error)
   }
 }
 

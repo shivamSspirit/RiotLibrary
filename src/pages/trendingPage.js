@@ -6,15 +6,17 @@ import CardWithIcon from '../components/cards/exploreVideoCard/cardIcon'
 import PlayListModal from '../components/playlistmanagment/playlistmodal/playlistmodal'
 
 import './landing.css'
-
+import { ScrollSpy } from 'bootstrap'
+import { ScrollToTop } from '../components/scrolltotop/ScroolTotop'
 
 
 function TrendingPage() {
-    const {globalVideos,globalVidCategory, globalStateProperties } = useGlobal();
+    const {globalVideos, globalStateProperties } = useGlobal();
     const [openmodal,setModalOpen] = useState(false)
     return (
         <>
             <div className='trend-page'>
+                <ScrollToTop/>
                 <Header />
                 <PlayListModal openModal={openmodal} setModal={setModalOpen}/>
                 <CardWithIcon openModal={openmodal} setModal={setModalOpen} globalStateproperties={globalStateProperties} globalVideos ={globalVideos} />   

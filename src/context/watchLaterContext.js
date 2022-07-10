@@ -1,11 +1,11 @@
 
 import React, { createContext, useContext, useReducer } from "react";
-import * as WatchLaterRAeeducers from '../reducers/watchLater'
+import * as watchLaterListReducer from '../reducers/watchLater'
 
 export const WatchLaterContext = createContext('watchlaterContext');
 
 export const WatchLaterProvider = ({ children }) => {
-  const [watchLater, dispatchWatchlater] = useReducer(WatchLaterRAeeducers?.watchLaterListReducer,WatchLaterRAeeducers?.watchLaterInitialState);
+  const [watchLater, dispatchWatchlater] = useReducer(watchLaterListReducer?.watchLaterListReducer,watchLaterListReducer?.watchLaterInitialState);
 
   let contextValue = {
     watchLater,

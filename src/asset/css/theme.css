@@ -1,3 +1,8 @@
 :root{
-    --h4:black;
+   --backgroundImg: linear-gradient(to bottom right, rgb(130, 159, 165), rgb(38, 41, 82));
+   --borderColors: rgb(117, 138, 142);
+   --primaryColor:rgb(40, 42, 83);
+   --inputBorderRadius:4px;
+   --white:cornsilk;
+   --transparant:transparant;  
 }

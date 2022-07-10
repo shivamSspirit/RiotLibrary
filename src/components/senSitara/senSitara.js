@@ -5,20 +5,46 @@ import Dislike from '../../asset/icon/dislike.png'
 import Heart from '../../asset/icon/heart.png'
 import playList from '../../asset/icon/playList.png'
 
-
 function SenSitara(props) {
     const { fetchOne } = props;
+    console.log('fetchOne',fetchOne)
+
+    // const moveToWatchLater = async (videoId) => {
+    //     const selectedProduct = exploreVideoData?.find(item => item?._id === videoId)
+    //     const res = await WatchLaterApi?.postwatchVideo(selectedProduct)
+    //     await dispatchWatchlater({
+    //         type: ActionTypes?.WatchLaterAction?.ADD_TO_WATCHLATER,
+    //         payload: res?.data?.watchlater
+    //     })
+    // }
+
+
+
+    // const unsetfromwatchlater = async (videoId) => {
+    //     const res = await WatchLaterApi?.deletewatchVideo(videoId)
+
+    //     await dispatchWatchlater({
+    //         type: ActionTypes?.WatchLaterAction?.REMOVE_FROM_WATCHLATER,
+    //         payload: videoId
+    //     })
+
+    //     await dispatchWatchlater({
+    //         type: ActionTypes?.WatchLaterAction?.ADD_TO_WATCHLATER,
+    //         payload: res?.data?.watchlater
+    //     })
+    // }
+
     return (
         <div>
             <div className='section-container'>
                 <div className='part-0'>
-                    <h1 className='video-title'>Sen sitara leask his teams</h1>
+                    <h1 className='video-title'>{fetchOne?.title}</h1>
                 </div>
                 <div className='part-1'>
-                    <p className='somepara'>by mnnimal project</p>
+                    <p className='somepara'>{fetchOne?.category}</p>
                 </div>
                 <div className='part-2'>
-                    <iframe width="950" height="534" src={`https://www.youtube.com/embed/${fetchOne && fetchOne[1]?._id}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                    <iframe width="950" height="534" src={`https://www.youtube.com/embed/${fetchOne && fetchOne?._id}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                 </div>
                 <div className='part-3'>
                     <div className='play-feature'>
@@ -51,7 +77,7 @@ function SenSitara(props) {
                 </div>
                 <div className='part-5'>
                     <p className='des-val'>
-                        {fetchOne && `${fetchOne[1]?.description}`}
+                        {fetchOne && `${fetchOne?.description}`}
                     </p>
                 </div>
             </div>

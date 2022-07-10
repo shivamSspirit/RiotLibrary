@@ -1,11 +1,17 @@
+@import url(../../asset/css/theme.css);
+/* 
 * {
     margin: 0;
     box-sizing: border-box;
+} */
+
+a {
+    text-decoration: none;
 }
 
 .header-container {
     width: 100vw;
-    background-image: linear-gradient(to bottom right, rgb(130, 159, 165), rgb(38, 41, 82));
+    background-image: var(--backgroundImg);
 }
 
 .header {
@@ -29,22 +35,49 @@
     align-items: center;
     padding-right: 1rem;
     gap: 1rem;
+    flex-direction: row;
+}
+
+.navs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+}
+
+.dropdown-item {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    align-content: center !important;
+    justify-items: center !important;
 }
 
 .auth-btn {
     width: 8rem;
     height: 3.4rem;
     font-size: large;
-    font-weight: 600;
-    border: .2rem solid rgb(7, 54, 105);
+    font-weight: 800;
+    /* border: .2rem solid var(--borderColors); */
     border-radius: 4px;
     background-color: transparent;
     text-decoration: none;
-    color: white;
+    color: var(--primaryColor);
     padding: 0.8rem;
     text-align: center;
 }
-.auth-btn:hover{
+
+.auth-btn:hover {
     color: white;
-    background-color:rgb(57, 57, 106) ;
+    background-image: var(--backgroundImg);
+}
+
+@media only screen and (max-width: 600px) {
+    .navs {
+        display: none;
+    }
+
 }

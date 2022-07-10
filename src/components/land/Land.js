@@ -1,13 +1,12 @@
 import React from 'react'
 import './land.css'
-import LandImg from '../../asset/img/istockphoto-1287065554-170667a.jpeg'
 import {Link} from 'react-router-dom'
 
 function Land() {
     return (
         <div>
             <div className='img-container'>
-                <img className='land-img' src={LandImg} alt="" />
+                {/* <img className='land-img' src={LandImg} alt="" />k */}
                 <div className='img-content'>
                     <div className='parts'>
                         <div className='part-1'>

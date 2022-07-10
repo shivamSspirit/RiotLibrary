@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
 import * as AuthApis from '../../../api/authapi'
 import { useNavigate } from 'react-router-dom';
+import Masterinput from '../../inputfield/minput';
+import { useAuth } from '../../../context/authContext'
 import './login.css'
 
 
 function Login() {
     const navigate = useNavigate();
+
+    const { setAuthToken } = useAuth();
+
     const [input, setInput] = useState({
         email: '',
         password: ''
@@ -32,7 +37,7 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        AuthApis.LoginHandler({email:input.email,password:input.password}).then(res=>{console.log('res from login',res)})
+        AuthApis.LoginHandler({ email: input.email, password: input.password }).then(res => { setAuthToken(res?.data?.encodedToken) })
         navigate('/')
     }
 
@@ -46,7 +51,7 @@ function Login() {
                     <div className='parts'>
                         <label className='email-label' htmlFor='emailName'>Email
                         </label>
-                        <input className='email-input' type='email' name='email' onChange={handleInputChange} placeholder='type email' />
+                        <Masterinput className='email-input' type='email' name='email' onChange={handleInputChange} placeholder='type email' />
 
                     </div>
 
@@ -54,7 +59,7 @@ function Login() {
                     <div className='parts'>
                         <label className='pwd-label' htmlFor='password'>Password
                         </label>
-                        <input className='password-input' type='password' name='password' onChange={handleInputChange} placeholder='type password' />
+                        <Masterinput className='password-input' type='password' name='password' onChange={handleInputChange} placeholder='type password' />
 
                     </div>
                     <div className='parts'>

@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.mainplaylistSectionm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.play-title {
+    text-align: center;
+}

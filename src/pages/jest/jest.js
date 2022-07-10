@@ -1,6 +1,3 @@
-
-
-
 function helloSUm(a,b){
 return a+b
 }

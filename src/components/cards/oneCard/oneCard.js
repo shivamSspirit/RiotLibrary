@@ -1,23 +1,37 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { useGlobal } from '../../../context/GlobalContext'
 import { useNavigate } from 'react-router-dom'
 import { useWatchLater } from '../../../context/watchLaterContext'
 import { usePlayList } from '../../../context/playListContext'
+import { useLikes } from '../../../context/likeContext'
 
+import * as LikesApis from '../../../api/likes'
 import * as CategoryPis from '../../../api/category'
-import * as WatchLaterApi from '../../../api/watchlater'
 import * as ActionTypes from '../../../constant/actions'
+import { useWatchLaterOperation } from '../../../hooks/watchlater'
+
+import { Link } from 'react-router-dom'
+
+import MenusIcon from '../../../asset/icon/menus.png'
+
+import likesIcon from '../../../asset/icon/like.png'
+import dislikeIcon from '../../../asset/icon/dislike.png'
+import playlistIcon from '../../../asset/icon/playList.png'
+
+import Dropdown from 'react-bootstrap/Dropdown';
 
 
 function OneCard(props) {
-    const { isCategoryCard, CategoryCardData, isExploreVideoCard, exploreVideoData, isWatchLater, watchvideoLaterData, setModal } = props;
+    const { isCategoryCard, CategoryCardData, isExploreVideoCard, exploreVideoData, isWatchLater, watchvideoLaterData, setModal, isSinglePLayList, singlePlaylistVideoData, isCategorized, categorizedVideo } = props;
     const { setDynamicProperties } = useGlobal();
     const navigate = useNavigate();
-    const { watchLater, dispatchWatchlater } = useWatchLater();
+    const { watchLater } = useWatchLater();
     const { playList, dispatchplayList } = usePlayList()
+    const { Likes, dispatchLikes } = useLikes();
+    const { postToWatchLater, removeFromWatchLater } = useWatchLaterOperation()
 
-    console.log(playList)
+    console.log('fun', playList)
+
 
     const moveToExplore = async (videoCategoryID) => {
         const res = await CategoryPis?.getSingleCategory(videoCategoryID);
@@ -27,33 +41,49 @@ function OneCard(props) {
 
 
     const moveToWatchLater = async (videoId) => {
-        const selectedProduct = exploreVideoData?.find(item => item?.id === videoId)
-        const res = await WatchLaterApi?.postwatchVideo(selectedProduct)
-        await dispatchWatchlater({
-            type: ActionTypes?.WatchLaterAction?.ADD_TO_WATCHLATER,
-            payload: res?.data?.watchlater
+        const selectedProduct = exploreVideoData?.find(item => item?._id === videoId)
+        await postToWatchLater(selectedProduct, () => {
+            console.log('posting ton watch later')
         })
     }
 
 
     const unsetfromwatchlater = async (videoId) => {
-        const res = await WatchLaterApi?.deletewatchVideo(videoId)
-        console.log('res from remove from wathc later', res)
-
-        await dispatchWatchlater({
-            type: ActionTypes?.WatchLaterAction?.ADD_TO_WATCHLATER,
-            payload: res?.data?.watchlater
+        await removeFromWatchLater(videoId, () => {
+            console.log('removniig ')
         })
     }
 
     const modalOpration = async (currentvideoID) => {
         const currentselectedVideo = exploreVideoData?.find(item => item?._id === currentvideoID)
-        console.log('selectedvideo', currentselectedVideo)
         await dispatchplayList({
             type: ActionTypes?.playlistmanagment?.SET_CURRENT_VIDEO,
             payload: currentselectedVideo
         })
         setModal(true);
+    }
+
+    const addtoLikes = async (videoId) => {
+        const newItem = exploreVideoData?.find(item => item?._id === videoId)
+        const response = await LikesApis?.postLikedVideo(newItem);
+
+        await dispatchLikes({
+            type: ActionTypes?.likeAction?.ADD_TO_LIKES,
+            payload: response?.data?.likes
+        })
+    }
+
+    const removeFromLikes = async (videoId) => {
+        const response = await LikesApis?.deleteLikedVideo(videoId);
+        await dispatchLikes({
+            type: ActionTypes?.likeAction?.REMOVE_FROM_LIKES,
+            payload: videoId
+        })
+
+        await dispatchLikes({
+            type: ActionTypes?.likeAction?.ADD_TO_LIKES,
+            payload: response?.data?.likes
+        })
     }
 
     return (
@@ -66,11 +96,6 @@ function OneCard(props) {
                                 <div className='part-1'>
                                     <Link to="#cate">
                                         <img className='img-card' src={item.imgUrl} alt='v-category' />
-                                    </Link>
-                                </div>
-                                <div className='part-2'>
-                                    <Link to={'#categoory'} className='card-title'>
-                                        <h4>{item.title}</h4>
                                     </Link>
                                 </div>
                                 <div className='part-3'>
@@ -88,6 +113,31 @@ function OneCard(props) {
             )}
 
 
+            {isCategorized && (
+                <div className='card-section'>
+                    {(categorizedVideo?.map((item, idx) => (
+                        <div key={`vcat${idx}`} className='card-container'>
+                            <div className='card-parts'>
+                                <div className='part-1'>
+                                    <iframe width="300" height="210" src={`https://www.youtube.com/embed/${item?._id}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                </div>
+                                <div className='part-2'>
+                                    <Link to={`/videos/${item?._id}`}>{item?.title}</Link>
+                                </div>
+                                <div className='part-3'>
+                                    <p className='card-des'>
+                                        {item.categoryName}
+                                    </p>
+                                </div>
+                                <div className='part-4'>
+                                    <Link to={`/videos/${item?._id}`}><button className='card-btn'>{'Play'}</button></Link>
+                                </div>
+                            </div>
+                        </div>
+                    )))}
+                </div>
+            )}
+
 
             {isExploreVideoCard && (
                 <div className='card-section'>
@@ -97,30 +147,47 @@ function OneCard(props) {
                                 <div className='part-1'>
                                     <iframe width="300" height="210" src={`https://www.youtube.com/embed/${item?._id}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                                 </div>
-                                <div className='part-2'>
+                                <div className='parts-2'>
                                     <h2 className='card-title'>
-                                        {item?.title}
+                                        <Link to={`/videos/${item?._id}`}>{item?.title}</Link>
                                     </h2>
                                 </div>
-                                <div className='part-3'>
-                                    <p className='card-des'>
-                                        {item.viewCount} views | 4 hours ago
-                                    </p>
+
+
+                                <div className='common-parts'>
+                                    <div className='part-3'>
+                                        <p className='card-des'>
+                                            {item.viewCount} views | 4 hours ago
+                                        </p>
+                                    </div>
+                                    <div className='part-4'>
+                                        <div className='action-icons'>
+                                            {(Likes && Likes?.likesproducts?.find(video => video?.id === item?.id)) ? <button onClick={() => { removeFromLikes(item?._id) }} className='lik-icon'><img className='card-icons' src={dislikeIcon} alt="dislike" /></button> : <button onClick={() => { addtoLikes(item?._id) }} className='lik-icon'> <img className='card-icons' src={likesIcon} alt="like" /></button>}
+                                            <button onClick={() => modalOpration(item?._id)} > <img className='card-icons' src={playlistIcon} alt='playlist' /></button>
+                                        </div>
+
+                                        {/* <div class="dropdown">
+                                            <button id="dLabel" className='dropdown-toggle' type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img className='menu-icon' alt='menu' src={MenusIcon} />
+                                            </button>
+
+                                            <div className="dropdown-menu" aria-labelledby="dLabel">
+                                            {(Likes && Likes?.likesproducts?.find(video => video?.id === item?.id)) ? <button onClick={() => { removeFromLikes(item?._id) }} className='lik-icon'>Unlike</button> : <button onClick={() => { addtoLikes(item?._id) }} className='lik-icon'>Add to likes</button>}
+                                            <button onClick={() => modalOpration(item?._id)} >Add to playlist</button>
+                                            {watchLater?.watchLaterproducts?.find(video => video?.id === item?.id) ? <button onClick={() => unsetfromwatchlater(item?._id)} >{'Undo'}</button> : <button onClick={() => moveToWatchLater(item?._id)}>{'Add to watchlater'}</button>}
+                                            </div>
+                                        </div> */}
+
+
+                                    </div>
                                 </div>
 
-                                <div className='part-4'>
-                                    <i onClick={() => modalOpration(item?._id)} className='fa-solid fa-file-plus'>add to playlist..</i>
-                                </div>
-
-                                <div className='part-4'>
-                                    {watchLater?.watchLaterproducts?.find(video => video?.id === item?.id) ? <button onClick={() => unsetfromwatchlater(item?.id)} className='card-btn'>{'Undo'}</button>   :<button onClick={() => moveToWatchLater(item?.id)} className='card-btn'>{'move to watchlater'}</button>}
-                                </div>
                             </div>
-
                         </div>
                     )))}
                 </div>
             )}
+
 
 
             {isWatchLater && (
@@ -142,13 +209,42 @@ function OneCard(props) {
                                     </p>
                                 </div>
                                 <div className='part-4'>
-                                    {watchLater?.watchLaterproducts?.find(video => video?.id === item?.id) ? <button onClick={() => unsetfromwatchlater(item?.id)} className='card-btn'>{'Undo'}</button>   :<button onClick={() => moveToWatchLater(item?.id)} className='card-btn'>{'move to watchlater'}</button>}
+                                    {watchLater?.watchLaterproducts?.find(video => video?.id === item?.id) ? <button onClick={() => unsetfromwatchlater(item?._id)} className='card-btn'>{'Undo'}</button> : <button onClick={() => moveToWatchLater(item?._id)} className='card-btn'>{'move to watchlater'}</button>}
                                 </div>
                             </div>
                         </div>
                     )))}
                 </div>
             )}
+
+            {isSinglePLayList && (
+                <div className='card-section'>
+                    {singlePlaylistVideoData?.map((item, idx) => (
+                        <div key={`play-video${idx}`} className='card-container'>
+                            <div className='card-parts'>
+                                <div className='part-1'>
+                                    <iframe width="300" height="210" src={`https://www.youtube.com/embed/${item?._id}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <div className='part-2'>
+                                    <h2 className='card-title'>
+                                        {item?.title}
+                                    </h2>
+                                </div>
+                                <div className='part-3'>
+                                    <p className='card-des'>
+                                        {item?.viewCount} views | 4 hours ago
+                                    </p>
+                                </div>
+                                <div className='part-4'>
+                                    {watchLater?.watchLaterproducts?.find(video => video?.id === item?.id) ? <button onClick={() => unsetfromwatchlater(item?._id)} className='card-btn'>{'Undo'}</button> : <button onClick={() => moveToWatchLater(item?._id)} className='card-btn'>{'move to watchlater'}</button>}
+                                </div>
+                            </div>
+                        </div>
+                    )
+                    )}
+                </div>
+            )
+            }
         </>
     )
 }

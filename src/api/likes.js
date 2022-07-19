@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 
-const encodedToken = localStorage.getItem('token')
+const authorization = localStorage.getItem('token')
 const likesUrl = '/api/user/likes'
 
 
@@ -9,7 +9,7 @@ const likesUrl = '/api/user/likes'
 
 export const getLikedList = async () => {
     try {
-        const response = await axios.get(likesUrl, { headers: { encodedToken } })
+        const response = await axios.get(likesUrl,  { headers:  {authorization:authorization}   })
         return response;
     } catch (error) {
         console.error(error);
@@ -21,7 +21,7 @@ export const getLikedList = async () => {
 
 export const postLikedVideo = async (likedVideo) => {
     try {
-        const response = await axios.post(likesUrl, { likedVideo }, { headers: { encodedToken } })
+        const response = await axios.post(likesUrl, { likedVideo },  { headers:  {authorization:authorization}   })
         return response;
     } catch (error) {
         console.log(error)
@@ -33,7 +33,7 @@ export const postLikedVideo = async (likedVideo) => {
 
 export const deleteLikedVideo = async (likedtodeleteVideo) => {
     try {
-        const response = await axios.delete(`${likesUrl}/${likedtodeleteVideo}`, { headers: { encodedToken } })
+        const response = await axios.delete(`${likesUrl}/${likedtodeleteVideo}`,  { headers:  {authorization:authorization}   })
         return response;
     } catch (error) {
         console.log(error)

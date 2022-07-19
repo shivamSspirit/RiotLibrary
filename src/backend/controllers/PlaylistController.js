@@ -13,10 +13,15 @@ import { v4 as uuid } from "uuid";
  * send GET Request at /api/user/playlist
  * */
 export const getAllPlaylistsHandler = function (request) {
-  const user = requiresAuth.call(this, request);
+  console.log('requsetssss',request)
+  const {...ant}  = JSON.parse(request.requestBody)
+  console.log('fsdfdsdfs',ant)
+  const users = requiresAuth.call(this, request);
+  console.log('sdfsfsspopopoooo',users)
+ 
 
   try {
-    if (!user) {
+    if (!users) {
       return new Response(
         404,
         {},
@@ -25,7 +30,7 @@ export const getAllPlaylistsHandler = function (request) {
         }
       );
     }
-    return new Response(200, {}, { playlists: user.playlists });
+    return new Response(200, {}, { playlists: users.playlists });
   } catch (error) {
     return new Response(
       500,

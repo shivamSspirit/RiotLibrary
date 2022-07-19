@@ -8,6 +8,7 @@ export function usePlaylistOperation() {
 
     async function getGlobalPlayLists(callback) {
         const response = await playlistApis?.getPlayList();
+        console.log('ressdsddds',response)
         dispatchplayList({
             type: ActionTypes?.playlistmanagment?.CREATE_GLOBAL_PLAYLISTS,
             payload: response?.data?.playlists

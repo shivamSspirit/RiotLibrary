@@ -30,7 +30,7 @@ function OneCard(props) {
     const { Likes, dispatchLikes } = useLikes();
     const { postToWatchLater, removeFromWatchLater } = useWatchLaterOperation()
 
-    console.log('fun', playList)
+   // console.log('fun', playList)
 
 
     const moveToExplore = async (videoCategoryID) => {
@@ -42,6 +42,7 @@ function OneCard(props) {
 
     const moveToWatchLater = async (videoId) => {
         const selectedProduct = exploreVideoData?.find(item => item?._id === videoId)
+        // console.log('selected',selectedProduct)
         await postToWatchLater(selectedProduct, () => {
             console.log('posting ton watch later')
         })
@@ -75,11 +76,7 @@ function OneCard(props) {
 
     const removeFromLikes = async (videoId) => {
         const response = await LikesApis?.deleteLikedVideo(videoId);
-        await dispatchLikes({
-            type: ActionTypes?.likeAction?.REMOVE_FROM_LIKES,
-            payload: videoId
-        })
-
+       
         await dispatchLikes({
             type: ActionTypes?.likeAction?.ADD_TO_LIKES,
             payload: response?.data?.likes
@@ -149,7 +146,7 @@ function OneCard(props) {
                                 </div>
                                 <div className='parts-2'>
                                     <h2 className='card-title'>
-                                        <Link to={`/videos/${item?._id}`}>{item?.title}</Link>
+                                        <Link style={{textDecorartion:'dotted'}} className='video-link' to={`/videos/${item?._id}`}>{item?.title}</Link>
                                     </h2>
                                 </div>
 
@@ -162,8 +159,8 @@ function OneCard(props) {
                                     </div>
                                     <div className='part-4'>
                                         <div className='action-icons'>
-                                            {(Likes && Likes?.likesproducts?.find(video => video?.id === item?.id)) ? <button onClick={() => { removeFromLikes(item?._id) }} className='lik-icon'><img className='card-icons' src={dislikeIcon} alt="dislike" /></button> : <button onClick={() => { addtoLikes(item?._id) }} className='lik-icon'> <img className='card-icons' src={likesIcon} alt="like" /></button>}
-                                            <button onClick={() => modalOpration(item?._id)} > <img className='card-icons' src={playlistIcon} alt='playlist' /></button>
+                                            {(watchLater && watchLater?.watchLaterproducts?.find(video => video?.id === item?.id)) ? <span onClick={() => { unsetfromwatchlater(item?._id) }} className='lik-icon'><img style={{maxWidth:'35px',maxHeight:'35px'}} className='card-icons' src={dislikeIcon} alt="dislike" /></span> : <span onClick={() => { moveToWatchLater(item?._id) }} className='lik-icon'> <img style={{maxWidth:'35px',maxHeight:'35px'}} className='card-icons' src={likesIcon} alt="like" /></span>}
+                                            <span onClick={() => modalOpration(item?._id)} > <img style={{maxWidth:'35px',maxHeight:'35px'}} className='card-icons' src={playlistIcon} alt='playlist' /></span>
                                         </div>
 
                                         {/* <div class="dropdown">

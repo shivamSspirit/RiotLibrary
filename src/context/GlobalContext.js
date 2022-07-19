@@ -29,13 +29,15 @@ const GlobalContext = (props) => {
 		fetchVideo();
 	}, [])
 
-	useEffect(() =>
-		(async () => {
+	useEffect(() => {
+		const fetchcate = async () => {
 			const response = await categoryApi?.getCategoryList();
 			if (response) {
 				setGlobalVidCategory(response?.data?.categories)
 			}
-	})(), [])
+		}
+		fetchcate()
+	}, [])
 
 	// {
 	// 	const fetchCategory = async () => {

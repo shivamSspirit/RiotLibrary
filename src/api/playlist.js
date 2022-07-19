@@ -1,13 +1,16 @@
 import axios from 'axios'
 
 const playListUrl = '/api/user/playlists';
-const encodedToken = localStorage.getItem('token')
+const authorization = localStorage.getItem('token')
+
+// console.log('token',authorization)
 
 // get playlist videos
 
 export const getPlayList = async () => {
   try {
-    const response = await axios.get(playListUrl, { headers: { encodedToken } })
+    const response = await axios.get(playListUrl, { headers:  {authorization:authorization}  })
+    console.log('resjdskfjdskjkrishannnnnnsss', response)
     return response;
   } catch (error) {
     console.error("getPlaylistfromServer : Error in getting playlist");
@@ -19,7 +22,7 @@ export const getPlayList = async () => {
 export const postPlayList = async (playlist) => {
   try {
     const response = await axios.post("/api/user/playlists", { playlist },
-      { headers: { encodedToken }, }
+      { headers: { authorization }, }
     );
     if (response.status === 201) {
       return response.data;
@@ -34,7 +37,7 @@ export const postPlayList = async (playlist) => {
 
 export const deleteplayList = async (playlistId) => {
   try {
-    const response = await axios.delete(`${playListUrl}/${playlistId}`, { headers: { encodedToken } })
+    const response = await axios.delete(`${playListUrl}/${playlistId}`, { headers:  {authorization:authorization}  })
     return response;
   } catch (error) {
     console.log('in delete', error)
@@ -45,7 +48,7 @@ export const deleteplayList = async (playlistId) => {
 
 export const getSingleplayList = async (playlistId) => {
   try {
-    const response = await axios.get(`${playListUrl}/${playlistId}`, { headers: { encodedToken } })
+    const response = await axios.get(`${playListUrl}/${playlistId}`, { headers:  {authorization:authorization}  })
     return response
   } catch (error) {
     console.log('getting single playsit', error)
@@ -57,11 +60,11 @@ export const getSingleplayList = async (playlistId) => {
 
 export const postSingleplayList = async (playlistId, video) => {
   try {
-    const response = await axios.post(`${playListUrl}/${playlistId}`, { data: {video} }, { headers: { encodedToken } })
-    if(response.status===201){
+    const response = await axios.post(`${playListUrl}/${playlistId}`, { data: { video } }, { headers:  {authorization:authorization}  })
+    if (response.status === 201) {
       return response
     } else {
-    console.log(response)
+      console.log(response)
     }
   } catch (error) {
     throw new Error(error)
@@ -73,7 +76,7 @@ export const postSingleplayList = async (playlistId, video) => {
 
 export const deleteSingleplayList = async (playlistId, videoId) => {
   try {
-    const response = axios.delete(`${playListUrl}/${playlistId}/${videoId}`, { headers: { encodedToken } })
+    const response = axios.delete(`${playListUrl}/${playlistId}/${videoId}`, { headers:  {authorization:authorization}  })
     return response
   } catch (error) {
     console.log('in delete dingle video', error)

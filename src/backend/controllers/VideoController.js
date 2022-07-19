@@ -54,13 +54,13 @@ export const getVideoHandler = function (schema, request) {
 };
 
 
-export const getPagedVideos = function (schema,request) {
+// export const getPagedVideos = function (schema,request) {
 
-  const { pageNum } = request.params;
-  // console.log('rew',request)
+//   const { pageNum } = request.params;
+//   // console.log('rew',request)
 
-  const latestVideos =this.db.videos
-  console.log('la',latestVideos)
-  const paginatedVideos = latestVideos.slice(0, pageNum * 2 + 2);
-  return new Response(200, {}, { videos: paginatedVideos })
-}
+//   const latestVideos =this.db.videos
+//   console.log('la',latestVideos)
+//   const paginatedVideos = latestVideos.slice(0, pageNum * 2 + 2);
+//   return new Response(200, {}, { videos: paginatedVideos })
+// }

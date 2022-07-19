@@ -25,22 +25,23 @@ function Listform({ openModal, setModal }) {
     const { playList, dispatchplayList } = usePlayList();
     const { getGlobalPlayLists,
         postVideotoplaylist,
-        deletevideoFromplaylist } = usePlaylistOperation();
+        deletevideoFromplaylist,createPlayList } = usePlaylistOperation();
 
     const { watchLater } = useWatchLater()
     const { postToWatchLater, removeFromWatchLater } = useWatchLaterOperation()
 
 
-    useEffect(() => {
-        getGlobalPlayLists(() => {
-            console.log('setting playlist')
-        })
-    }, [playList?.playlistCount])
+    // useEffect(() => {
+    //     getGlobalPlayLists(() => {
+    //         console.log('setting playlist')
+    //     })
+    // }, [playList?.playlistCount])
 
 
     useEffect(() => {
-        if (playList.playlistproducts) {
-            setGetPlayList(playList.playlistproducts);
+        if (playList?.playlistproducts) {
+            console.log('ha')
+            setGetPlayList(playList?.playlistproducts);
         }
     }, [playList.playlistproducts])
 
@@ -65,14 +66,24 @@ function Listform({ openModal, setModal }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const targetList = { ...list }
-        const response = await playListApis?.postPlayList(targetList);
-        await dispatchplayList({
-            type: ActionTypes?.playlistmanagment?.CREATE_GLOBAL_PLAYLISTS,
-            payload: response?.playlists
-        });
+
+        await createPlayList(targetList,()=>{
+            console.log('creating new playlist')
+        })
+        // const response = await playListApis?.postPlayList(targetList);
+        // await dispatchplayList({
+        //     type: ActionTypes?.playlistmanagment?.CREATE_GLOBAL_PLAYLISTS,
+        //     payload: response?.playlists
+        // });
+
+        await getGlobalPlayLists(()=>{
+            console.log('getting playlist')
+        })
 
 
         setDataLists([...lists, targetList]);
+
+
         setTimeout(() => {
             setList({
                 title: '',
@@ -165,7 +176,7 @@ function Listform({ openModal, setModal }) {
                             <input onChange={watchLater?.watchLaterproducts?.find(video => video?.id === playList?.currentselectedVideo?.id) ? unsetfromwatchlater : setwatchlater} checked={watchLater?.watchLaterproducts?.find(video => video?.id === playList?.currentselectedVideo?.id)} type="checkbox" id={`${'watch'}`} name={`${'watch'}`} />
                             <label className='lab-check' for={`${'watch'}`}>{`${'watch later'}`}</label>
                         </div>
-                        {getplaylist && getplaylist?.map((list, idx) => (
+                        {playList?.playlistproducts && playList?.playlistproducts?.map((list, idx) => (
                             <div className='chec-doc' key={`playlist${idx}`}>
                                 <input onChange={() => handlevideoInplaylist(list)} type="checkbox" id={`${list.title}`} name={`${list.title}`} />
                                 <label className='lab-check' htmlFor={`${list.title}`}>{`${list.title}`}</label>

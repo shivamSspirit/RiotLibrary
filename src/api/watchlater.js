@@ -1,27 +1,31 @@
 import axios from 'axios'
 
 const watchLaterUrl = '/api/user/watchlater';
-const encodedToken = localStorage.getItem('token')
-
+const authorization = localStorage.getItem('token')
+// const headers = { 'authorization': localStorage.getItem('token') }
 // get watch later videos
 
 export async function getwatchLater() {
     try {
-        const response = await axios.get(`/api/user/watchlater`, { headers: { encodedToken } });
-        return response;
+           
+            const response = await axios.get(`/api/user/watchlater`, { headers: { authorization: authorization } })
+            return response;
+        
     } catch (error) {
         console.log(error)
     }
 }
 
 // post watch later video
-
 export async function postwatchVideo(watchlatervideo) {
     try {
-        const response = await axios.post(watchLaterUrl, { data: watchlatervideo }, { headers: { encodedToken } });
+        console.log('dsssa')
+        debugger;
+        const response = await axios.post(watchLaterUrl, { data: watchlatervideo }, { headers: { authorization: localStorage.getItem("token") } });
+        console.log('resposnse watch later', response)
         return response;
     } catch (error) {
-        console.log(error)
+        console.log('error', error)
     }
 }
 
@@ -31,7 +35,7 @@ export async function postwatchVideo(watchlatervideo) {
 
 export async function deletewatchVideo(watchlater) {
     try {
-        const response = await axios.delete(`/api/user/watchlater/${watchlater}`, { headers: { encodedToken } })
+        const response = await axios.delete(`/api/user/watchlater/${watchlater}`, { headers: { authorization: authorization } })
         return response;
     } catch (error) {
         console.log(error)

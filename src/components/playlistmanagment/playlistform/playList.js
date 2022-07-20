@@ -15,43 +15,32 @@ function Listform({ openModal, setModal }) {
     const [list, setList] = useState({
         title: "games", description: "bob bar bar"
     });
+
     const [lists, setDataLists] = useState([]);
     const [toggleform, setToggleform] = useState(false)
 
-    // getting playlist from server
-    const [getplaylist, setGetPlayList] = useState(null)
 
     // fetching global playlist state from hooks
     const { playList, dispatchplayList } = usePlayList();
-    const { getGlobalPlayLists,
-        postVideotoplaylist,
-        deletevideoFromplaylist,createPlayList } = usePlaylistOperation();
+    const { getGlobalPlayLists, postVideotoplaylist, deletevideoFromplaylist, createPlayList } = usePlaylistOperation();
 
     const { watchLater } = useWatchLater()
     const { postToWatchLater, removeFromWatchLater } = useWatchLaterOperation()
 
-
-    // useEffect(() => {
-    //     getGlobalPlayLists(() => {
-    //         console.log('setting playlist')
-    //     })
-    // }, [playList?.playlistCount])
-
-
-    useEffect(() => {
-        if (playList?.playlistproducts) {
-            console.log('ha')
-            setGetPlayList(playList?.playlistproducts);
-        }
-    }, [playList.playlistproducts])
-
     // forminput list  handler
+
+    useEffect(()=>{
+         getGlobalPlayLists(() => {
+            console.log('getting playlist')
+        })
+    },[lists])
 
     const listOnchange = (e) => {
         const val = e.target.name;
         if (val === 'p-title') {
             setList({
-                title: e.target.value
+                title: e.target.value,
+                description: list.description
             })
         }
         if (val === 'p-des') {
@@ -66,24 +55,13 @@ function Listform({ openModal, setModal }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const targetList = { ...list }
-
-        await createPlayList(targetList,()=>{
+        setDataLists([...lists, targetList]);
+        await createPlayList(targetList, () => {
             console.log('creating new playlist')
         })
-        // const response = await playListApis?.postPlayList(targetList);
-        // await dispatchplayList({
-        //     type: ActionTypes?.playlistmanagment?.CREATE_GLOBAL_PLAYLISTS,
-        //     payload: response?.playlists
-        // });
-
-        await getGlobalPlayLists(()=>{
-            console.log('getting playlist')
-        })
-
-
-        setDataLists([...lists, targetList]);
-
-
+        // await getGlobalPlayLists(() => {
+        //     console.log('getting playlist')
+        // })
         setTimeout(() => {
             setList({
                 title: '',
@@ -92,26 +70,46 @@ function Listform({ openModal, setModal }) {
         }, 1000)
     }
 
+
     const openForm = () => {
         setToggleform(!toggleform)
     }
 
-    
+
     // plylist operations
 
-    const isVideoInPlaylist = async (playlist) => {
-        const filteredVideos = playlist.videos.filter(
+    const isVideoInPlaylist =  (playlist) => {
+        console.log('current playlist', playlist)
+        const filteredVideos = playlist?.videos?.filter(
             (playlistVideo) => playlistVideo._id === playList?.currentselectedVideo?._id
         );
-        return filteredVideos.length === 1;
+        console.log('filtered', filteredVideos?.length === 1)
+        return filteredVideos?.length === 1;
     };
 
 
-    const handlevideoInplaylist = async (playlist) => {
-        isVideoInPlaylist(playlist) ? deletevideoFromplaylist({ playlistId: playlist?._id, videoId: playList?.currentselectedVideo?._id }) : postVideotoplaylist({ playlistId: playlist?._id, video: playList?.currentselectedVideo })
+    const setVideoToPlayList = (playlist) => {
+        console.log('playlist',playList)
+        const data = { playlistId: playlist?._id, video: playList?.currentselectedVideo }
+        postVideotoplaylist(data,()=>{
+            console.log('posting')
+        })
     }
 
-    
+    const unsetVideoFromPlayList = (playlist) => {
+        const data = { playlistId: playlist?._id, videoId: playList?.currentselectedVideo?._id }
+        deletevideoFromplaylist(data,()=>{
+            console.log('deleting')
+        })
+    }
+
+    const handlevideoInplaylist = (e,playlist) => {
+        e.preventDefault()
+        console.log('dfff', isVideoInPlaylist(playlist) )
+        isVideoInPlaylist(playlist) ? unsetVideoFromPlayList(playlist) : setVideoToPlayList(playlist)
+    }
+
+
     // watch later oparation
 
     const setwatchlater = async () => {
@@ -162,7 +160,7 @@ function Listform({ openModal, setModal }) {
                             <label className='in-label' htmlFor='play-list-des'>
                                 PlayList Des:
                             </label>
-                            <input className='list-input' value={list.description} type='text' placeholder='play list description' name='p-des' onChange={listOnchange} />
+                            <input className='list-input' value={list?.description} type='text' placeholder='play list description' name='p-des' onChange={listOnchange} />
 
                             <div className='form-btn'>
                                 <button className='btnn' type='submit'>create</button>
@@ -178,7 +176,10 @@ function Listform({ openModal, setModal }) {
                         </div>
                         {playList?.playlistproducts && playList?.playlistproducts?.map((list, idx) => (
                             <div className='chec-doc' key={`playlist${idx}`}>
-                                <input onChange={() => handlevideoInplaylist(list)} type="checkbox" id={`${list.title}`} name={`${list.title}`} />
+                                {console.log('pro',list)}
+                                <input checked={isVideoInPlaylist(list)} onChange={(e) => handlevideoInplaylist(e,list)} type="checkbox" id={`${list.title}`} name={`${list.title}`} />
+                                {/* <input type="checkbox" id={`${list.title}`} name={`${list.title}`} /> */}
+
                                 <label className='lab-check' htmlFor={`${list.title}`}>{`${list.title}`}</label>
                             </div>
                         ))}

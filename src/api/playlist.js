@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const playListUrl = '/api/user/playlists';
-const authorization = localStorage.getItem('token')
+const authorization = localStorage.getItem("token")
 
 // console.log('token',authorization)
 
@@ -21,7 +21,7 @@ export const getPlayList = async () => {
 
 export const postPlayList = async (playlist) => {
   try {
-    const response = await axios.post("/api/user/playlists", { playlist },
+    const response = await axios.post("/api/user/playlists", {playlist },
       { headers: { authorization }, }
     );
     if (response.status === 201) {
@@ -59,6 +59,7 @@ export const getSingleplayList = async (playlistId) => {
 //  This API call adds a new video to the playlist of the user in the db.
 
 export const postSingleplayList = async (playlistId, video) => {
+  console.log('viedo',video)
   try {
     const response = await axios.post(`${playListUrl}/${playlistId}`, { data: { video } }, { headers:  {authorization:authorization}  })
     if (response.status === 201) {

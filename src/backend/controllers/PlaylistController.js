@@ -12,13 +12,10 @@ import { v4 as uuid } from "uuid";
  * This handler handles getting all user's playlists.
  * send GET Request at /api/user/playlist
  * */
-export const getAllPlaylistsHandler = function (request) {
-  console.log('requsetssss',request)
-  const {...ant}  = JSON.parse(request.requestBody)
-  console.log('fsdfdsdfs',ant)
+export const getAllPlaylistsHandler = function (schema, request) {
   const users = requiresAuth.call(this, request);
-  console.log('sdfsfsspopopoooo',users)
- 
+  console.log('sdfsfsspopopoooo', users)
+
 
   try {
     if (!users) {
@@ -48,7 +45,7 @@ export const getAllPlaylistsHandler = function (request) {
  * body contains {playlist: {title: "foo", description:"bar bar bar" }}
  * */
 
-export const addNewPlaylistHandler = function (request) {
+export const addNewPlaylistHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
   if (user) {
     const { playlist } = JSON.parse(request.requestBody);
@@ -69,7 +66,7 @@ export const addNewPlaylistHandler = function (request) {
  * send DELETE Request at /api/user/playlists/:playlistId
  * */
 
-export const removePlaylistHandler = function (request) {
+export const removePlaylistHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
   if (user) {
     const playlistId = request.params.playlistId;
@@ -91,7 +88,7 @@ export const removePlaylistHandler = function (request) {
  * send GET Request at /api/user/playlists/:playlistId
  * */
 
-export const getVideosFromPlaylistHandler = function (request) {
+export const getVideosFromPlaylistHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
   if (user) {
     const playlistId = request.params.playlistId;
@@ -112,11 +109,12 @@ export const getVideosFromPlaylistHandler = function (request) {
  * body contains {video}
  * */
 
-export const addVideoToPlaylistHandler = function (request) {
+export const addVideoToPlaylistHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
   if (user) {
     const playlistId = request.params.playlistId;
     const { data } = JSON.parse(request.requestBody);
+    console.log('dddd', data)
     const playlist = user.playlists.find((item) => item._id === playlistId);
     if (playlist.videos.some((item) => item.id === data.video.id)) {
       console.log('hello')
@@ -143,7 +141,7 @@ export const addVideoToPlaylistHandler = function (request) {
  * send DELETE Request at /api/user/playlists/:playlistId/:videoId
  * */
 
-export const removeVideoFromPlaylistHandler = function (request) {
+export const removeVideoFromPlaylistHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
   if (user) {
     const playlistId = request.params.playlistId;

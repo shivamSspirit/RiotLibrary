@@ -7,10 +7,8 @@ const authorization = localStorage.getItem('token')
 
 export async function getwatchLater() {
     try {
-           
-            const response = await axios.get(`/api/user/watchlater`, { headers: { authorization: authorization } })
-            return response;
-        
+        const response = await axios.get(`/api/user/watchlater`, { headers: { authorization: authorization } })
+        return response;
     } catch (error) {
         console.log(error)
     }
@@ -19,10 +17,7 @@ export async function getwatchLater() {
 // post watch later video
 export async function postwatchVideo(watchlatervideo) {
     try {
-        console.log('dsssa')
-        debugger;
         const response = await axios.post(watchLaterUrl, { data: watchlatervideo }, { headers: { authorization: localStorage.getItem("token") } });
-        console.log('resposnse watch later', response)
         return response;
     } catch (error) {
         console.log('error', error)

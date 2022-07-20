@@ -1,13 +1,23 @@
 import * as likesApis from '../api/likes'
 import * as ActionTypes from '../constant/actions'
-import { uselikes } from '../context/likeContext'
+import { useLikes } from '../context/likeContext'
 
-export function uselikesOperation() {
-    const { dispatchlikes } = uselikes();
+export function useLikesOperation() {
+    const {Likes, dispatchLikes } = useLikes();
+
+    function ifvideoinlikes(video){
+        const isvideo = Likes?.likesproducts?.find((videos=>videos?._id===video?._id))
+        if(isvideo){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     async function getlikesvideoList(callback){
         const response = await likesApis?.getLikedList();
-        await dispatchlikes({
+        console.log('res from get likes',response)
+        await dispatchLikes({
             type:ActionTypes?.likeAction?.ADD_TO_LIKES,
             payload: response?.data?.likes
         })
@@ -17,8 +27,15 @@ export function uselikesOperation() {
     }
 
     async function postTolikes(video, callback) {
+        if(ifvideoinlikes(video)){
+            await dispatchLikes({
+                type: ActionTypes?.likeAction?.ADD_TO_LIKES,
+                payload: Likes?.likesproducts
+            })
+        }
         const response = await likesApis?.postLikedVideo(video);
-        await dispatchlikes({
+        console.log('res from post likes',response)
+        await dispatchLikes({
             type: ActionTypes?.likeAction?.ADD_TO_LIKES,
             payload: response?.data?.likes
         })
@@ -30,7 +47,8 @@ export function uselikesOperation() {
 
     async function removeFromlikes(videoId, callback) {
         const response = await likesApis?.deleteLikedVideo(videoId);
-        dispatchlikes({
+        console.log('res from remove likes',response)
+        dispatchLikes({
             type: ActionTypes?.likeAction?.ADD_TO_LIKES,
             payload: response?.data?.likes
         })

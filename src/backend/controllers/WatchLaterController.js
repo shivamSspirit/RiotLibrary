@@ -12,7 +12,7 @@ import { requiresAuth } from "../utils/authUtils";
  * send GET Request at /api/user/watchlater
  * */
 
-export const getWatchLaterVideosHandler = function (request) {
+export const getWatchLaterVideosHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {
@@ -42,8 +42,10 @@ export const getWatchLaterVideosHandler = function (request) {
  * body contains {video}
  * */
 
-export const addItemToWatchLaterVideos = function (request) {
+export const addItemToWatchLaterVideos = function (schema, request) {
+  // console.log('user',request)
   const user = requiresAuth.call(this, request);
+  console.log('user', user.watchlater)
   if (user) {
     const { data } = JSON.parse(request.requestBody);
     if (user.watchlater.some((item) => item.id === data.id)) {
@@ -72,7 +74,7 @@ export const addItemToWatchLaterVideos = function (request) {
  * send DELETE Request at /api/user/watchlater/:videoId
  * */
 
-export const removeItemFromWatchLaterVideos = function (request) {
+export const removeItemFromWatchLaterVideos = function (schema, request) {
   const user = requiresAuth.call(this, request);
   if (user) {
     const videoId = request.params.videoId;

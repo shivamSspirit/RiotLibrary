@@ -5,6 +5,7 @@ const baseAuthUrl = '/api/auth'
 export const signupHandler = async (userData) => {
     try {
         const response = await axios.post(`${baseAuthUrl}/signup`, userData);
+        console.log('data',response)
         localStorage.setItem("token", response.data.encodedToken);
         return response;
     } catch (error) {

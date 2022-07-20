@@ -1,14 +1,17 @@
 import React from 'react'
-import { useGlobal } from '../../../context/GlobalContext'
 import { useNavigate } from 'react-router-dom'
+import { useGlobal } from '../../../context/GlobalContext'
 import { useWatchLater } from '../../../context/watchLaterContext'
 import { usePlayList } from '../../../context/playListContext'
 import { useLikes } from '../../../context/likeContext'
 
-import * as LikesApis from '../../../api/likes'
+// import * as LikesApis from '../../../api/likes'
 import * as CategoryPis from '../../../api/category'
 import * as ActionTypes from '../../../constant/actions'
+
+import { useLikesOperation } from '../../../hooks/likes'
 import { useWatchLaterOperation } from '../../../hooks/watchlater'
+import { usePlaylistOperation } from '../../../hooks/playlistmanagment'
 
 import { Link } from 'react-router-dom'
 
@@ -17,21 +20,37 @@ import MenusIcon from '../../../asset/icon/menus.png'
 import likesIcon from '../../../asset/icon/like.png'
 import dislikeIcon from '../../../asset/icon/dislike.png'
 import playlistIcon from '../../../asset/icon/playList.png'
+import watchlaterLightIcon from '../../../asset/icon/light.png'
+import watchlaterDarkIcon from '../../../asset/icon/dark.png'
 
 import Dropdown from 'react-bootstrap/Dropdown';
+
+import { useParams } from 'react-router-dom'
 
 
 function OneCard(props) {
     const { isCategoryCard, CategoryCardData, isExploreVideoCard, exploreVideoData, isWatchLater, watchvideoLaterData, setModal, isSinglePLayList, singlePlaylistVideoData, isCategorized, categorizedVideo } = props;
     const { setDynamicProperties } = useGlobal();
     const navigate = useNavigate();
+    const { playlistId } = useParams()
     const { watchLater } = useWatchLater();
-    const { playList, dispatchplayList } = usePlayList()
+    const { playList, dispatchplayList } = usePlayList();
     const { Likes, dispatchLikes } = useLikes();
-    const { postToWatchLater, removeFromWatchLater } = useWatchLaterOperation()
+    const { postToWatchLater, removeFromWatchLater } = useWatchLaterOperation();
+    const { getlikesvideoList, postTolikes, removeFromlikes } = useLikesOperation();
+    const { getGlobalPlayLists, createPlayList, deletePlaylist, getSinglePlaylist, postVideotoplaylist, deletevideoFromplaylist } = usePlaylistOperation();
 
-   // console.log('fun', playList)
+    // console.log('fun', playList)
 
+
+    // go to explore videos
+
+    console.log('id', playlistId)
+
+    const removevideoFromPlaylist = (video) => {
+        const data = { playlistId: playlistId, videoId: video?._id }
+        deletevideoFromplaylist(data)
+    }
 
     const moveToExplore = async (videoCategoryID) => {
         const res = await CategoryPis?.getSingleCategory(videoCategoryID);
@@ -39,6 +58,8 @@ function OneCard(props) {
         navigate('/videos')
     }
 
+
+    // watchlater operations
 
     const moveToWatchLater = async (videoId) => {
         const selectedProduct = exploreVideoData?.find(item => item?._id === videoId)
@@ -55,33 +76,37 @@ function OneCard(props) {
         })
     }
 
+    // for model
     const modalOpration = async (currentvideoID) => {
         const currentselectedVideo = exploreVideoData?.find(item => item?._id === currentvideoID)
         await dispatchplayList({
             type: ActionTypes?.playlistmanagment?.SET_CURRENT_VIDEO,
             payload: currentselectedVideo
         })
-        setModal(true);
+        await setModal(true);
+        console.log("selected now", playList?.currentselectedVideo)
     }
+
+    // for likes
 
     const addtoLikes = async (videoId) => {
         const newItem = exploreVideoData?.find(item => item?._id === videoId)
-        const response = await LikesApis?.postLikedVideo(newItem);
-
-        await dispatchLikes({
-            type: ActionTypes?.likeAction?.ADD_TO_LIKES,
-            payload: response?.data?.likes
-        })
+        await postTolikes(newItem);
     }
 
     const removeFromLikes = async (videoId) => {
-        const response = await LikesApis?.deleteLikedVideo(videoId);
-       
-        await dispatchLikes({
-            type: ActionTypes?.likeAction?.ADD_TO_LIKES,
-            payload: response?.data?.likes
-        })
+        await removeFromlikes(videoId)
     }
+
+    // for playlist
+
+    // const addTOplaylist = async (video) => {
+    //     await postVideotoplaylist(video);
+    // }
+
+    // const removeFromplaylist = async (video) => {
+    //     await removeFromplaylist(video)
+    // }
 
     return (
         <>
@@ -146,7 +171,7 @@ function OneCard(props) {
                                 </div>
                                 <div className='parts-2'>
                                     <h2 className='card-title'>
-                                        <Link style={{textDecorartion:'dotted'}} className='video-link' to={`/videos/${item?._id}`}>{item?.title}</Link>
+                                        <Link style={{ textDecorartion: 'dotted' }} className='video-link' to={`/videos/${item?._id}`}>{item?.title}</Link>
                                     </h2>
                                 </div>
 
@@ -159,8 +184,9 @@ function OneCard(props) {
                                     </div>
                                     <div className='part-4'>
                                         <div className='action-icons'>
-                                            {(watchLater && watchLater?.watchLaterproducts?.find(video => video?.id === item?.id)) ? <span onClick={() => { unsetfromwatchlater(item?._id) }} className='lik-icon'><img style={{maxWidth:'35px',maxHeight:'35px'}} className='card-icons' src={dislikeIcon} alt="dislike" /></span> : <span onClick={() => { moveToWatchLater(item?._id) }} className='lik-icon'> <img style={{maxWidth:'35px',maxHeight:'35px'}} className='card-icons' src={likesIcon} alt="like" /></span>}
-                                            <span onClick={() => modalOpration(item?._id)} > <img style={{maxWidth:'35px',maxHeight:'35px'}} className='card-icons' src={playlistIcon} alt='playlist' /></span>
+                                            {(watchLater && watchLater?.watchLaterproducts?.find(video => video?.id === item?.id)) ? <span onClick={() => { unsetfromwatchlater(item?._id) }} className='lik-icon'><img style={{ maxWidth: '35px', maxHeight: '35px' }} className='card-icons' src={watchlaterLightIcon} alt="dislike" /></span> : <span onClick={() => { moveToWatchLater(item?._id) }} className='lik-icon'> <img style={{ maxWidth: '35px', maxHeight: '35px' }} className='card-icons' src={watchlaterDarkIcon} alt="like" /></span>}
+                                            <span onClick={() => modalOpration(item?._id)} > <img style={{ maxWidth: '35px', maxHeight: '35px' }} className='card-icons' src={playlistIcon} alt='playlist' /></span>
+                                            {(Likes && Likes?.likesproducts?.find((videos) => videos?.id === item?.id)) ? <span onClick={() => { removeFromLikes(item?._id) }}><img style={{ maxWidth: '35px', maxHeight: '35px' }} className='card-icons' src={likesIcon} alt="like" /></span> : <span onClick={() => { addtoLikes(item?._id) }}><img style={{ maxWidth: '35px', maxHeight: '35px' }} src={dislikeIcon} alt='' /></span>}
                                         </div>
 
                                         {/* <div class="dropdown">
@@ -233,7 +259,7 @@ function OneCard(props) {
                                     </p>
                                 </div>
                                 <div className='part-4'>
-                                    {watchLater?.watchLaterproducts?.find(video => video?.id === item?.id) ? <button onClick={() => unsetfromwatchlater(item?._id)} className='card-btn'>{'Undo'}</button> : <button onClick={() => moveToWatchLater(item?._id)} className='card-btn'>{'move to watchlater'}</button>}
+                                    <button onClick={() => removevideoFromPlaylist(item)} className='card-btn'>{'Remove this'}</button>
                                 </div>
                             </div>
                         </div>

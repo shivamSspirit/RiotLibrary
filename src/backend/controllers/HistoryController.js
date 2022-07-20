@@ -11,7 +11,7 @@ import { requiresAuth } from "../utils/authUtils";
  * This handler handles getting videos from user's history.
  * send GET Request at /api/user/history
  * */
-export const getHistoryVideosHandler = function (request) {
+export const getHistoryVideosHandler = function (schema,request) {
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {
@@ -41,7 +41,7 @@ export const getHistoryVideosHandler = function (request) {
  * body contains {video}
  * */
 
-export const addVideoToHistoryHandler = function (request) {
+export const addVideoToHistoryHandler = function (schema,request) {
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {
@@ -81,7 +81,7 @@ export const addVideoToHistoryHandler = function (request) {
  * send DELETE Request at /api/user/history/:videoId
  * */
 
-export const removeVideoFromHistoryHandler = function (request) {
+export const removeVideoFromHistoryHandler = function (schema,request) {
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {
@@ -113,7 +113,7 @@ export const removeVideoFromHistoryHandler = function (request) {
  * send DELETE Request at /api/user/history/all
  * */
 
-export const clearHistoryHandler = function (request) {
+export const clearHistoryHandler = function (schema,request) {
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {

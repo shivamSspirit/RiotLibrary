@@ -3,22 +3,34 @@ import './singleplaylist.css'
  import OneCard from '../../cards/oneCard/oneCard'
 import { useParams } from 'react-router-dom'
 import * as PlayLaistApis from '../../../api/playlist'
-
+import { usePlaylistOperation } from '../../../hooks/playlistmanagment'
+import { usePlayList } from '../../../context/playListContext'
 
 function SinglePlayListComp() {
 
     const { playlistId } = useParams();
     const [currentPLayList,setCurretnPlayList] = useState(null)
+    const {getSinglePlaylist}  = usePlaylistOperation()
+    const {playList} = usePlayList()
+
 
 
     useEffect(() => {
         if(playlistId){
-            (async()=>{
-                const response = await PlayLaistApis?.getSingleplayList(playlistId);
-                setCurretnPlayList(response?.data?.playlist)
-            })()
+           getSinglePlaylist(playlistId,()=>{
+            console.log('getting single playlist')
+           })
         }
     }, [playlistId])
+
+    useEffect(()=>{
+        if(playList?.playlistproducts){
+            const findplaylist = playList?.playlistproducts?.find(lists=>lists?._id===playlistId)
+            if(findplaylist){
+                setCurretnPlayList(findplaylist)
+            }
+        }
+    },[playList?.playlistproducts])
 
    
 

@@ -30,7 +30,7 @@ import { useParams } from 'react-router-dom'
 
 function OneCard(props) {
     const { isCategoryCard, CategoryCardData, isExploreVideoCard, exploreVideoData, isWatchLater, watchvideoLaterData, setModal, isSinglePLayList, singlePlaylistVideoData, isCategorized, categorizedVideo } = props;
-    const { setDynamicProperties } = useGlobal();
+    const { setDynamicProperties,curretcategory,setCurrentCategory } = useGlobal();
     const navigate = useNavigate();
     const { playlistId } = useParams()
     const { watchLater } = useWatchLater();
@@ -54,7 +54,8 @@ function OneCard(props) {
 
     const moveToExplore = async (videoCategoryID) => {
         const res = await CategoryPis?.getSingleCategory(videoCategoryID);
-        await setDynamicProperties('selectedsingleVideoCategory', res.data.category);
+        console.log('res',res)
+        await setCurrentCategory(res?.data?.category?.categoryName);
         navigate('/videos')
     }
 

@@ -8,6 +8,7 @@ const GlobalContext = (props) => {
 	const [globalStateProperties, setglobalStateProperties] = useState(null);  // object contains multiple global state variable
 	const [globalVideos, setGlobalVideos] = useState(null);
 	const [globalVidCategory, setGlobalVidCategory] = useState(null);
+	const [curretcategory,setCurrentCategory] = useState()
 
 	// useEffect(()=>{
 	// 	const fetchPagedVideos = async()=>{
@@ -57,7 +58,8 @@ const GlobalContext = (props) => {
 		globalStateProperties,
 		setDynamicProperties,
 		globalVideos,
-		globalVidCategory
+		globalVidCategory,
+		curretcategory,setCurrentCategory
 	};
 
 	return (

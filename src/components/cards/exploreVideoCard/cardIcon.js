@@ -2,27 +2,30 @@ import React, { useEffect, useState } from 'react'
 import './cardicon.css'
 import OneCard from '../oneCard/oneCard';
 import CateFilter from '../../cateFilter/CateFilter';
+import { useGlobal } from '../../../context/GlobalContext';
 
 function CardIcon(props) {
-    const { globalStateproperties, globalVideos, openModal, setModal } = props;
+    const { globalVideos, openModal, setModal, setCurrentCategory } = props;
+    const { curretcategory } = useGlobal()
     const [filteredCategory, setFilteredCategory] = useState(null);
 
     useEffect(() => {
-        if (globalStateproperties?.selectedsingleVideoCategory?.categoryName) {
-            const filtered = globalVideos?.filter((item) => item.category === globalStateproperties?.selectedsingleVideoCategory?.categoryName)
+        if (curretcategory!=="all") {
+            const filtered = globalVideos?.filter((item) => item.category === curretcategory)
             setFilteredCategory(filtered)
         }
-    }, [globalStateproperties?.selectedsingleVideoCategory?.categoryName])
+    }, [curretcategory])
 
     useEffect(() => {
-        if (!globalStateproperties?.selectedsingleVideoCategory?.categoryName) {
+        if (curretcategory!=='all'&&!curretcategory) {
             setFilteredCategory(globalVideos)
         }
-    }, [globalVideos,globalStateproperties?.selectedsingleVideoCategory?.categoryName])
+    }, [globalVideos, curretcategory])
 
     const clicck = (catefgoryName) => {
+        setCurrentCategory(catefgoryName);
         if (catefgoryName === 'all') {
-            setFilteredCategory(globalVideos)
+          setFilteredCategory(globalVideos)
         } else {
             const fromnavLnkvfilt = globalVideos?.filter((item) => item.category === catefgoryName)
             setFilteredCategory(fromnavLnkvfilt);
@@ -31,9 +34,9 @@ function CardIcon(props) {
 
     return (
         <>
-            <CateFilter click={clicck} category={globalStateproperties?.selectedsingleVideoCategory} />
+            <CateFilter click={clicck} category={curretcategory} />
             <div className='col-container'>
-                <OneCard openModal={openModal} setModal={setModal} isExploreVideoCard={true} exploreVideoData={filteredCategory} />
+                <OneCard openModal={openModal} setModal={setModal} isExploreVideoCard={true} exploreVideoData={filteredCategory&&filteredCategory} />
             </div>
         </>
     )

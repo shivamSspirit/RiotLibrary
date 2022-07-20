@@ -11,7 +11,7 @@ import { ScrollToTop } from '../components/scrolltotop/ScroolTotop'
 
 
 function TrendingPage() {
-    const {globalVideos, globalStateProperties } = useGlobal();
+    const {globalVideos, globalStateProperties,curretcategory,setCurrentCategory } = useGlobal();
     const [openmodal,setModalOpen] = useState(false)
     return (
         <>
@@ -19,7 +19,7 @@ function TrendingPage() {
                 <ScrollToTop/>
                 <Header />
                 <PlayListModal openModal={openmodal} setModal={setModalOpen}/>
-                <CardWithIcon openModal={openmodal} setModal={setModalOpen} globalStateproperties={globalStateProperties} globalVideos ={globalVideos} />   
+                <CardWithIcon openModal={openmodal} setModal={setModalOpen} setCurrentCategory={setCurrentCategory} globalVideos ={globalVideos} />   
             </div>
         </>
     )

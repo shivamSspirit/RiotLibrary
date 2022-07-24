@@ -6,7 +6,7 @@ import { ScrollToTop } from '../../components/scrolltotop/ScroolTotop'
 function SinglePlayListPage() {
    
   return (
-    <div>
+    <div style={{height:'100vh'}}>
       <ScrollToTop/>
       <Header/>
       <SinglePlayListComp />

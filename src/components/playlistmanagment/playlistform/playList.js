@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import './playlist.css'
-import * as playListApis from '../../../api/playlist';
 import { usePlayList } from '../../../context/playListContext';
 import { useWatchLater } from '../../../context/watchLaterContext';
 import * as ActionTypes from '../../../constant/actions'
@@ -39,8 +38,8 @@ function Listform({ openModal, setModal }) {
         const val = e.target.name;
         if (val === 'p-title') {
             setList({
-                title: e.target.value,
-                description: list.description
+              ...list,  title: e.target.value,
+                
             })
         }
         if (val === 'p-des') {

@@ -70,6 +70,11 @@ a {
     text-align: center;
 }
 
+.openthis{
+    right: 0.5rem !important;
+    background: var(--backgroundImg) !important;
+}
+
 .auth-btn:hover {
     color: white;
     background-image: var(--backgroundImg);

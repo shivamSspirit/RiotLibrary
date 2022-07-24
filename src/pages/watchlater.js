@@ -5,7 +5,7 @@ import { ScrollToTop } from '../components/scrolltotop/ScroolTotop'
 
 function WatchLater() {
     return (
-        <div>
+        <div style={{height:'100vh'}} className='mainwatchlater-container'>
             <ScrollToTop/>
             <Header />
             <Watchlatersection />

@@ -5,7 +5,7 @@ import { ScrollToTop } from '../../components/scrolltotop/ScroolTotop'
 
 function PlaylistPage() {
   return (
-    <div>
+    <div style={{height:'100vh'}}>
       <ScrollToTop />
       <Header />
       <GPlayList />

@@ -4,13 +4,16 @@
 }
 
 .trend-page{
+    height: 100vh;
     display: flex;
     flex-direction: column;
     gap: 0rem;
+    background-image: linear-gradient(to bottom right, rgb(15, 32, 68), rgb(10, 32, 71));
 }
 
 .main-land{
-    background-image: linear-gradient(to bottom right, rgb(15, 32, 68), rgb(10, 32, 71));
+    height: 100%;
+    /* background-image: linear-gradient(to bottom right, rgb(15, 32, 68), rgb(10, 32, 71)); */
 }
 .page-title{
     

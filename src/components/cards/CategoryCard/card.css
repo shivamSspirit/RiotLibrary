@@ -6,6 +6,7 @@
 }
 
 .card-section {
+    height: auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

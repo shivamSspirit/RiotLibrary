@@ -1,18 +1,17 @@
-
 .section-container {
+    padding-left: 1.7rem;
     display: flex;
     flex-direction: column;
-    width: 69vw;
-    gap: 1.5rem;
+    width: 100%;
+    gap: 0.3rem;
     justify-content: flex-start;
     justify-items: flex-start;
-
 }
 
 .play-feature {
     display: flex;
     flex-direction: row;
-    text-align: center;
+    text-align: left;
     gap: 0.6rem;
 }
 
@@ -20,8 +19,8 @@
 .iconss {
     display: flex;
     flex-direction: row;
-    gap: .7rem;
-    width: 100%;
+    gap: .5rem;
+    max-width: 100%;
 }
 
 
@@ -61,12 +60,7 @@
     display: flex;
     flex-direction: row;
     gap: .4rem;
-    width: 40%;
     justify-content: flex-end;
     justify-self: flex-end;
     justify-items: flex-end;
-}
-
-.des-val{
-  max-width: 90%;
 }

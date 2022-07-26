@@ -5,12 +5,12 @@ import AuthRoutes from "./authRoutes";
 import Mockman from "mockman-js";
 
 // importing all the themes pages
-import LandingPage from "../pages/landingPage";
+import LandingPage from '../pages/landingpage/landingPage'
 import SignUp from "../components/auth/signup/signup";
 import Login from "../components/auth/login/login";
-import TrendingPage from "../pages/trendingPage";
-import SingleVideo from "../pages/singleVideo";
-import WatchLater from "../pages/watchlater";
+import TrendingPage from "../pages/explore/trendingPage";
+import SingleVideo from "../pages/singlevideo/singleVideo";
+import WatchLater from "../pages/watchlater/watchlater";
 import PlaylistPage from "../pages/playlistPage/PlaylistPage";
 import Jest from "../pages/jest/jest";
 import SinglePlayListPage from "../pages/singlePlaylistPage/singleplayListPage";

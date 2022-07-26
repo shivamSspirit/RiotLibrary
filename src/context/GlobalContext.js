@@ -9,6 +9,7 @@ const GlobalContext = (props) => {
 	const [globalVidCategory, setGlobalVidCategory] = useState(null);
 	const [curretcategory,setCurrentCategory] = useState()
 	const [loaderState,setLoaderState] = useState(false)
+	const [openmodal, setModalOpen] = useState(false);
 
 	// useEffect(()=>{
 	// 	const fetchPagedVideos = async()=>{
@@ -32,7 +33,9 @@ const GlobalContext = (props) => {
 		curretcategory,setCurrentCategory,
 		loaderState,setLoaderState,
 		setGlobalVidCategory,
-		setGlobalVideos
+		setGlobalVideos,
+		openmodal,
+		setModalOpen
 	};
 
 	return (

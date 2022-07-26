@@ -1,0 +1,15 @@
+@import url(../../../asset/css/theme.css);
+
+
+.col-container {
+    max-width: 100vw;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-image: var(--backgroundImg);
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    overflow: scroll;
+}

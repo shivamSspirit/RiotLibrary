@@ -12,12 +12,14 @@ a {
 .header-container {
     width: 100vw;
     background-image: var(--backgroundImg);
+    position: sticky;
 }
 
 .header {
     display: flex;
     flex-direction: row;
     padding: 1rem;
+    position: sticky;
 }
 
 .head-part-1 {

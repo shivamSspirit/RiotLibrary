@@ -153,7 +153,7 @@ function OneCard(props) {
                                     <iframe width="300" height="210" src={`https://www.youtube.com/embed/${item?._id}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                                 </div>
                                 <div className='part-2'>
-                                    <Link to={`/videos/${item?._id}`}>{item?.title}</Link>
+                                    <Link style={{textDecoration:"none",color:'inherit'}} to={`/videos/${item?._id}`}>{item?.title}</Link>
                                 </div>
                                 <div className='part-3'>
                                     <p className='card-des'>
@@ -161,7 +161,7 @@ function OneCard(props) {
                                     </p>
                                 </div>
                                 <div className='part-4'>
-                                    <Link to={`/videos/${item?._id}`}><button className='card-btn'>{'Play'}</button></Link>
+                                    <Link style={{textDecoration:"none",color:'inherit'}} to={`/videos/${item?._id}`}><button className='card-btn'>{'Play'}</button></Link>
                                 </div>
                             </div>
                         </div>

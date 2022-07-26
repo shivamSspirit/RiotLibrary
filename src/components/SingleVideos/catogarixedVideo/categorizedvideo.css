@@ -7,10 +7,18 @@
 
 .category-side{
     display: flex;
+  
 }
 
 .side-container{
     display: flex;
     flex-direction: column;
+    height: 660px;
     overflow: scroll;
 }
+
+@media only screen and (max-width: 600px) {
+    .category-side{
+    display: none;
+    }  
+  }

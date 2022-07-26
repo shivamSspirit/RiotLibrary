@@ -1,0 +1,56 @@
+@import url(../../asset/css/theme.css);
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.single-page{
+    background: var(--backgroundImg);
+    height: 100vh;
+}
+
+.main-single-page {
+    width: 100vw;
+    height: 100%;
+}
+
+.sensitara {
+    height: calc(100%-96px);
+    display: flex;
+    flex-direction: row;
+    gap: 2.3rem;
+    padding: 1rem;
+    width: 100vw;
+}
+
+.part-one{
+    display: flex;
+    overflow: scroll;
+    flex-basis: 70%;
+}
+
+.part-2 {
+    display: flex;
+    overflow: scroll;
+    flex-basis: 30%;
+    justify-content: center;
+    justify-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .sensitara {
+        width: 100%;
+    }
+    .part-one{
+        flex-basis: 100%;
+        justify-content: center;
+    }
+    .sensitara {
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        padding: 1rem;
+        width: 100vw;
+    }
+}

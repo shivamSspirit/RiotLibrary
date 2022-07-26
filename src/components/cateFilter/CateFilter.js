@@ -12,12 +12,12 @@ function CateFilter(props) {
     <div>
       <div className='nav-links'>
         <ul className='categoeryFilter'>
-          <li onClick={() => click('Computer Programming')} className={`cate-li ${category === 'Computer Programming' && `active`}`}>Programming</li>
-          <li onClick={() => click('Frontend Development')} className={`cate-li ${category === 'Frontend Development' && `active`}`}>Frontend</li>
-          <li onClick={() => click('Backend Development')} className={`cate-li ${category === 'Backend Development' && `active`}`}>Backend</li>
-          <li onClick={() => click('full stack Development')} className={`cate-li ${category === 'full stack Development' && `active`}`}>fullstack</li>
-          <li onClick={() => click('web3')} className={`cate-li ${category === 'web3' && `active`}`}>Blockchanin</li>
-          <li onClick={() => click('all')} className={`cate-li ${category === 'all' && `active`}`}>all</li>
+          <li onClick={() => click('Star Guardian Version')} className={`cate-li ${category === 'Star Guardian Version' && `active`}`}>Star</li>
+          <li onClick={() => click('sessions lol')} className={`cate-li ${category === 'sessions lol' && `active`}`}>Lol</li>
+          <li onClick={() => click('Pentakill')} className={`cate-li ${category === 'Pentakill' && `active`}`}>Pentakill</li>
+          <li onClick={() => click('Warsongs')} className={`cate-li ${category === 'Warsongs' && `active`}`}>Warsongs</li>
+          <li onClick={() => click('kDa')} className={`cate-li ${category === 'kDa' && `active`}`}>KdA</li>
+          <li onClick={() => click('all')} className={`cate-li ${category === 'all' && `active`}`}>All</li>
         </ul>
       </div>
     </div>

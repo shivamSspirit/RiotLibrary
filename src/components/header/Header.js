@@ -5,7 +5,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { useAuth } from '../../context/authContext'
 
 function Header() {
-    const { authToken } = useAuth();
+    const { authToken, handleLogout } = useAuth();
 
     // const [hoverState1, setHoverState1] = useState(false);
     // const [hoverState2, setHoverState2] = useState(false);
@@ -42,6 +42,10 @@ function Header() {
     //     }
     // }, [hoverState2])
 
+    const logout = () => {
+        handleLogout()
+    }
+
 
     return (
         <div>
@@ -58,19 +62,19 @@ function Header() {
                             <NavLink to={'/watchlater'} className='auth-btn dropdown-item'>Watchlater</NavLink>
                             <NavLink to={'/playlists'} className='auth-btn dropdown-item'>playlists</NavLink>
                             {!authToken && (<NavLink to='/auth/login' className='auth-btn dropdown-item'>login</NavLink>)}
-                            {authToken && (<NavLink to='/' className='auth-btn dropdown-item'>logout</NavLink>)}
+                            {authToken && (<button  onClick = {logout} className='auth-btn dropdown-item'>logout</button>)}
                         </div>
 
                         <div className="dropdown show">
-                            <button onClick={()=>setTrue(!pop)} className="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button onClick={() => setTrue(!pop)} className="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Navs
                             </button>
 
-                            <div className={`dropdown-menu ${pop&&'show openthis'}`} aria-labelledby="dropdownMenuLink">
+                            <div className={`dropdown-menu ${pop && 'show openthis'}`} aria-labelledby="dropdownMenuLink">
                                 <NavLink to={'/watchlater'} className='auth-btn dropdown-item'>Watchlater</NavLink>
                                 <NavLink to={'/playlists'} className='auth-btn dropdown-item'>playlists</NavLink>
                                 {!authToken && (<NavLink to='/auth/login' className='auth-btn dropdown-item'>login</NavLink>)}
-                                {authToken && (<NavLink to='/' className='auth-btn dropdown-item'>logout</NavLink>)}
+                                {authToken && (<button onClick={logout} className='auth-btn dropdown-item'>logout</button>)}
                             </div>
                         </div>
 

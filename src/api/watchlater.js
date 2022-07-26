@@ -1,13 +1,13 @@
 import axios from 'axios'
 
 const watchLaterUrl = '/api/user/watchlater';
-const authorization = localStorage.getItem('token')
+
 // const headers = { 'authorization': localStorage.getItem('token') }
 // get watch later videos
 
 export async function getwatchLater() {
     try {
-        const response = await axios.get(`/api/user/watchlater`, { headers: { authorization: authorization } })
+        const response = await axios.get(`/api/user/watchlater`, { headers: { authorization: localStorage.getItem('token') } })
         return response;
     } catch (error) {
         console.log(error)
@@ -30,7 +30,7 @@ export async function postwatchVideo(watchlatervideo) {
 
 export async function deletewatchVideo(watchlater) {
     try {
-        const response = await axios.delete(`/api/user/watchlater/${watchlater}`, { headers: { authorization: authorization } })
+        const response = await axios.delete(`/api/user/watchlater/${watchlater}`, { headers: { authorization: localStorage.getItem('token') } })
         return response;
     } catch (error) {
         console.log(error)

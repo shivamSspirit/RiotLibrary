@@ -1,0 +1,15 @@
+@import url(../../asset/css/theme.css);
+
+.main-loader{
+    display: flex;
+    width: 100vw;
+    height: 100%;
+}
+
+.loader-container{
+    width: 100%;
+    background: var(--backgroundImg);
+    display: flex;
+    justify-content:center;
+    justify-items: center;
+}

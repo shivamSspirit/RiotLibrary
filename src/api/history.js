@@ -8,7 +8,7 @@ const authorization = localStorage.getItem('token')
 
 export async function getHistoryList() {
     try {
-        const response = await axios.get(historyUrl, { headers:  {authorization:authorization}  })
+        const response = await axios.get(historyUrl, { headers:  {authorization:localStorage.getItem('token')}  })
         return response;
     } catch (error) {
         console.error(error);
@@ -19,7 +19,7 @@ export async function getHistoryList() {
 
 export async function postHistory(historyVideo) {
     try {
-        const response = await axios.post(historyUrl, { headers:  {authorization:authorization}  }, { historyVideo })
+        const response = await axios.post(historyUrl, { headers:  {authorization:localStorage.getItem('token')}  }, { historyVideo })
         return response
     } catch (error) {
         console.error(error)
@@ -32,7 +32,7 @@ export async function postHistory(historyVideo) {
 
 export async function deleteHistoryVideo(videoId) {
     try {
-        const response = await axios.delete(`${historyUrl}/${videoId}`, { headers:  {authorization:authorization}  })
+        const response = await axios.delete(`${historyUrl}/${videoId}`, { headers:  {authorization:localStorage.getItem('token')}  })
         return response;
     } catch (error) {
         console.error(error)
@@ -44,7 +44,7 @@ export async function deleteHistoryVideo(videoId) {
 
 export async function deleteHistoryVideos() {
     try {
-        const response = await axios.delete(`${historyUrl}/all`, { headers:  {authorization:authorization}  })
+        const response = await axios.delete(`${historyUrl}/all`, { headers:  {authorization:localStorage.getItem('token')}  })
         return response
     } catch (error) {
         console.error(error)

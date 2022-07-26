@@ -1,8 +1,12 @@
 import { v4 as uuid } from "uuid";
 
 
-import cate0 from '../../asset/img/istockphoto-1308451777-170667a.jpeg'
-import cate2 from '../../asset/img/photo-1487180144351-b8472da7d491.avif'
+import riot0 from '../../asset/img/riot0.jpg'
+import riot1 from '../../asset/img/riot1.jpg'
+import riot2 from '../../asset/img/riot2.jpg'
+import riot3 from '../../asset/img/riot3.jpg'
+import riot4 from '../../asset/img/riot4.jpg'
+
 /**
  * Category Database can be added here.
  * You can add category of your wish with different attributes
@@ -12,42 +16,42 @@ import cate2 from '../../asset/img/photo-1487180144351-b8472da7d491.avif'
 export const categories = [
   {
     _id: uuid(),
-    imgUrl:cate0,
+    imgUrl:riot0,
     btnText:'Check Now',
-    categoryName: "Computer Programming",
+    categoryName: "Star Guardian Version",
      title:
-      "Computer programming",
+      "Star Guardian Version",
   },
   {
     _id: uuid(),
-    imgUrl:cate2,
+    imgUrl:riot1,
     btnText:'Check Now',
-    categoryName: "Frontend Development",
+    categoryName: "sessions lol",
      title:
-      "Front development",
+      "sessions lol",
   },
   {
     _id: uuid(),
-    imgUrl:cate2,
+    imgUrl:riot2,
     btnText:'Check Now',
-    categoryName: "Backend Development",
+    categoryName: "Pentakill",
      title:
-      "Backend Development",
+      "Pentakill",
   },
   {
     _id: uuid(),
-    imgUrl:cate2,
+    imgUrl:riot3,
     btnText:'Check Now',
-    categoryName: "full stack Development",
+    categoryName: "Warsongs",
      title:
-      "full stack Development",
+      "Warsongs",
   },
   {
     _id: uuid(),
-    imgUrl:cate2,
+    imgUrl:riot4,
     btnText:'Check Now',
-    categoryName: "web3",
+    categoryName: "kDa",
      title:
-      "Blockchanin Development",
+      "kDa",
   },
 ];

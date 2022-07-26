@@ -1,6 +1,13 @@
 @import url(../../../asset/css/theme.css);
 
 
+a:-webkit-any-link {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+
+
 .card-section {
     height: auto;
     display: flex;
@@ -38,8 +45,8 @@
 
 }
 
-.video-link {
-    text-decoration: none;
+.video-link:-webkit-any-link{
+    text-decoration: none !important;
 }
 
 .common-parts {

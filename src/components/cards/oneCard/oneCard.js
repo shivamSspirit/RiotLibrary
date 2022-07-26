@@ -15,7 +15,6 @@ import { usePlaylistOperation } from '../../../hooks/playlistmanagment'
 
 import { Link } from 'react-router-dom'
 
-import MenusIcon from '../../../asset/icon/menus.png'
 
 import likesIcon from '../../../asset/icon/like.png'
 import dislikeIcon from '../../../asset/icon/dislike.png'
@@ -23,14 +22,17 @@ import playlistIcon from '../../../asset/icon/playList.png'
 import watchlaterLightIcon from '../../../asset/icon/light.png'
 import watchlaterDarkIcon from '../../../asset/icon/dark.png'
 
-import Dropdown from 'react-bootstrap/Dropdown';
-
 import { useParams } from 'react-router-dom'
+
+import { useToast } from '../../../hooks/useToastify'
+
+import { ToastContainer } from 'react-toastify';
+import { replace } from 'lodash'
 
 
 function OneCard(props) {
     const { isCategoryCard, CategoryCardData, isExploreVideoCard, exploreVideoData, isWatchLater, watchvideoLaterData, setModal, isSinglePLayList, singlePlaylistVideoData, isCategorized, categorizedVideo } = props;
-    const { setDynamicProperties,curretcategory,setCurrentCategory } = useGlobal();
+    const { setDynamicProperties, curretcategory, setCurrentCategory } = useGlobal();
     const navigate = useNavigate();
     const { playlistId } = useParams()
     const { watchLater } = useWatchLater();
@@ -39,6 +41,8 @@ function OneCard(props) {
     const { postToWatchLater, removeFromWatchLater } = useWatchLaterOperation();
     const { getlikesvideoList, postTolikes, removeFromlikes } = useLikesOperation();
     const { getGlobalPlayLists, createPlayList, deletePlaylist, getSinglePlaylist, postVideotoplaylist, deletevideoFromplaylist } = usePlaylistOperation();
+
+    const {showToast} = useToast()
 
     // console.log('fun', playList)
 
@@ -53,10 +57,11 @@ function OneCard(props) {
     }
 
     const moveToExplore = async (videoCategoryID) => {
+        console.log('videoCategoryID',videoCategoryID)
         const res = await CategoryPis?.getSingleCategory(videoCategoryID);
-        console.log('res',res)
-        await setCurrentCategory(res?.data?.category?.categoryName);
-        navigate('/videos')
+        console.log('res', res)
+        await setCurrentCategory(res.data.category.categoryName);
+        navigate('/videos',replace='true')
     }
 
 
@@ -111,6 +116,9 @@ function OneCard(props) {
 
     return (
         <>
+        {/* <div>
+        <ToastContainer/>
+        </div> */}
             {isCategoryCard && (
                 <div className='card-section'>
                     {(CategoryCardData?.map((item, idx) => (
@@ -172,7 +180,9 @@ function OneCard(props) {
                                 </div>
                                 <div className='parts-2'>
                                     <h2 className='card-title'>
-                                        <Link style={{ textDecorartion: 'dotted' }} className='video-link' to={`/videos/${item?._id}`}>{item?.title}</Link>
+                                        <Link className='video-link' style={{ textDecoration: 'none', color: 'inherit' }} to={`/videos/${item?._id}`}>
+                                            {item?.title}
+                                        </Link>
                                     </h2>
                                 </div>
 
@@ -269,6 +279,7 @@ function OneCard(props) {
                 </div>
             )
             }
+            < ToastContainer/>
         </>
     )
 }

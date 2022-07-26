@@ -1,11 +1,11 @@
 import React from 'react'
-import './sensitara.css'
+import './singlevideoss.css'
 import likeIcon from '../../asset/icon/like.png'
 import Dislike from '../../asset/icon/dislike.png'
 import Heart from '../../asset/icon/heart.png'
 import playList from '../../asset/icon/playList.png'
 
-function SenSitara(props) {
+function SingleVideos(props) {
     const { fetchOne } = props;
     console.log('fetchOne',fetchOne)
 
@@ -85,4 +85,4 @@ function SenSitara(props) {
     )
 }
 
-export default SenSitara
+export default SingleVideos

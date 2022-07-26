@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
-import * as VideoApi from '../api/videos'
-import * as categoryApi from '../api/category'
+import React, { useState, useContext } from "react";
 
 export const Context = React.createContext("defaultContext");
+
 
 const GlobalContext = (props) => {
 	const [globalStateProperties, setglobalStateProperties] = useState(null);  // object contains multiple global state variable
 	const [globalVideos, setGlobalVideos] = useState(null);
 	const [globalVidCategory, setGlobalVidCategory] = useState(null);
 	const [curretcategory,setCurrentCategory] = useState()
+	const [loaderState,setLoaderState] = useState(false)
 
 	// useEffect(()=>{
 	// 	const fetchPagedVideos = async()=>{
@@ -20,36 +20,6 @@ const GlobalContext = (props) => {
 	// 	fetchPagedVideos()
 	// },[])
 
-	useEffect(() => {
-		const fetchVideo = async () => {
-			const response = await VideoApi.getVideoList();
-			if (response) {
-				setGlobalVideos(response?.data?.videos)
-			}
-		}
-		fetchVideo();
-	}, [])
-
-	useEffect(() => {
-		const fetchcate = async () => {
-			const response = await categoryApi?.getCategoryList();
-			if (response) {
-				setGlobalVidCategory(response?.data?.categories)
-			}
-		}
-		fetchcate()
-	}, [])
-
-	// {
-	// 	const fetchCategory = async () => {
-	// 		const response = await categoryApi?.getCategoryList();
-	// 		if (response) {
-	// 			setGlobalVidCategory(response?.data?.categories)
-	// 		}
-	// 	}
-	// 	fetchCategory();
-	// }, [])
-
 	const setDynamicProperties = (name, value) => {
 		setglobalStateProperties({ ...globalStateProperties, [name]: value });   // set dynamic properties with this
 	};
@@ -59,7 +29,10 @@ const GlobalContext = (props) => {
 		setDynamicProperties,
 		globalVideos,
 		globalVidCategory,
-		curretcategory,setCurrentCategory
+		curretcategory,setCurrentCategory,
+		loaderState,setLoaderState,
+		setGlobalVidCategory,
+		setGlobalVideos
 	};
 
 	return (

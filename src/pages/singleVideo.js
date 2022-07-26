@@ -1,18 +1,21 @@
 import React, { useEffect, useState,useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 
-import SenSitara from '../components/senSitara/senSitara'
-import SingleVCategory from '../components/senSitara/catogarixedVideo/cateGorizedVideo'
+import SingleVideos from '../components/SingleVideos/SingleVideos'
+import SingleVCategory from '../components/SingleVideos/catogarixedVideo/cateGorizedVideo'
 import './singlevideo.css'
 import Header from '../components/header/Header';
 import * as videoApis from '../api/videos'
 
+import Loader from '../components/Loader/Loader'
+
 import { useGlobal } from '../context/GlobalContext'
 import { ScrollToTop } from '../components/scrolltotop/ScroolTotop'
+import { faL } from '@fortawesome/free-solid-svg-icons'
 
 function SenSitaracomppo() {
     const { videoId } = useParams()
-    const { globalVideos } = useGlobal();
+    const { globalVideos,loaderState,setLoaderState } = useGlobal();
     const [currentVideo, setCurrentVideos] = useState(null)
     const [categorized, setCategorized] = useState(null);
 
@@ -20,8 +23,12 @@ function SenSitaracomppo() {
     useEffect(() => {
         if (videoId) {
             (async()=>{
+                setLoaderState(true)
                 const response = await videoApis?.getSingleVideo(videoId);
-                setCurrentVideos(response?.data?.video)
+                if(response){
+                    setLoaderState(false)
+                    setCurrentVideos(response?.data?.video)
+                }
             })()
         }
     }, [videoId])
@@ -40,18 +47,20 @@ function SenSitaracomppo() {
     }, [currentVideo,givemeARR])
 
     return (
-        <>
+    
+        <div className='main-single-page'>
         <ScrollToTop/>
             <Header />
-            <div className='sensitara'>
+            {loaderState?<Loader/>:<div className='sensitara'>
                 <div>
-                    <SenSitara fetchOne={currentVideo} />
+                  <SingleVideos fetchOne={currentVideo} />
                 </div>
                 <div className='part-2'>
                     <SingleVCategory categorizedVideos={categorized} />
                 </div>
-            </div>
-        </>
+            </div>}
+        </div>
+    
 
     )
 }

@@ -9,7 +9,7 @@
 .img-container {
     width: 100vw;
     height: calc(100%-96px);
-    display: flex;
+    display: block;
     background-image: url('../../asset/img/istockphoto-1287065554-170667a.jpeg');
     background-position: center;
     background-repeat: no-repeat;
@@ -22,12 +22,12 @@
     display: flex;
     align-items: center;
     max-width: 50%;
-    max-height: 100%;
+    min-height: 21rem;
     padding: 1.5rem;
     color: var(--white);
 }
 
-.parts {
+.land-parts {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;

@@ -1,58 +1,35 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './signup.css'
 import * as AuthApis from '../../../api/authapi'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import useSignupForm from '../../../hooks/useForms/useSignup';
 
 function SignUp() {
-    const [input, setInput] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: ''
-    });
-
+    const formSignup = () => {
+        console.log("Callback function when form is submitted!");
+        console.log("Form Values ", values);
+    }
+    const { values, errors, handleChange } = useSignupForm(formSignup)
     const navigate = useNavigate();
 
-    const handleInputChange = (e) => {
-        const nameVal = e.target.name;
-        if (nameVal === 'firstname') {
-            setInput({
-                ...input,
-                firstName: e.target.value
-            });
-        }
-        if (nameVal === 'lastname') {
-            setInput({
-                ...input,
-                lastName: e.target.value
-            });
-        }
-        if (nameVal === 'email') {
-            setInput({
-                ...input,
-                email: e.target.value
+    const handleSubmit = (event) => {
+        if (event) event.preventDefault();
+        if (Object.keys(errors).length === 0 && Object.keys(values).length !== 0) {
+            AuthApis.signupHandler({
+                firstName: values.firstName,
+                lastName: values.lastName,
+                email: values.email,
+                password: values.password
+            }).then(res => {
+                console.log('res from sign up', res)
             })
-        }
-        if (nameVal === 'password') {
-            setInput({
-                ...input,
-                password: e.target.value
-            })
-        }
-    }
+            navigate('/auth/login')
 
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        AuthApis.signupHandler({
-            firstName: input.firstName,
-            lastName: input.lastName,
-            email: input.email,
-            password: input.password
-        }).then(res => {
-            console.log('res from sign up', res)
-        })
-        navigate('/auth/login')
+        } else {
+            alert("There is an Error!");
+        }
     }
 
 
@@ -61,36 +38,44 @@ function SignUp() {
             <div className='signup-container'>
                 <form onSubmit={handleSubmit} className='signup-form'>
 
-                    <div className='parts'>
+                    <div className='signup-parts'>
                         <label className='first-label' htmlFor='firstName'>FirstName
                         </label>
-                        <input className='sign-inputs' type='text' name='firstname' onChange={handleInputChange} placeholder='type firstName' />
+                        <input value={values?.firstName?values?.firstName:''} className={`sign-inputs ${errors?.firstName && 'boader-red'}`} type='text' name='firstname' onChange={handleChange} placeholder='type firstName' />
+                        {errors.firstName && <p className='signup-error'>{errors.firstName}</p>}
                     </div>
 
 
-                    <div className='parts'>
+                    <div className='signup-parts'>
                         <label className='first-label' htmlFor='lastName'>LastName
                         </label>
-                        <input className='sign-inputs' type='text' name='lastname' onChange={handleInputChange} placeholder='type lastName' />
+                        <input value={values?.lastName?values?.lastName:''} className={`sign-inputs ${errors?.lastName && 'boader-red'}`} type='text' name='lastname' onChange={handleChange} placeholder='type lastName' />
+                        {errors.lastName && <p className='signup-error'>{errors.lastName}</p>}
                     </div>
 
 
-                    <div className='parts'>
+                    <div className='signup-parts'>
                         <label className='first-label' htmlFor='emailName'>email
                         </label>
-                        <input className='sign-inputs' type='email' name='email' onChange={handleInputChange} placeholder='type email' />
+                        <input value={values?.email?values?.email:''} className={`sign-inputs ${errors?.email && 'boader-red'}`} type='email' name='email' onChange={handleChange} placeholder='type email' />
+                        {errors.email && <p className='signup-error'>{errors.email}</p>}
 
                     </div>
 
 
-                    <div className='parts'>
+                    <div className='signup-parts'>
                         <label className='first-label' htmlFor='password'>password
                         </label>
-                        <input className='sign-inputs' type='password' name='password' onChange={handleInputChange} placeholder='type password' />
+                        <input value={values?.password?values?.password:''} className={`sign-inputs ${errors?.password && 'boader-red'}`} type='password' name='password' onChange={handleChange} placeholder='type password' />
+                        {errors.password && <p className='signup-error'>{errors.password}</p>}
 
                     </div>
-                    <div className='parts'>
+                    <div className='signup-parts'>
                         <button className='sign-btn' type='submit'>Send</button>
+                    </div>
+
+                    <div className='signup-parts'>
+                        <span>if you have account:<Link className='log-link' style={{textDecoration:"none",color:"inherit"}} to={'/auth/login'}>Login</Link></span>
                     </div>
 
                 </form>

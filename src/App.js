@@ -6,6 +6,7 @@ import AllRoutes from "./Routers/routes";
 import { PlayListProvider } from "./context/playListContext";
 import { LikesProvider } from "./context/likeContext";
 import { AuthProvider } from "./context/authContext";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (

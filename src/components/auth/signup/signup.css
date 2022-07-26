@@ -6,10 +6,14 @@
 } */
 
 .mainSignContainer{
+    max-width: 100vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
     justify-items: center;
     align-items: center;
+    background-color: rgb(63, 92, 117);
+    border-radius: 9px;
 }
 
 .signup-container {
@@ -25,19 +29,36 @@
     flex-direction: column;
 }
 
-.parts {
-    padding: 1rem;
+.signup-parts {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.signup-error{
+    color: rgb(130, 62, 62);
+    margin-bottom: 0.3rem !important;
 }
 
 .first-label {
     font-size: large;
     font-weight: 550;
+    text-align: left;
 }
 
 .sign-inputs {
     height: 2.5rem;
     border: 1px solid var(--borderColors);
     border-radius: var(--inputBorderRadius);
+}
+
+.boader-red{
+    outline: 1px red solid;
+}
+
+.log-link:hover{
+    color: whitesmoke !important;
 }
 
 .sign-btn {

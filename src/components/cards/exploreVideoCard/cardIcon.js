@@ -17,7 +17,7 @@ function CardIcon(props) {
     }, [curretcategory])
 
     useEffect(() => {
-        if (curretcategory!=='all'&&!curretcategory) {
+        if (!curretcategory) {
             setFilteredCategory(globalVideos)
         }
     }, [globalVideos, curretcategory])

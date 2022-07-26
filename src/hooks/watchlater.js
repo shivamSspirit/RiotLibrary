@@ -1,44 +1,53 @@
 import * as watchlaterApis from '../api/watchlater'
 import * as ActionTypes from '../constant/actions'
 import { useWatchLater } from '../context/watchLaterContext'
+import { useToast } from './useToastify';
+
 
 export function useWatchLaterOperation() {
-    const { dispatchWatchlater,watchLater } = useWatchLater();
+    const { dispatchWatchlater, watchLater } = useWatchLater();
+    const { showToast } = useToast()
 
-    function ifvideoinwatchlater(video){
-        const isvideo =  watchLater?.watchLaterproducts?.find((videos=>videos?._id===video?._id))
-        if(isvideo){
+    function ifvideoinwatchlater(video) {
+        const isvideo = watchLater?.watchLaterproducts?.find((videos => videos?._id === video?._id))
+        if (isvideo) {
             return true;
-        }else{
+        } else {
             return false;
-        }    
+        }
     }
 
-    async function getwatchLatervideoList(callback){
+    async function getwatchLatervideoList(callback) {
         const response = await watchlaterApis?.getwatchLater();
-        console.log('res from get watchlater',response)
-        await dispatchWatchlater({
-            type:ActionTypes?.WatchLaterAction?.ADD_TO_WATCHLATER,
-            payload: response?.data?.watchlater
-        })
-        if(callback){
+        console.log('res from get watchlater', response)
+        if (response) {
+            showToast("success", "getting watch later videos")
+            await dispatchWatchlater({
+                type: ActionTypes?.WatchLaterAction?.ADD_TO_WATCHLATER,
+                payload: response?.data?.watchlater
+            })
+        }
+        if (callback) {
             return callback();
         }
     }
 
     async function postToWatchLater(video, callback) {
-        if(ifvideoinwatchlater(video)){
+        if (ifvideoinwatchlater(video)) {
             await dispatchWatchlater({
                 type: ActionTypes?.WatchLaterAction.ADD_TO_WATCHLATER,
                 payload: watchLater?.watchLaterproducts
             })
         }
         const response = await watchlaterApis?.postwatchVideo(video);
-        console.log('resfrom post watchlater action',response)
-        await dispatchWatchlater({
-            type: ActionTypes?.WatchLaterAction.ADD_TO_WATCHLATER,
-            payload: response?.data?.watchlater
-        })
+        console.log('resfrom post watchlater action', response)
+        if (response) {
+            showToast('success', 'added to watchlater')
+            await dispatchWatchlater({
+                type: ActionTypes?.WatchLaterAction.ADD_TO_WATCHLATER,
+                payload: response?.data?.watchlater
+            })
+        }
         if (callback) {
             return callback();
         }
@@ -46,11 +55,15 @@ export function useWatchLaterOperation() {
 
     async function removeFromWatchLater(videoId, callback) {
         const response = await watchlaterApis?.deletewatchVideo(videoId);
-        console.log('res from remove watchlater',response)
-        dispatchWatchlater({
-            type: ActionTypes?.WatchLaterAction?.ADD_TO_WATCHLATER,
-            payload: response?.data?.watchlater
-        })
+        console.log('res from remove watchlater', response)
+        if (response) {
+            showToast('info', 'removing from watchlater')
+            dispatchWatchlater({
+                type: ActionTypes?.WatchLaterAction?.ADD_TO_WATCHLATER,
+                payload: response?.data?.watchlater
+            })
+        }
+
         if (callback) {
             return callback();
         }

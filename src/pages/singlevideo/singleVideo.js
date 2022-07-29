@@ -11,14 +11,21 @@ import Loader from '../../components/Loader/Loader'
 
 import { useGlobal } from '../../context/GlobalContext'
 import { ScrollToTop } from '../../components/scrolltotop/ScroolTotop'
+import PlayListModal from '../../components/playlistmanagment/playlistmodal/playlistmodal'
+import { Modal } from 'react-bootstrap'
 
 
 function SenSitaracomppo() {
     const { videoId } = useParams()
-    const { globalVideos, loaderState, setLoaderState } = useGlobal();
+    const { globalVideos, loaderState, setLoaderState, openmodal, setModalOpen } = useGlobal();
     const [currentVideo, setCurrentVideos] = useState(null)
     const [categorized, setCategorized] = useState(null);
 
+    // useEffect(() => {
+    //     if (openmodal) {
+    //         console.log('fsdsdf', openmodal)
+    //     }
+    // }, [openmodal])
 
     useEffect(() => {
         if (videoId) {
@@ -50,12 +57,14 @@ function SenSitaracomppo() {
         <div className='single-page'>
             <div className='main-single-page'>
                 <ScrollToTop />
+                <PlayListModal openmodal={openmodal} setModalOpen={setModalOpen} />
                 <Header />
+
                 {loaderState ?
                     <Loader /> :
                     <div className='sensitara'>
                         <div className='part-one'>
-                            <SingleVideos fetchOne={currentVideo} />
+                            <SingleVideos fetchOne={currentVideo} setModalOpen={setModalOpen} />
                         </div>
                         <div className='part-2'>
                             <SingleVCategory categorizedVideos={categorized} />

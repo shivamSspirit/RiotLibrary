@@ -13,6 +13,8 @@ a {
     width: 100vw;
     background-image: var(--backgroundImg);
     position: sticky;
+    font-family: var(--fonts);
+
 }
 
 .header {
@@ -48,7 +50,11 @@ a {
     align-items: center;
     align-content: center;
     justify-items: center;
+    font-weight: 600;
+    color: var(--whitecolor);
 }
+
+.navs:hover {}
 
 .dropdown-item {
     display: flex !important;
@@ -56,30 +62,42 @@ a {
     align-items: center !important;
     align-content: center !important;
     justify-items: center !important;
+    font-weight: 700 !important;
+    font-family: var(--fonts);
+    color: var(--whitecolor) !important;
+
+}
+
+.dropdown-toggle {
+    color: var(--whitecolor) !important;
 }
 
 .auth-btn {
-    width: 8rem;
-    height: 3.4rem;
-    font-size: large;
-    font-weight: 800;
+    width: 6rem;
+    height: 3rem;
+    font-weight: 900;
+    font-family: var(--fonts);
     /* border: .2rem solid var(--borderColors); */
     border-radius: 4px;
     background-color: transparent;
     text-decoration: none;
-    color: var(--primaryColor);
-    padding: 0.8rem;
+    color: var(--whitecolor);
+    padding: 0.4rem;
     text-align: center;
 }
 
-.openthis{
+.openthis {
     right: 0.5rem !important;
     background: var(--backgroundImg) !important;
+    color: var(--whitecolor);
+    font-weight: 700 !important;
 }
 
 .auth-btn:hover {
-    color: white;
+    /* color: white;
+    background-image: var(--backgroundImg); */
     background-image: var(--backgroundImg);
+    color: #fff !important;
 }
 
 @media only screen and (max-width: 600px) {

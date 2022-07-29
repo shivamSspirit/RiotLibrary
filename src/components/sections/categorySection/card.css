@@ -31,7 +31,7 @@
     background-image: var(--backgroundImg);
     border-radius: 4px;
     text-align: center;
-    color: var(--primaryColor);
+    color: var(--whitecolor);
 }
 
 
@@ -68,6 +68,10 @@
     font-size: large;
 }
 
+/* .card-des:hover{
+    color: var(--maincolor);
+} */
+
 
 .part-4 {
     padding: 0.3rem;
@@ -76,10 +80,15 @@
 .card-btn {
     width: 80%;
     padding: 0.3rem;
-    color: var(--primaryColor);
-    background-color: transparent;
-    border: .1rem solid var(--borderColors);
+    color: var(--whitecolor);
+    background: var(--backgroundImg);
+    /* border: .1rem solid var(--borderColors); */
     border-radius: 4px;
     font-weight: 500;
     font-size: 16px;
+    border: none;
 }  
+
+.card-btn:hover{
+    color: var(--maincolor);
+}

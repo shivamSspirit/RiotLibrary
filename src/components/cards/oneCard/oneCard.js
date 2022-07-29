@@ -31,7 +31,7 @@ import { replace } from 'lodash'
 
 
 function OneCard(props) {
-    const { isCategoryCard, CategoryCardData, isExploreVideoCard, exploreVideoData, isWatchLater, watchvideoLaterData, setModal, isSinglePLayList, singlePlaylistVideoData, isCategorized, categorizedVideo } = props;
+    const { isCategoryCard, CategoryCardData, isExploreVideoCard, exploreVideoData, isWatchLater, watchvideoLaterData, setModalOpen, isSinglePLayList, singlePlaylistVideoData, isCategorized, categorizedVideo } = props;
     const { setDynamicProperties, curretcategory, setCurrentCategory } = useGlobal();
     const navigate = useNavigate();
     const { playlistId } = useParams()
@@ -89,7 +89,7 @@ function OneCard(props) {
             type: ActionTypes?.playlistmanagment?.SET_CURRENT_VIDEO,
             payload: currentselectedVideo
         })
-        await setModal(true);
+        setModalOpen(true);
         console.log("selected now", playList?.currentselectedVideo)
     }
 

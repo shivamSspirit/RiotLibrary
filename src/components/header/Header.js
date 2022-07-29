@@ -66,8 +66,8 @@ function Header() {
                         </div>
 
                         <div className="dropdown show">
-                            <button onClick={() => setTrue(!pop)} className="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Navs
+                            <button onClick={() => setTrue(!pop)} className="btn auth-btn btn-transparent dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Pages
                             </button>
 
                             <div className={`dropdown-menu ${pop && 'show openthis'}`} aria-labelledby="dropdownMenuLink">

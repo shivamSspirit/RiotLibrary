@@ -4,5 +4,9 @@
    --primaryColor:rgb(40, 42, 83);
    --inputBorderRadius:4px;
    --white:cornsilk;
-   --transparant:transparant;  
+   --transparant:transparant; 
+   --fonts:"Inter", sans-serif; 
+   --whitecolor:cornsilk;
+   --maincolor:rgba(97, 12, 191, 1);
+
 }

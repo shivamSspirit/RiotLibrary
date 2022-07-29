@@ -5,7 +5,9 @@ import CateFilter from '../../cateFilter/CateFilter';
 import { useGlobal } from '../../../context/GlobalContext';
 
 function CardIcon(props) {
-    const { globalVideos, openModal, setModal, setCurrentCategory } = props;
+    const { globalVideos, openmodal, setModalOpen, setCurrentCategory } = props;
+
+    console.log('proprs',props)
     const { curretcategory } = useGlobal()
     const [filteredCategory, setFilteredCategory] = useState(null);
     const [currentcate,setCurrentCate] = useState('')
@@ -43,7 +45,7 @@ function CardIcon(props) {
         <>
             <CateFilter click={clicck} category={curretcategory} />
             <div className='col-container'>
-                <OneCard openModal={openModal} setModal={setModal} isExploreVideoCard={true} exploreVideoData={filteredCategory} />
+                <OneCard openmodal={openmodal} setModalOpen={setModalOpen} isExploreVideoCard={true} exploreVideoData={filteredCategory} />
             </div>
         </>
     )

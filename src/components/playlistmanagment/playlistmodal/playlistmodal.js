@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PlayListForm from '../playlistform/playList'
 
 function PlayListModal(props) {
-  const { openModal, setModal } = props;
+  const { openmodal, setModalOpen } = props;
+
+  useEffect(()=>{
+    if(openmodal){
+      console.log('opennew',openmodal)
+    }
+  },[openmodal])
   return (
     <div>
-      <PlayListForm openModal={openModal} setModal={setModal} />
+      <PlayListForm openmodal={openmodal} setModalOpen={setModalOpen} />
     </div>
   )
 }

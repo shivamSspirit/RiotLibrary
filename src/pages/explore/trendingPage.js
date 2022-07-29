@@ -13,9 +13,9 @@ import * as VideoApi from '../../api/videos'
 import '../landingpage/landing.css'
 
 function TrendingPage() {
-    const { globalVideos, setCurrentCategory, setGlobalVideos, currentcategory, loaderState, setLoaderState } = useGlobal();
-    const [openmodal, setModalOpen] = useState(false);
-
+    const { globalVideos, setCurrentCategory, setGlobalVideos, currentcategory, openmodal, setModalOpen, loaderState, setLoaderState } = useGlobal();
+   
+console.log('opn from trending',openmodal)
 
     useEffect(() => {
         const fetchVideo = async () => {
@@ -29,14 +29,16 @@ function TrendingPage() {
         fetchVideo();
     }, [])
 
+   // console.log('openmodlaaa',openmodal)
+
 
     return (
         <>
             <div className='trend-page'>
                 <ScrollToTop />
                 <Header />
-                <PlayListModal openModal={openmodal} setModal={setModalOpen} />
-                {loaderState ? <Loader /> : <CardWithIcon openModal={openmodal} setModal={setModalOpen} setCurrentCategory={setCurrentCategory} globalVideos={globalVideos} />}
+                <PlayListModal openmodal={openmodal} setModalOpen={setModalOpen} />
+                {loaderState ? <Loader /> : <CardWithIcon openmodal={openmodal} setModalOpen={setModalOpen} setCurrentCategory={setCurrentCategory} globalVideos={globalVideos} />}
             </div>
         </>
     )

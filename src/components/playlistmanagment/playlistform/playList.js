@@ -10,11 +10,11 @@ import { usePlaylistOperation } from '../../../hooks/playlistmanagment';
 import Cross from '../../../asset/img/cross.png'
 
 
-function Listform({ openModal, setModal }) {
+function Listform(props) {
     const [list, setList] = useState({
         title: "games", description: "bob bar bar"
     });
-
+    
     const [lists, setDataLists] = useState([]);
     const [toggleform, setToggleform] = useState(false)
 
@@ -133,12 +133,12 @@ function Listform({ openModal, setModal }) {
             type: ActionTypes?.playlistmanagment?.UNSET_CURRENT_VIDEO
         });
 
-        setModal(false)
+       props.setModalOpen(false)
     }
 
     return (
         <div>
-            {openModal && (
+            {props.openmodal && (
                 <div className='play-list-form'>
                     <div className='card-head'>
                         <h2 onClick={openForm} className='form-title'>

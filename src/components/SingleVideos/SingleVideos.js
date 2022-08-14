@@ -20,10 +20,16 @@ import { useWatchLater } from '../../context/watchLaterContext'
 import { usePlayList } from '../../context/playListContext'
 import { add } from 'lodash'
 
+import { useHistory } from '../../context/historyContext'
+
+import { useHistoryOperation } from '../../hooks/history'
+
 function SingleVideos(props) {
     const { fetchOne, openmodal, setModalOpen } = props;
     const { dispatchplayList } = usePlayList()
     const {watchLater} = useWatchLater()
+
+    const {postTohistory} = useHistoryOperation();
 
     const { postToWatchLater, removeFromWatchLater } = useWatchLaterOperation();
     const { getlikesvideoList, postTolikes, removeFromlikes } = useLikesOperation();
@@ -93,15 +99,18 @@ function SingleVideos(props) {
     //     })
     // }
 
-    const gotoHistory = (videoId) => {
-        console.log('making history', videoId)
+    const gotoHistory = (video) => {
+        console.log('vieo',video)
+        postTohistory(video,()=>{
+            console.log('making history', video)
+        })
     }
 
     return (
         <div>
             <div className='section-container'>
                 <div className='part-2'>
-                    <ReactPlayer width={'100%'} height={'450px'} onStart={() => { gotoHistory(fetchOne?._id) }} controls url={`https://www.youtube.com/embed/${fetchOne?._id}`} />
+                    <ReactPlayer width={'100%'} height={'450px'} onStart={() => { gotoHistory(fetchOne) }} controls url={`https://www.youtube.com/embed/${fetchOne?._id}`} />
                 </div>
 
 

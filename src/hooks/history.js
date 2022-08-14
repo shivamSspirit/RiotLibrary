@@ -2,8 +2,11 @@ import * as historyApis from '../api/history'
 import * as ActionTypes from '../constant/actions'
 import { useHistory } from '../context/historyContext'
 
-export function usehistoryOperation() {
-    const { history, dispatchHistory } = useHistory();
+
+export function useHistoryOperation() {
+    const { history,  dispatchHistory } = useHistory();
+
+   
 
     function ifvideoinhistory(video) {
         const isvideo = history?.historyproducts?.find((videos => videos?._id === video?._id))
@@ -26,19 +29,26 @@ export function usehistoryOperation() {
         }
     }
 
-    async function postTohistory(video, callback) {
-        if (ifvideoinhistory(video)) {
+    async function postTohistory(historyVideo, callback) {
+        if (ifvideoinhistory(historyVideo)) {
             await dispatchHistory({
                 type: ActionTypes?.historyAction?.ADD_TO_HISTORY,
-                payload: history?.historyproducts
+                payload: history?.historyvideos
             })
         }
-        const response = await historyApis?.postHistory(video);
+        const response = await historyApis?.postHistory(historyVideo);
         console.log('res from post history',response)
-        await dispatchHistory({
-            type: ActionTypes?.historyAction?.ADD_TO_HISTORY,
-            payload: response?.data?.history
-        })
+        console.log('hree',dispatchHistory)
+        if(response){
+            await dispatchHistory({
+                type: ActionTypes?.historyAction?.ADD_TO_HISTORY,
+                payload: response?.data?.history
+            })  
+        }
+        // await dispatchHistory({
+        //     type: ActionTypes?.historyAction?.ADD_TO_HISTORY,
+        //     payload: response?.data?.history
+        // })
         if (callback) {
             return callback();
         }

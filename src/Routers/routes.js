@@ -14,11 +14,18 @@ import WatchLater from "../pages/watchlater/watchlater";
 import PlaylistPage from "../pages/playlistPage/PlaylistPage";
 import Jest from "../pages/jest/jest";
 import SinglePlayListPage from "../pages/singlePlaylistPage/singleplayListPage";
-
+import HistoryPage from "../pages/history/historyPage";
+import Likepage from "../pages/likes/likepage";
+import {Helmet} from "react-helmet";
 class AllRoutes extends React.Component {
     render() {
         return (
             <div>
+                 <Helmet>
+                <meta charSet="utf-8" />
+                <title>Riot</title>
+                {/* <link rel="canonical" href="http://mysite.com/example" /> */}
+            </Helmet>
                 <Routes>
                     {/* < Public Routes> */}
                     <Route exact path="/" element={<LandingPage />} />
@@ -33,6 +40,9 @@ class AllRoutes extends React.Component {
                             <SingleVideo />
                         </AuthRoutes>
                     } />
+                     <Route exact path="/history" element={<AuthRoutes><HistoryPage /></AuthRoutes>} />
+                     <Route exact path="/likes" element={<AuthRoutes><Likepage /></AuthRoutes>} />
+
                     <Route exact path="/watchlater" element={<AuthRoutes><WatchLater /></AuthRoutes>} />
                     <Route exact path="/playlists" element={<AuthRoutes><PlaylistPage /></AuthRoutes>} />
                     <Route exact path="/playlists/:playlistId" element={<AuthRoutes><SinglePlayListPage /></AuthRoutes>} />

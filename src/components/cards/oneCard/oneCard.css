@@ -6,8 +6,6 @@ a:-webkit-any-link {
     color: inherit !important;
 }
 
-
-
 .card-section {
     height: auto;
     display: flex;
@@ -42,12 +40,19 @@ a:-webkit-any-link {
     font-weight: 500;
     font-size: small;
     text-decoration: none;
+    cursor: pointer;
 
 }
 
 .video-link:-webkit-any-link{
-    text-decoration: none !important;
+    /* text-decoration: none !important; */
 }
+
+.video-link:hover{
+    color: black !important;
+}
+
+
 
 .common-parts {
     background-color: aqua;

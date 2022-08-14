@@ -8,8 +8,14 @@ import { ScrollToTop } from '../../components/scrolltotop/ScroolTotop'
 import { ToastContainer } from 'react-toastify'
 import Loader from '../../components/Loader/Loader'
  import './landing.css'
+import { useAuth } from '../../context/authContext'
+import { useNavigate } from 'react-router-dom'
 function LandingPage() {
     const { globalVidCategory,loaderState,setLoaderState ,setGlobalVidCategory} = useGlobal();
+
+    const {authToken} = useAuth()
+
+ const navigate =  useNavigate()
 
 
     useEffect(() => {
@@ -23,6 +29,14 @@ function LandingPage() {
 		}
 		fetchcate()
 	}, [])
+
+    // useEffect(()=>{
+    //     if(!localStorage.getItem("authToken")){
+    //         navigate('/auth/login')
+    //     }
+    //  },[localStorage.getItem("authToken")])
+
+
 
     return (
         <div className='main-land'>

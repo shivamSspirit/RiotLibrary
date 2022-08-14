@@ -73,6 +73,8 @@ function Header() {
                             <div className={`dropdown-menu ${pop && 'show openthis'}`} aria-labelledby="dropdownMenuLink">
                                 <NavLink to={'/watchlater'} className='auth-btn dropdown-item'>Watchlater</NavLink>
                                 <NavLink to={'/playlists'} className='auth-btn dropdown-item'>playlists</NavLink>
+                                <NavLink to={'/history'} className='auth-btn dropdown-item'>history</NavLink>
+                                <NavLink to={'/likes'} className='auth-btn dropdown-item'>likes</NavLink>
                                 {!authToken && (<NavLink to='/auth/login' className='auth-btn dropdown-item'>login</NavLink>)}
                                 {authToken && (<button onClick={logout} className='auth-btn dropdown-item'>logout</button>)}
                             </div>

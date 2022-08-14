@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as AuthApis from '../../../api/authapi'
 import { Link, useNavigate } from 'react-router-dom';
 import Masterinput from '../../inputfield/minput';
@@ -6,42 +6,25 @@ import { useAuth } from '../../../context/authContext'
 import { useToast } from '../../../hooks/useToastify';
 import './login.css'
 
-
 import useLoginForm from '../../../hooks/useForms/useLoginForm';
 
 
 function Login() {
     const navigate = useNavigate();
-    const { setAuthToken } = useAuth();
-
+    const { authToken,setAuthToken } = useAuth();
 
  const formLogin = () => {
         console.log("Callback function when form is submitted!");
         console.log("Form Values ", values);
     }
     const { values, errors, handleChange , asGuest } = useLoginForm(formLogin)
-    // const [input, setInput] = useState({
-    //     email: '',
-    //     password: ''
-    // });
 
-
-    // const handleInputChange = (e) => {
-    //     const nameVal = e.target.name;
-
-    //     if (nameVal === 'email') {
-    //         setInput({
-    //             ...input,
-    //             email: e.target.value
-    //         })
+    // useEffect(()=>{
+    //     if(!authToken){
+    //         window.location = '/auth/login'
     //     }
-    //     if (nameVal === 'password') {
-    //         setInput({
-    //             ...input,
-    //             password: e.target.value
-    //         })
-    //     }
-    // }
+    //  },[authToken])
+
 
     const handleSubmit = async(event) => {
         if (event) event.preventDefault();
@@ -57,7 +40,6 @@ function Login() {
             alert("There is an Error!");
         }
     }
-
 
     // const handleSubmit = async (e) => {
     //     e.preventDefault();

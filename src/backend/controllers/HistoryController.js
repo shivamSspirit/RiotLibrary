@@ -42,7 +42,9 @@ export const getHistoryVideosHandler = function (schema,request) {
  * */
 
 export const addVideoToHistoryHandler = function (schema,request) {
+  console.log('video',request)
   const user = requiresAuth.call(this, request);
+ 
   try {
     if (!user) {
       return new Response(
@@ -54,7 +56,8 @@ export const addVideoToHistoryHandler = function (schema,request) {
       );
     }
     const { video } = JSON.parse(request.requestBody);
-    if (user.history.some((item) => item.id === video.id)) {
+    
+    if (user.history.some((item) => item?._id === video._id)) {
       return new Response(
         409,
         {},

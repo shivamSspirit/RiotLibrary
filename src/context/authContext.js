@@ -15,9 +15,9 @@ const AuthProvider = ({ children }) => {
     localStorageUser ? localStorageUser : null
   );
 
-  console.log('authtoken',authToken)
+  console.log('authtoken', authToken)
 
-  const handleLogout=()=>{
+  const handleLogout = () => {
     console.log('lo')
     localStorage.clear();
     setAuthToken('');
@@ -27,7 +27,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ authToken, setAuthToken, authUser, setAuthUser,handleLogout }}
+      value={{ authToken, setAuthToken, authUser, setAuthUser, handleLogout }}
     >
       {children}
     </AuthContext.Provider>

@@ -31,7 +31,7 @@ import { replace } from 'lodash'
 
 
 function OneCard(props) {
-    const { isCategoryCard, CategoryCardData, isExploreVideoCard, exploreVideoData, isWatchLater, watchvideoLaterData, setModalOpen, isSinglePLayList, singlePlaylistVideoData, isCategorized, categorizedVideo } = props;
+    const { isCategoryCard, CategoryCardData, isExploreVideoCard, exploreVideoData, isWatchLater, watchvideoLaterData, setModalOpen, isSinglePLayList, singlePlaylistVideoData, isCategorized, categorizedVideo, isLikesVideos, likesVideoData, isHistoryVideos, historyVideoData } = props;
     const { setDynamicProperties, curretcategory, setCurrentCategory } = useGlobal();
     const navigate = useNavigate();
     const { playlistId } = useParams()
@@ -42,7 +42,7 @@ function OneCard(props) {
     const { getlikesvideoList, postTolikes, removeFromlikes } = useLikesOperation();
     const { getGlobalPlayLists, createPlayList, deletePlaylist, getSinglePlaylist, postVideotoplaylist, deletevideoFromplaylist } = usePlaylistOperation();
 
-    const {showToast} = useToast()
+    const { showToast } = useToast()
 
     // console.log('fun', playList)
 
@@ -57,11 +57,11 @@ function OneCard(props) {
     }
 
     const moveToExplore = async (videoCategoryID) => {
-        console.log('videoCategoryID',videoCategoryID)
+        console.log('videoCategoryID', videoCategoryID)
         const res = await CategoryPis?.getSingleCategory(videoCategoryID);
         console.log('res', res)
         await setCurrentCategory(res.data.category.categoryName);
-        navigate('/videos',replace='true')
+        navigate('/videos', replace = 'true')
     }
 
 
@@ -116,7 +116,7 @@ function OneCard(props) {
 
     return (
         <>
-        {/* <div>
+            {/* <div>
         <ToastContainer/>
         </div> */}
             {isCategoryCard && (
@@ -153,7 +153,7 @@ function OneCard(props) {
                                     <iframe width="300" height="210" src={`https://www.youtube.com/embed/${item?._id}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                                 </div>
                                 <div className='part-2'>
-                                    <Link style={{textDecoration:"none",color:'inherit'}} to={`/videos/${item?._id}`}>{item?.title}</Link>
+                                    <Link style={{ textDecoration: "none", color: 'inherit' }} to={`/videos/${item?._id}`}>{item?.title}</Link>
                                 </div>
                                 <div className='part-3'>
                                     <p className='card-des'>
@@ -161,7 +161,58 @@ function OneCard(props) {
                                     </p>
                                 </div>
                                 <div className='part-4'>
-                                    <Link style={{textDecoration:"none",color:'inherit'}} to={`/videos/${item?._id}`}><button className='card-btn'>{'Play'}</button></Link>
+                                    <Link style={{ textDecoration: "none", color: 'inherit' }} to={`/videos/${item?._id}`}><button className='card-btn'>{'Play'}</button></Link>
+                                </div>
+                            </div>
+                        </div>
+                    )))}
+                </div>
+            )}
+
+
+            {isLikesVideos && (
+                <div className='card-section'>
+                    {(likesVideoData?.map((item, idx) => (
+                        <div key={`vcat${idx}`} className='card-container'>
+                            <div className='card-parts'>
+                                <div className='part-1'>
+                                    <iframe width="300" height="210" src={`https://www.youtube.com/embed/${item?._id}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                </div>
+                                <div className='part-2'>
+                                    <Link style={{ textDecoration: "none", color: 'inherit' }} to={`/videos/${item?._id}`}>{item?.title}</Link>
+                                </div>
+                                <div className='part-3'>
+                                    <p className='card-des'>
+                                        {item.categoryName}
+                                    </p>
+                                </div>
+                                <div className='part-4'>
+                                    <Link style={{ textDecoration: "none", color: 'inherit' }} to={`/videos/${item?._id}`}><button className='card-btn'>{'Play'}</button></Link>
+                                </div>
+                            </div>
+                        </div>
+                    )))}
+                </div>
+            )}
+
+            {isHistoryVideos && (
+                <div className='card-section'>
+                    {(historyVideoData?.map((item, idx) => (
+                        <div key={`vcat${idx}`} className='card-container'>
+                            <div className='card-parts'>
+                                <div className='part-1'>
+                                    <iframe width="300" height="210" src={`https://www.youtube.com/embed/${item?._id}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                </div>
+                                <div className='part-2'>
+                                    <Link style={{ textDecoration: "none", color: 'inherit' }} to={`/videos/${item?._id}`}>{item?.title}</Link>
+                                </div>
+                                <div className='part-3'>
+                                    <p className='card-des'>
+                                        {item.categoryName}
+                                    </p>
+                                </div>
+                                <div className='part-4'>
+                                    <Link style={{ textDecoration: "none", color: 'inherit' }} to={`/videos/${item?._id}`}><button className='card-btn'>{'Play'}</button></Link>
                                 </div>
                             </div>
                         </div>
@@ -180,7 +231,7 @@ function OneCard(props) {
                                 </div>
                                 <div className='parts-2'>
                                     <h2 className='card-title'>
-                                        <Link className='video-link' style={{ textDecoration: 'none', color: 'inherit' }} to={`/videos/${item?._id}`}>
+                                        <Link className='video-link' style={{ textDecoration: 'none', color: 'aliceblue' }} to={`/videos/${item?._id}`}>
                                             {item?.title}
                                         </Link>
                                     </h2>
@@ -279,7 +330,7 @@ function OneCard(props) {
                 </div>
             )
             }
-            < ToastContainer/>
+            < ToastContainer />
         </>
     )
 }

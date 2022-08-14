@@ -8,9 +8,9 @@
 
 .img-container {
     width: 100vw;
-    height: calc(100%-96px);
+    height: calc(100% - 96px);
     display: block;
-    background-image: url('../../asset/img/istockphoto-1287065554-170667a.jpeg');
+    background-image: url('../../asset/img/pro.jpeg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

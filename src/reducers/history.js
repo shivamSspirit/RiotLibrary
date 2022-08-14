@@ -5,7 +5,7 @@ export const historyInitialState = {
     historyCount: 0
 }
 
-const HistoryListReducer = (state = historyInitialState, action) => {
+const historyListReducer = (state = historyInitialState, action) => {
     switch (action.type) {
         case ActionTypes?.historyAction?.ADD_TO_HISTORY:
             return {
@@ -21,4 +21,4 @@ const HistoryListReducer = (state = historyInitialState, action) => {
     }
 }
 
-export { HistoryListReducer }
+export { historyListReducer }

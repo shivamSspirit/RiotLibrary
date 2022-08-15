@@ -56,7 +56,6 @@ export const getSingleplayList = async (playlistId) => {
 //  This API call adds a new video to the playlist of the user in the db.
 
 export const postSingleplayList = async (playlistId, video) => {
-  console.log('viedo', video)
   try {
     const response = await axios.post(`${playListUrl}/${playlistId}`, { data: { video } }, { headers: { authorization: localStorage.getItem("token") } })
     if (response.status === 201) {

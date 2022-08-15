@@ -44,9 +44,6 @@ a:-webkit-any-link {
 
 }
 
-.video-link:-webkit-any-link{
-    /* text-decoration: none !important; */
-}
 
 .video-link:hover{
     color: black !important;

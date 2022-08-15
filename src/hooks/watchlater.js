@@ -19,7 +19,6 @@ export function useWatchLaterOperation() {
 
     async function getwatchLatervideoList(callback) {
         const response = await watchlaterApis?.getwatchLater();
-        console.log('res from get watchlater', response)
         if (response) {
             showToast("success", "getting watch later videos")
             await dispatchWatchlater({
@@ -40,7 +39,6 @@ export function useWatchLaterOperation() {
             })
         }
         const response = await watchlaterApis?.postwatchVideo(video);
-        console.log('resfrom post watchlater action', response)
         if (response) {
             showToast('success', 'added to watchlater')
             await dispatchWatchlater({
@@ -55,7 +53,6 @@ export function useWatchLaterOperation() {
 
     async function removeFromWatchLater(videoId, callback) {
         const response = await watchlaterApis?.deletewatchVideo(videoId);
-        console.log('res from remove watchlater', response)
         if (response) {
             showToast('info', 'removing from watchlater')
             dispatchWatchlater({
@@ -63,7 +60,6 @@ export function useWatchLaterOperation() {
                 payload: response?.data?.watchlater
             })
         }
-
         if (callback) {
             return callback();
         }

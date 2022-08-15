@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useReducer } from "react";
 import { historyListReducer,historyInitialState} from '../reducers/history'
 export const HistoryContext = createContext('historyContext');

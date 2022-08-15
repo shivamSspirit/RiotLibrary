@@ -6,7 +6,6 @@ function Land() {
     return (
         <div>
             <div className='img-container'>
-                {/* <img className='land-img' src={LandImg} alt="" />k */}
                 <div className='img-content'>
                     <div className='land-parts'>
                         <div className='part-1'>

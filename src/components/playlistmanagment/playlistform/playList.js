@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import './playlist.css'
+
 import { usePlayList } from '../../../context/playListContext';
 import { useWatchLater } from '../../../context/watchLaterContext';
-import * as ActionTypes from '../../../constant/actions'
-
 import { useWatchLaterOperation } from '../../../hooks/watchlater';
 import { usePlaylistOperation } from '../../../hooks/playlistmanagment';
+
+import * as ActionTypes from '../../../constant/actions'
 
 import Cross from '../../../asset/img/cross.png'
 
@@ -14,7 +15,6 @@ function Listform(props) {
     const [list, setList] = useState({
         title: "games", description: "bob bar bar"
     });
-    
     const [lists, setDataLists] = useState([]);
     const [toggleform, setToggleform] = useState(false)
 
@@ -28,18 +28,18 @@ function Listform(props) {
 
     // forminput list  handler
 
-    useEffect(()=>{
-         getGlobalPlayLists(() => {
+    useEffect(() => {
+        getGlobalPlayLists(() => {
             console.log('getting playlist')
         })
-    },[lists])
+    }, [lists])
 
     const listOnchange = (e) => {
         const val = e.target.name;
         if (val === 'p-title') {
             setList({
-              ...list,  title: e.target.value,
-                
+                ...list, title: e.target.value,
+
             })
         }
         if (val === 'p-des') {
@@ -58,9 +58,6 @@ function Listform(props) {
         await createPlayList(targetList, () => {
             console.log('creating new playlist')
         })
-        // await getGlobalPlayLists(() => {
-        //     console.log('getting playlist')
-        // })
         setTimeout(() => {
             setList({
                 title: '',
@@ -74,37 +71,32 @@ function Listform(props) {
         setToggleform(!toggleform)
     }
 
-
     // plylist operations
 
-    const isVideoInPlaylist =  (playlist) => {
-        console.log('current playlist', playlist)
+    const isVideoInPlaylist = (playlist) => {
         const filteredVideos = playlist?.videos?.filter(
             (playlistVideo) => playlistVideo._id === playList?.currentselectedVideo?._id
         );
-        console.log('filtered', filteredVideos?.length === 1)
         return filteredVideos?.length === 1;
     };
 
 
     const setVideoToPlayList = (playlist) => {
-        console.log('playlist',playList)
         const data = { playlistId: playlist?._id, video: playList?.currentselectedVideo }
-        postVideotoplaylist(data,()=>{
+        postVideotoplaylist(data, () => {
             console.log('posting')
         })
     }
 
     const unsetVideoFromPlayList = (playlist) => {
         const data = { playlistId: playlist?._id, videoId: playList?.currentselectedVideo?._id }
-        deletevideoFromplaylist(data,()=>{
+        deletevideoFromplaylist(data, () => {
             console.log('deleting')
         })
     }
 
-    const handlevideoInplaylist = (e,playlist) => {
+    const handlevideoInplaylist = (e, playlist) => {
         e.preventDefault()
-        console.log('dfff', isVideoInPlaylist(playlist) )
         isVideoInPlaylist(playlist) ? unsetVideoFromPlayList(playlist) : setVideoToPlayList(playlist)
     }
 
@@ -133,7 +125,7 @@ function Listform(props) {
             type: ActionTypes?.playlistmanagment?.UNSET_CURRENT_VIDEO
         });
 
-       props.setModalOpen(false)
+        props.setModalOpen(false)
     }
 
     return (
@@ -175,10 +167,8 @@ function Listform(props) {
                         </div>
                         {playList?.playlistproducts && playList?.playlistproducts?.map((list, idx) => (
                             <div className='chec-doc' key={`playlist${idx}`}>
-                                {console.log('pro',list)}
-                                <input checked={isVideoInPlaylist(list)} onChange={(e) => handlevideoInplaylist(e,list)} type="checkbox" id={`${list.title}`} name={`${list.title}`} />
-                                {/* <input type="checkbox" id={`${list.title}`} name={`${list.title}`} /> */}
-
+                                {console.log('pro', list)}
+                                <input checked={isVideoInPlaylist(list)} onChange={(e) => handlevideoInplaylist(e, list)} type="checkbox" id={`${list.title}`} name={`${list.title}`} />
                                 <label className='lab-check' htmlFor={`${list.title}`}>{`${list.title}`}</label>
                             </div>
                         ))}

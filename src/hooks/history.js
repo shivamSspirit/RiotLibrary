@@ -6,8 +6,6 @@ import { useHistory } from '../context/historyContext'
 export function useHistoryOperation() {
     const { history,  dispatchHistory } = useHistory();
 
-   
-
     function ifvideoinhistory(video) {
         const isvideo = history?.historyproducts?.find((videos => videos?._id === video?._id))
         if (isvideo) {
@@ -19,7 +17,6 @@ export function useHistoryOperation() {
 
     async function gethistoryvideoList(callback) {
         const response = await historyApis?.getHistoryList();
-        console.log('res from get history',response)
         await dispatchHistory({
             type: ActionTypes?.historyAction?.ADD_TO_HISTORY,
             payload: response?.data?.history
@@ -38,7 +35,7 @@ export function useHistoryOperation() {
         }
         const response = await historyApis?.postHistory(historyVideo);
         console.log('res from post history',response)
-        console.log('hree',dispatchHistory)
+        console.log('hree',dispatchHistory);
         if(response){
             await dispatchHistory({
                 type: ActionTypes?.historyAction?.ADD_TO_HISTORY,

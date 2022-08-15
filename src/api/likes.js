@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 
-const authorization = localStorage.getItem("token")
+
 const likesUrl = '/api/user/likes'
 
 

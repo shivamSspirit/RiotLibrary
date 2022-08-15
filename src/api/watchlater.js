@@ -2,7 +2,6 @@ import axios from 'axios'
 
 const watchLaterUrl = '/api/user/watchlater';
 
-// const headers = { 'authorization': localStorage.getItem('token') }
 // get watch later videos
 
 export async function getwatchLater() {

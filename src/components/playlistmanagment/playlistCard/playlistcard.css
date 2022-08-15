@@ -1,13 +1,6 @@
-/* *{
-    margin: 0;
-    box-sizing: border-box;
-} */
-
 @import url(../../../asset/css/theme.css);
 
-
-
-.main-p-section{
+.main-p-section {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -17,32 +10,32 @@
     justify-content: center;
 }
 
-.p-card-container{
+.p-card-container {
     max-width: 15rem;
     max-height: 15rem;
     background: var(--backgroundImg);
 }
 
 
-.p-parts{
+.p-parts {
     display: flex;
     flex-direction: column;
     text-align: center;
 }
 
-.playlist-img{
+.playlist-img {
     max-width: 14rem;
     max-height: 10rem;
 }
 
-.dlt-btn{
+.dlt-btn {
     border: none;
     padding: .3rem;
     background: none;
 }
 
-.dlt-btn:hover{
-border-radius: 34%;
-background-color: bisque;
-width: 50%;
+.dlt-btn:hover {
+    border-radius: 34%;
+    background-color: bisque;
+    width: 50%;
 }

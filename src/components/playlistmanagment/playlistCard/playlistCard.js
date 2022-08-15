@@ -1,18 +1,14 @@
 import React from 'react'
-import './playlistcard.css'
-import { usePlayList } from '../../../context/playListContext'
-import * as ActionTypes from '../../../constant/actions'
-import * as playListApis from '../../../api/playlist'
 import { Link } from 'react-router-dom'
 
+import './playlistcard.css'
+import { usePlayList } from '../../../context/playListContext'
 import {usePlaylistOperation} from '../../../hooks/playlistmanagment'
-
 import demoImg from '../../../asset/img/hawamahal.jpeg'
 
 function PlaylistCard() {
-    const { playList, dispatchplayList } = usePlayList()
+    const { playList } = usePlayList()
     const {deletePlaylist}  =usePlaylistOperation()
-    console.log('sssss',playList)
 
     const removeGplaylist=(playlistId)=>{
         deletePlaylist(playlistId)

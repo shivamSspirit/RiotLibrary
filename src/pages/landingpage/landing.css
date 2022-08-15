@@ -1,10 +1,11 @@
 @import url(../../asset/css/theme.css);
-*{
+
+* {
     margin: 0;
     box-sizing: border-box;
 }
 
-.trend-page{
+.trend-page {
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -12,16 +13,13 @@
     background-image: linear-gradient(to bottom right, rgb(15, 32, 68), rgb(10, 32, 71));
 }
 
-.main-land{
-    /* height: 100vh; */
+.main-land {
     background: var(--backgroundImg);
-    /* background-image: linear-gradient(to bottom right, rgb(15, 32, 68), rgb(10, 32, 71)); */
 }
 
-.main-category-container{
+.main-category-container {
     width: 100%;
     height: calc(100% - 820px);
 }
-.page-title{
-    
-}
+
+.page-title {}

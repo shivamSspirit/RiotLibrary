@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useGlobal } from '../../context/GlobalContext'
 import { ScrollToTop } from '../../components/scrolltotop/ScroolTotop'
 
@@ -9,13 +9,10 @@ import PlayListModal from '../../components/playlistmanagment/playlistmodal/play
 
 import * as VideoApi from '../../api/videos'
 
-
 import '../landingpage/landing.css'
 
 function TrendingPage() {
-    const { globalVideos, setCurrentCategory, setGlobalVideos, currentcategory, openmodal, setModalOpen, loaderState, setLoaderState } = useGlobal();
-   
-console.log('opn from trending',openmodal)
+    const { globalVideos, setCurrentCategory, setGlobalVideos, openmodal, setModalOpen, loaderState, setLoaderState } = useGlobal();
 
     useEffect(() => {
         const fetchVideo = async () => {
@@ -29,7 +26,6 @@ console.log('opn from trending',openmodal)
         fetchVideo();
     }, [])
 
-   // console.log('openmodlaaa',openmodal)
 
 
     return (

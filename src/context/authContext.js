@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext('authContext');
 
-
 const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const localStorageAuth = localStorage.getItem("token");

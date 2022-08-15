@@ -1,10 +1,5 @@
 @import url(../../../asset/css/theme.css);
 
-/* * {
-    margin: 0;
-    box-sizing: border-box;
-} */
-
 .main-Container {
     display: flex;
     justify-content: center;
@@ -41,7 +36,7 @@
     text-align: left;
 }
 
-.login-error{
+.login-error {
     color: rgb(130, 62, 62);
     margin-bottom: 0rem !important;
 }
@@ -52,7 +47,7 @@
     border-radius: var(--inputBorderRadius);
 }
 
-.boader-log-red{
+.boader-log-red {
     outline: 1px red solid;
 }
 
@@ -80,7 +75,7 @@
 }
 
 
-.sign-link:hover{
-cursor: pointer;
-color: white !important;
+.sign-link:hover {
+    cursor: pointer;
+    color: white !important;
 }

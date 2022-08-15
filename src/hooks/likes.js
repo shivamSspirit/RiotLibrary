@@ -8,8 +8,6 @@ export function useLikesOperation() {
      const { showToast } = useToast()
     const { Likes, dispatchLikes } = useLikes();
 
-    console.log("ddssdsipatch",dispatchLikes)
-
 
     function ifvideoinlikes(video) {
         const isvideo = Likes?.likesproducts?.find((videos => videos?._id === video?._id))
@@ -22,7 +20,6 @@ export function useLikesOperation() {
 
     async function getlikesvideoList(callback) {
         const response = await likesApis?.getLikedList();
-        console.log('res from get likes', response)
         await dispatchLikes({
             type: ActionTypes?.likeAction?.ADD_TO_LIKES,
             payload: response?.data?.likes
@@ -40,7 +37,6 @@ export function useLikesOperation() {
             })
         }
         const response = await likesApis?.postLikedVideo(video);
-        console.log('res from post likes', response)
         if (response) {
             showToast('success', 'added to Likes')
             await dispatchLikes({
@@ -48,8 +44,6 @@ export function useLikesOperation() {
                 payload: response?.data?.likes
             })
         }
-
-
         if (callback) {
             return callback();
         }
@@ -57,7 +51,6 @@ export function useLikesOperation() {
 
     async function removeFromlikes(videoId, callback) {
         const response = await likesApis?.deleteLikedVideo(videoId);
-        console.log('res from remove likes', response)
         if (response) {
             showToast('info','removing from Likes')
             dispatchLikes({

@@ -5,7 +5,7 @@ import * as watchLaterListReducer from '../reducers/watchLater'
 export const WatchLaterContext = createContext('watchlaterContext');
 
 export const WatchLaterProvider = ({ children }) => {
-  const [watchLater, dispatchWatchlater] = useReducer(watchLaterListReducer?.watchLaterListReducer,watchLaterListReducer?.watchLaterInitialState);
+  const [watchLater, dispatchWatchlater] = useReducer(watchLaterListReducer?.watchLaterListReducer, watchLaterListReducer?.watchLaterInitialState);
 
   let contextValue = {
     watchLater,

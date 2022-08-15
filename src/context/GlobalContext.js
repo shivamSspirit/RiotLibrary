@@ -7,8 +7,8 @@ const GlobalContext = (props) => {
 	const [globalStateProperties, setglobalStateProperties] = useState(null);  // object contains multiple global state variable
 	const [globalVideos, setGlobalVideos] = useState(null);
 	const [globalVidCategory, setGlobalVidCategory] = useState(null);
-	const [curretcategory,setCurrentCategory] = useState()
-	const [loaderState,setLoaderState] = useState(false)
+	const [curretcategory, setCurrentCategory] = useState()
+	const [loaderState, setLoaderState] = useState(false)
 	const [openmodal, setModalOpen] = useState(false);
 
 	// useEffect(()=>{
@@ -30,8 +30,8 @@ const GlobalContext = (props) => {
 		setDynamicProperties,
 		globalVideos,
 		globalVidCategory,
-		curretcategory,setCurrentCategory,
-		loaderState,setLoaderState,
+		curretcategory, setCurrentCategory,
+		loaderState, setLoaderState,
 		setGlobalVidCategory,
 		setGlobalVideos,
 		openmodal,

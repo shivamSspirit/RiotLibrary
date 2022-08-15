@@ -6,8 +6,6 @@ import { useGlobal } from '../../../context/GlobalContext';
 
 function CardIcon(props) {
     const { globalVideos, openmodal, setModalOpen, setCurrentCategory } = props;
-
-    console.log('proprs',props)
     const { curretcategory } = useGlobal()
     const [filteredCategory, setFilteredCategory] = useState(null);
     const [currentcate,setCurrentCate] = useState('')

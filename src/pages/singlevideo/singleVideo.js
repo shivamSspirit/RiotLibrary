@@ -12,7 +12,6 @@ import Loader from '../../components/Loader/Loader'
 import { useGlobal } from '../../context/GlobalContext'
 import { ScrollToTop } from '../../components/scrolltotop/ScroolTotop'
 import PlayListModal from '../../components/playlistmanagment/playlistmodal/playlistmodal'
-import { Modal } from 'react-bootstrap'
 
 
 function SenSitaracomppo() {
@@ -21,11 +20,6 @@ function SenSitaracomppo() {
     const [currentVideo, setCurrentVideos] = useState(null)
     const [categorized, setCategorized] = useState(null);
 
-    // useEffect(() => {
-    //     if (openmodal) {
-    //         console.log('fsdsdf', openmodal)
-    //     }
-    // }, [openmodal])
 
     useEffect(() => {
         if (videoId) {

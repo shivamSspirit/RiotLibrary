@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 function Masterinput({ name, value, onChange, className, type, placeholder }) {
 

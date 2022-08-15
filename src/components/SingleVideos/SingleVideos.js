@@ -60,8 +60,6 @@ function SingleVideos(props) {
 
 
     const moveToWatchLater = async (video) => {
-        // const selectedProduct = exploreVideoData?.find(item => item?._id === videoId)
-        // console.log('selected',selectedProduct)
         await postToWatchLater(video, () => {
             console.log('posting ton watch later')
         })
@@ -100,7 +98,7 @@ function SingleVideos(props) {
     // }
 
     const gotoHistory = (video) => {
-        console.log('vieo',video)
+        console.log('here is history',video)
         postTohistory(video,()=>{
             console.log('making history', video)
         })
@@ -113,21 +111,15 @@ function SingleVideos(props) {
                     <ReactPlayer width={'100%'} height={'450px'} onStart={() => { gotoHistory(fetchOne) }} controls url={`https://www.youtube.com/embed/${fetchOne?._id}`} />
                 </div>
 
-
-                {/*  */}
-
-
                 <div className='part-3'>
                     <div className='play-feature'>
                         <div className='iconss'>
                             <div className='like-icon'>
-                                {/* {(Likes && Likes?.likesproducts?.find((videos) => videos?.id === fetchOne?.id)) ? <span onClick={() => { removeFromLikes(item?._id) }}><img style={{ maxWidth: '35px', maxHeight: '35px' }} className='card-icons' src={likesIcon} alt="like" /></span> : <span onClick={() => { addtoLikes(item?._id) }}><img style={{ maxWidth: '35px', maxHeight: '35px' }} src={dislikeIcon} alt='' /></span>} */}
                                 {(Likes && Likes?.likesproducts?.find((videos) => videos?.id === fetchOne?.id)) ? <img onClick={() => { removeFromLikes(fetchOne?._id) }} className='img-style' src={likeIcon} alt='' /> : <img onClick={() => { addtoLikes(fetchOne) }} className='img-style' src={Dislike} alt='' />}
                                 <span>like</span>
                             </div>
                             <div className='heart-icon'>
                             {(watchLater && watchLater?.watchLaterproducts?.find(video => video?.id === fetchOne?.id)) ? <img onClick={() => { unsetfromwatchlater(fetchOne?._id) }} style={{ maxWidth: '35px', maxHeight: '35px' }} className='img-style' src={watchlaterLightIcon} alt="dislike" /> : <img onClick={() => { moveToWatchLater(fetchOne) }} style={{ maxWidth: '35px', maxHeight: '35px' }} className='img-style' src={watchlaterDarkIcon} alt="like" />}
-                                {/* <img className='img-style' src={watchlaterDarkIcon} alt='' /> */}
                                 <span>add to watch later</span>
                             </div>
                             <div className='playlist-icon'>

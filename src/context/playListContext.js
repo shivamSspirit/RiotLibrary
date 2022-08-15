@@ -1,12 +1,12 @@
 
 import React, { createContext, useContext, useReducer } from "react";
 
-import {PlaylistListReducer , playlistInitialState } from "../reducers/playlistmanagment";
+import { PlaylistListReducer, playlistInitialState } from "../reducers/playlistmanagment";
 
 export const PlayListContext = createContext('playListContext');
 
- export const PlayListProvider = ({ children }) => {
-  const [playList, dispatchplayList] = useReducer(PlaylistListReducer,playlistInitialState);
+export const PlayListProvider = ({ children }) => {
+  const [playList, dispatchplayList] = useReducer(PlaylistListReducer, playlistInitialState);
 
   let contextValue = {
     playList,

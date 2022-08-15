@@ -1,11 +1,5 @@
 @import url(../../asset/css/theme.css);
 
-
-/* * {
-    margin: 0;
-    box-sizing: border-box;
-} */
-
 .img-container {
     width: 100vw;
     height: calc(100% - 96px);
@@ -15,8 +9,6 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
-
-
 
 .img-content {
     display: flex;
@@ -65,7 +57,6 @@
         padding: 1.5rem;
         color: var(--white);
         font-size: small;
-
     }
 
 }

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const historyUrl = '/api/user/history';
-const authorization = localStorage.getItem('token')
+
 
 
 // get history 

@@ -1,11 +1,10 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link, useParams } from 'react-router-dom'
 import { useGlobal } from '../../../context/GlobalContext'
 import { useWatchLater } from '../../../context/watchLaterContext'
 import { usePlayList } from '../../../context/playListContext'
 import { useLikes } from '../../../context/likeContext'
 
-// import * as LikesApis from '../../../api/likes'
 import * as CategoryPis from '../../../api/category'
 import * as ActionTypes from '../../../constant/actions'
 
@@ -13,43 +12,27 @@ import { useLikesOperation } from '../../../hooks/likes'
 import { useWatchLaterOperation } from '../../../hooks/watchlater'
 import { usePlaylistOperation } from '../../../hooks/playlistmanagment'
 
-import { Link } from 'react-router-dom'
-
-
 import likesIcon from '../../../asset/icon/like.png'
 import dislikeIcon from '../../../asset/icon/dislike.png'
 import playlistIcon from '../../../asset/icon/playList.png'
 import watchlaterLightIcon from '../../../asset/icon/light.png'
 import watchlaterDarkIcon from '../../../asset/icon/dark.png'
 
-import { useParams } from 'react-router-dom'
-
-import { useToast } from '../../../hooks/useToastify'
-
 import { ToastContainer } from 'react-toastify';
-import { replace } from 'lodash'
 
 
 function OneCard(props) {
     const { isCategoryCard, CategoryCardData, isExploreVideoCard, exploreVideoData, isWatchLater, watchvideoLaterData, setModalOpen, isSinglePLayList, singlePlaylistVideoData, isCategorized, categorizedVideo, isLikesVideos, likesVideoData, isHistoryVideos, historyVideoData } = props;
-    const { setDynamicProperties, curretcategory, setCurrentCategory } = useGlobal();
+    const { setCurrentCategory } = useGlobal();
     const navigate = useNavigate();
     const { playlistId } = useParams()
     const { watchLater } = useWatchLater();
     const { playList, dispatchplayList } = usePlayList();
-    const { Likes, dispatchLikes } = useLikes();
+    const { Likes } = useLikes();
     const { postToWatchLater, removeFromWatchLater } = useWatchLaterOperation();
-    const { getlikesvideoList, postTolikes, removeFromlikes } = useLikesOperation();
-    const { getGlobalPlayLists, createPlayList, deletePlaylist, getSinglePlaylist, postVideotoplaylist, deletevideoFromplaylist } = usePlaylistOperation();
+    const { postTolikes, removeFromlikes } = useLikesOperation();
+    const { deletevideoFromplaylist } = usePlaylistOperation();
 
-    const { showToast } = useToast()
-
-    // console.log('fun', playList)
-
-
-    // go to explore videos
-
-    console.log('id', playlistId)
 
     const removevideoFromPlaylist = (video) => {
         const data = { playlistId: playlistId, videoId: video?._id }
@@ -57,9 +40,7 @@ function OneCard(props) {
     }
 
     const moveToExplore = async (videoCategoryID) => {
-        console.log('videoCategoryID', videoCategoryID)
         const res = await CategoryPis?.getSingleCategory(videoCategoryID);
-        console.log('res', res)
         await setCurrentCategory(res.data.category.categoryName);
         navigate('/videos', replace = 'true')
     }
@@ -75,7 +56,6 @@ function OneCard(props) {
         })
     }
 
-
     const unsetfromwatchlater = async (videoId) => {
         await removeFromWatchLater(videoId, () => {
             console.log('removniig ')
@@ -90,7 +70,6 @@ function OneCard(props) {
             payload: currentselectedVideo
         })
         setModalOpen(true);
-        console.log("selected now", playList?.currentselectedVideo)
     }
 
     // for likes
@@ -106,19 +85,8 @@ function OneCard(props) {
 
     // for playlist
 
-    // const addTOplaylist = async (video) => {
-    //     await postVideotoplaylist(video);
-    // }
-
-    // const removeFromplaylist = async (video) => {
-    //     await removeFromplaylist(video)
-    // }
-
     return (
         <>
-            {/* <div>
-        <ToastContainer/>
-        </div> */}
             {isCategoryCard && (
                 <div className='card-section'>
                     {(CategoryCardData?.map((item, idx) => (
@@ -250,20 +218,6 @@ function OneCard(props) {
                                             <span onClick={() => modalOpration(item?._id)} > <img style={{ maxWidth: '35px', maxHeight: '35px' }} className='card-icons' src={playlistIcon} alt='playlist' /></span>
                                             {(Likes && Likes?.likesproducts?.find((videos) => videos?.id === item?.id)) ? <span onClick={() => { removeFromLikes(item?._id) }}><img style={{ maxWidth: '35px', maxHeight: '35px' }} className='card-icons' src={likesIcon} alt="like" /></span> : <span onClick={() => { addtoLikes(item?._id) }}><img style={{ maxWidth: '35px', maxHeight: '35px' }} src={dislikeIcon} alt='' /></span>}
                                         </div>
-
-                                        {/* <div class="dropdown">
-                                            <button id="dLabel" className='dropdown-toggle' type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img className='menu-icon' alt='menu' src={MenusIcon} />
-                                            </button>
-
-                                            <div className="dropdown-menu" aria-labelledby="dLabel">
-                                            {(Likes && Likes?.likesproducts?.find(video => video?.id === item?.id)) ? <button onClick={() => { removeFromLikes(item?._id) }} className='lik-icon'>Unlike</button> : <button onClick={() => { addtoLikes(item?._id) }} className='lik-icon'>Add to likes</button>}
-                                            <button onClick={() => modalOpration(item?._id)} >Add to playlist</button>
-                                            {watchLater?.watchLaterproducts?.find(video => video?.id === item?.id) ? <button onClick={() => unsetfromwatchlater(item?._id)} >{'Undo'}</button> : <button onClick={() => moveToWatchLater(item?._id)}>{'Add to watchlater'}</button>}
-                                            </div>
-                                        </div> */}
-
-
                                     </div>
                                 </div>
 
@@ -272,8 +226,6 @@ function OneCard(props) {
                     )))}
                 </div>
             )}
-
-
 
             {isWatchLater && (
                 <div className='card-section'>

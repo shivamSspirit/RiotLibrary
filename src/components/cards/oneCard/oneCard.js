@@ -42,7 +42,7 @@ function OneCard(props) {
     const moveToExplore = async (videoCategoryID) => {
         const res = await CategoryPis?.getSingleCategory(videoCategoryID);
         await setCurrentCategory(res.data.category.categoryName);
-        navigate('/videos', replace = 'true')
+        navigate('/videos')
     }
 
 

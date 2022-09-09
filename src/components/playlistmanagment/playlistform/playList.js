@@ -134,7 +134,7 @@ function Listform(props) {
                 <div className='play-list-form'>
                     <div className='card-head'>
                         <h2 onClick={openForm} className='form-title'>
-                            create new playlist
+                            <button className='btn'>create new playlist</button>
                         </h2>
                         <span className='cross-icon'>
                             <img onClick={closeModal} src={Cross} className='cross' alt='close' />

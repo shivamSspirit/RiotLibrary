@@ -1,3 +1,3 @@
-## Video Library Backend
+This is basic video library app
 
-This folder contains the Mock Backend created for Video Library App. It contains different API end-points and database configuration for building Video Library; so that you can focus on building Frontend.
+vercel link => https://riot-library-f3q90hlw7-shivamsoni00.vercel.app/

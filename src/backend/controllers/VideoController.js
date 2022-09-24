@@ -12,7 +12,6 @@ import { Response } from "miragejs";
 
 export const getAllVideosHandler = function () {
   try {
-    // console.log('dbs',this.db.videos)
     return new Response(200, {}, { videos: this.db.videos });
   } catch (error) {
     return new Response(
@@ -52,15 +51,3 @@ export const getVideoHandler = function (schema, request) {
     );
   }
 };
-
-
-// export const getPagedVideos = function (schema,request) {
-
-//   const { pageNum } = request.params;
-//   // console.log('rew',request)
-
-//   const latestVideos =this.db.videos
-//   console.log('la',latestVideos)
-//   const paginatedVideos = latestVideos.slice(0, pageNum * 2 + 2);
-//   return new Response(200, {}, { videos: paginatedVideos })
-// }

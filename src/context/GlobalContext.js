@@ -11,15 +11,6 @@ const GlobalContext = (props) => {
 	const [loaderState, setLoaderState] = useState(false)
 	const [openmodal, setModalOpen] = useState(false);
 
-	// useEffect(()=>{
-	// 	const fetchPagedVideos = async()=>{
-	// 		const response = await VideoApi?.getPagesVideos(2);
-	// 		if(response){
-	// 			console.log('datqa from paged',response?.data)
-	// 		}
-	// 	}
-	// 	fetchPagedVideos()
-	// },[])
 
 	const setDynamicProperties = (name, value) => {
 		setglobalStateProperties({ ...globalStateProperties, [name]: value });   // set dynamic properties with this

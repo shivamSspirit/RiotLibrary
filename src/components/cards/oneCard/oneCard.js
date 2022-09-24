@@ -21,13 +21,15 @@ import watchlaterDarkIcon from '../../../asset/icon/dark.png'
 import { ToastContainer } from 'react-toastify';
 
 
+
+
 function OneCard(props) {
     const { isCategoryCard, CategoryCardData, isExploreVideoCard, exploreVideoData, isWatchLater, watchvideoLaterData, setModalOpen, isSinglePLayList, singlePlaylistVideoData, isCategorized, categorizedVideo, isLikesVideos, likesVideoData, isHistoryVideos, historyVideoData } = props;
     const { setCurrentCategory } = useGlobal();
     const navigate = useNavigate();
     const { playlistId } = useParams()
     const { watchLater } = useWatchLater();
-    const { playList, dispatchplayList } = usePlayList();
+    const { dispatchplayList } = usePlayList();
     const { Likes } = useLikes();
     const { postToWatchLater, removeFromWatchLater } = useWatchLaterOperation();
     const { postTolikes, removeFromlikes } = useLikesOperation();
@@ -50,7 +52,6 @@ function OneCard(props) {
 
     const moveToWatchLater = async (videoId) => {
         const selectedProduct = exploreVideoData?.find(item => item?._id === videoId)
-        // console.log('selected',selectedProduct)
         await postToWatchLater(selectedProduct, () => {
             console.log('posting ton watch later')
         })

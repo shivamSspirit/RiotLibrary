@@ -1,53 +1,28 @@
 import React from 'react'
 import './singlevideoss.css'
-
+import ReactPlayer from 'react-player'
 import likeIcon from '../../asset/icon/like.png'
 import Dislike from '../../asset/icon/dislike.png'
 import playList from '../../asset/icon/playList.png'
 import watchlaterLightIcon from '../../asset/icon/light.png'
 import watchlaterDarkIcon from '../../asset/icon/dark.png'
-
 import { useLikesOperation } from '../../hooks/likes'
-import { usePlaylistOperation } from '../../hooks/playlistmanagment'
 import { useWatchLaterOperation } from '../../hooks/watchlater'
-import { useGlobal } from '../../context/GlobalContext'
-import ReactPlayer from 'react-player'
-
 import { useLikes } from '../../context/likeContext'
 import * as ActionTypes from '../../constant/actions'
-
 import { useWatchLater } from '../../context/watchLaterContext'
 import { usePlayList } from '../../context/playListContext'
-import { add } from 'lodash'
-
-import { useHistory } from '../../context/historyContext'
-
 import { useHistoryOperation } from '../../hooks/history'
 
+
 function SingleVideos(props) {
-    const { fetchOne, openmodal, setModalOpen } = props;
+    const { fetchOne, setModalOpen } = props;
     const { dispatchplayList } = usePlayList()
     const {watchLater} = useWatchLater()
-
     const {postTohistory} = useHistoryOperation();
-
     const { postToWatchLater, removeFromWatchLater } = useWatchLaterOperation();
-    const { getlikesvideoList, postTolikes, removeFromlikes } = useLikesOperation();
-    const { getGlobalPlayLists, createPlayList, deletePlaylist, getSinglePlaylist, postVideotoplaylist, deletevideoFromplaylist } = usePlaylistOperation();
-    console.log('fetchOne', fetchOne)
-
+    const {  postTolikes, removeFromlikes } = useLikesOperation();
     const { Likes } = useLikes()
-
-
-    // const moveToWatchLater = async (videoId) => {
-    //     const selectedProduct = exploreVideoData?.find(item => item?._id === videoId)
-    //     const res = await WatchLaterApi?.postwatchVideo(selectedProduct)
-    //     await dispatchWatchlater({
-    //         type: ActionTypes?.WatchLaterAction?.ADD_TO_WATCHLATER,
-    //         payload: res?.data?.watchlater
-    //     })
-    // }
-
 
     const modalOpration = async (currentvideo) => {
         await dispatchplayList({
@@ -55,7 +30,6 @@ function SingleVideos(props) {
             payload: currentvideo
         })
         await setModalOpen(true);
-        console.log("selected now", playList?.currentselectedVideo)
     }
 
 
@@ -81,24 +55,7 @@ function SingleVideos(props) {
         await removeFromlikes(videoId)
     }
 
-
-
-    // const unsetfromwatchlater = async (videoId) => {
-    //     const res = await WatchLaterApi?.deletewatchVideo(videoId)
-
-    //     await dispatchWatchlater({
-    //         type: ActionTypes?.WatchLaterAction?.REMOVE_FROM_WATCHLATER,
-    //         payload: videoId
-    //     })
-
-    //     await dispatchWatchlater({
-    //         type: ActionTypes?.WatchLaterAction?.ADD_TO_WATCHLATER,
-    //         payload: res?.data?.watchlater
-    //     })
-    // }
-
     const gotoHistory = (video) => {
-        console.log('here is history',video)
         postTohistory(video,()=>{
             console.log('making history', video)
         })
@@ -108,7 +65,7 @@ function SingleVideos(props) {
         <div>
             <div className='section-container'>
                 <div className='part-2'>
-                    <ReactPlayer width={'100%'} height={'450px'} onStart={() => { gotoHistory(fetchOne) }} controls url={`https://www.youtube.com/embed/${fetchOne?._id}`} />
+                    <ReactPlayer width={'100%'} height={'450px'} onStart={() => gotoHistory(fetchOne)} controls url={`https://www.youtube.com/embed/${fetchOne?._id}`} />
                 </div>
 
                 <div className='part-3'>

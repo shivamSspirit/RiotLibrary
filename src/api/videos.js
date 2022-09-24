@@ -15,12 +15,6 @@ export function getSingleVideo(videoId) {
     }); 
 }
 
-// export function getPagesVideos(pageNum){
-//     console.log('feeed',pageNum)
-//     return axios.get(`${'/api/videos'}/${pageNum}`,(res)=>{
-//         console.log(res)
-//     })
-// }
 
 
 

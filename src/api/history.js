@@ -18,8 +18,10 @@ export async function getHistoryList() {
 // post history video
 
 export async function postHistory(video) {
+    console.log('vfdvd',video)
     try {
         const response = await axios.post(historyUrl,{ video }, { headers: { authorization: localStorage.getItem("token") } })
+        console.log('resss',response)
         return response
     } catch (error) {
         console.error(error)

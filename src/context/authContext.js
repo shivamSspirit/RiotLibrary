@@ -14,10 +14,7 @@ const AuthProvider = ({ children }) => {
     localStorageUser ? localStorageUser : null
   );
 
-  console.log('authtoken', authToken)
-
   const handleLogout = () => {
-    console.log('lo')
     localStorage.clear();
     setAuthToken('');
     setAuthUser(null);

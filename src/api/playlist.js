@@ -10,7 +10,7 @@ export const getPlayList = async () => {
     const response = await axios.get(playListUrl, { headers: { authorization: localStorage.getItem("token") } })
     return response;
   } catch (error) {
-    console.error("getPlaylistfromServer : Error in getting playlist");
+    console.error(error);
   }
 }
 
@@ -25,7 +25,7 @@ export const postPlayList = async (playlist) => {
       return response.data;
     } else throw new Error();
   } catch (e) {
-    console.error("addPlaylistToServer : Error in adding playlist", e);
+    console.error(e);
   }
 };
 
@@ -37,7 +37,7 @@ export const deleteplayList = async (playlistId) => {
     const response = await axios.delete(`${playListUrl}/${playlistId}`, { headers: { authorization: localStorage.getItem("token") } })
     return response;
   } catch (error) {
-    console.log('in delete', error)
+    console.error(error)
   }
 }
 
@@ -48,7 +48,7 @@ export const getSingleplayList = async (playlistId) => {
     const response = await axios.get(`${playListUrl}/${playlistId}`, { headers: { authorization: localStorage.getItem("token") } })
     return response
   } catch (error) {
-    console.log('getting single playsit', error)
+    console.error(error)
   }
 }
 
@@ -76,7 +76,7 @@ export const deleteSingleplayList = async (playlistId, videoId) => {
     const response = axios.delete(`${playListUrl}/${playlistId}/${videoId}`, { headers: { authorization: localStorage.getItem("token") } })
     return response
   } catch (error) {
-    console.log('in delete dingle video', error)
+    console.error('in delete dingle video', error)
   }
 }
 

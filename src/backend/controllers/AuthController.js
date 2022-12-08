@@ -14,14 +14,10 @@ const sign = require("jwt-encode");
  * */
 
 export const signupHandler = function (schema, request) {
-  console.log('here')
   const { email, password, ...rest } = JSON.parse(request.requestBody);
-  console.log('here2')
   try {
-    console.log('email',email)
     // check if email already exists
     const foundUser = schema.users.findBy({ email });
-    console.log("users",foundUser)
     if (foundUser) {
       return new Response(
         422,
@@ -44,11 +40,7 @@ export const signupHandler = function (schema, request) {
       playlists: [],
       watchlater: [],
     };
-    console.log('nerw',newUser)
     const createdUser = schema.users.create(newUser);
-    console.log('here',createdUser)
-    const usersss = this.db.users;
-    console.log('bar bar',usersss)
     const encodedToken = sign({ _id, email }, process.env.REACT_APP_JWT_SECRET);
     return new Response(201, {}, { createdUser, encodedToken });
   } catch (error) {
@@ -71,7 +63,6 @@ export const signupHandler = function (schema, request) {
 export const loginHandler = function (schema, request) {
   const { email, password } = JSON.parse(request.requestBody);
   try {
-    console.log('users when login',this.db.users)
     const foundUser = schema.users.findBy({ email });
     if (!foundUser) {
       return new Response(

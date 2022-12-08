@@ -42,7 +42,6 @@ export const getHistoryVideosHandler = function (schema,request) {
  * */
 
 export const addVideoToHistoryHandler = function (schema,request) {
-  console.log('video',request)
   const user = requiresAuth.call(this, request);
  
   try {

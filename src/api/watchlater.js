@@ -9,7 +9,7 @@ export async function getwatchLater() {
         const response = await axios.get(`/api/user/watchlater`, { headers: { authorization: localStorage.getItem('token') } })
         return response;
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -19,7 +19,7 @@ export async function postwatchVideo(watchlatervideo) {
         const response = await axios.post(watchLaterUrl, { data: watchlatervideo }, { headers: { authorization: localStorage.getItem("token") } });
         return response;
     } catch (error) {
-        console.log('error', error)
+        console.error(error)
     }
 }
 
@@ -32,6 +32,6 @@ export async function deletewatchVideo(watchlater) {
         const response = await axios.delete(`/api/user/watchlater/${watchlater}`, { headers: { authorization: localStorage.getItem('token') } })
         return response;
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }

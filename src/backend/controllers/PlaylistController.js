@@ -14,8 +14,6 @@ import { v4 as uuid } from "uuid";
  * */
 export const getAllPlaylistsHandler = function (schema, request) {
   const users = requiresAuth.call(this, request);
-  console.log('sdfsfsspopopoooo', users)
-
 
   try {
     if (!users) {
@@ -92,7 +90,6 @@ export const getVideosFromPlaylistHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
   if (user) {
     const playlistId = request.params.playlistId;
-    console.log(playlistId)
     const playlist = user.playlists.find((item) => item._id === playlistId);
     return new Response(200, {}, { playlist });
   }
@@ -114,10 +111,8 @@ export const addVideoToPlaylistHandler = function (schema, request) {
   if (user) {
     const playlistId = request.params.playlistId;
     const { data } = JSON.parse(request.requestBody);
-    console.log('dddd', data)
     const playlist = user.playlists.find((item) => item._id === playlistId);
     if (playlist.videos.some((item) => item.id === data.video.id)) {
-      console.log('hello')
       return new Response(
         409,
         {},

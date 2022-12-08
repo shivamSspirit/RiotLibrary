@@ -2,8 +2,6 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import AuthRoutes from "./authRoutes";
 
-import Mockman from "mockman-js";
-
 // importing all the themes pages
 import LandingPage from '../pages/landingpage/landingPage'
 import SignUp from "../components/auth/signup/signup";
@@ -12,7 +10,6 @@ import TrendingPage from "../pages/explore/trendingPage";
 import SingleVideo from "../pages/singlevideo/singleVideo";
 import WatchLater from "../pages/watchlater/watchlater";
 import PlaylistPage from "../pages/playlistPage/PlaylistPage";
-import Jest from "../pages/jest/jest";
 import SinglePlayListPage from "../pages/singlePlaylistPage/singleplayListPage";
 import HistoryPage from "../pages/history/historyPage";
 import Likepage from "../pages/likes/likepage";
@@ -45,11 +42,6 @@ class AllRoutes extends React.Component {
                     <Route exact path="/watchlater" element={<AuthRoutes><WatchLater /></AuthRoutes>} />
                     <Route exact path="/playlists" element={<AuthRoutes><PlaylistPage /></AuthRoutes>} />
                     <Route exact path="/playlists/:playlistId" element={<AuthRoutes><SinglePlayListPage /></AuthRoutes>} />
-
-                    {/* {extra routes use in development} */}
-
-                    <Route exact path="/jest" element={<Jest />} />
-                    <Route exact path="/test" element={<Mockman />} />
                 </Routes>
             </div>
         );

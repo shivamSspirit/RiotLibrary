@@ -49,7 +49,6 @@ a {
     color: var(--whitecolor);
 }
 
-.navs:hover {}
 
 .dropdown-item {
     display: flex !important;

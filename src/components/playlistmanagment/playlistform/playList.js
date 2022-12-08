@@ -107,14 +107,12 @@ function Listform(props) {
         if (playList?.currentselectedVideo) {
             await postToWatchLater(playList?.currentselectedVideo)
         }
-        console.log('setted in watchlater')
     }
 
     const unsetfromwatchlater = async () => {
         if (playList?.currentselectedVideo) {
             await removeFromWatchLater(playList?.currentselectedVideo?._id)
         }
-        console.log('unsetted in watchlater')
     }
 
 

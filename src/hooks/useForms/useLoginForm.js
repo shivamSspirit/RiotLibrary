@@ -74,7 +74,6 @@ const useLoginForm = (Callback) => {
 
     const asGuest = (e) => {
         e.preventDefault();
-        console.log('login as guest')
         setValues({
             email: "shivam@gmail.com".trim(),
             password: "Pret@spirit3".trim()

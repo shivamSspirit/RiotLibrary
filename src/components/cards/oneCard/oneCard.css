@@ -34,8 +34,6 @@ a:-webkit-any-link {
 }
 
 
-.part-2 {}
-
 .card-title {
     font-weight: 500;
     font-size: small;
@@ -45,7 +43,7 @@ a:-webkit-any-link {
 }
 
 
-.video-link:hover{
+.video-link:hover {
     color: black !important;
 }
 
